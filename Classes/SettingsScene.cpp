@@ -246,8 +246,12 @@ void SettingsScene::exitSettingsScene( Ref *sender )
 {
 //    _musicData->pauseGameMusic();
 //    Director::getInstance()->popScene();
+//    cocos2d::Director::getInstance()->pushScene(
+//                                                pop_scene_with<cocos2d::TransitionFlipX>::create(TRANSITION_TIME_BETWEEN_SCENE, cocos2d::TransitionScene::Orientation::RIGHT_OVER)
+    
     cocos2d::Director::getInstance()->pushScene(
-                                                pop_scene_with<cocos2d::TransitionFlipX>::create(TRANSITION_TIME_BETWEEN_SCENE, cocos2d::TransitionScene::Orientation::LEFT_OVER)
+                                                pop_scene_with<cocos2d::TransitionFlipX>::create(TRANSITION_TIME_BETWEEN_SCENE, cocos2d::TransitionScene::Orientation::RIGHT_OVER)
+                                                
     );
 }
 

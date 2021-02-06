@@ -8,6 +8,11 @@
 
 #include "GameScene.hpp"
 
+#define BARREL      0
+#define MINE        1
+#define SUBMARINE   2
+#define ROCKET      3
+
 int global_var = 0;
 
 using namespace cocos2d;
@@ -15,8 +20,8 @@ using namespace cocos2d;
 Scene *GameScene::createScene()
 {
     auto scene = Scene::createWithPhysics();
-    scene->getPhysicsWorld()->setDebugDrawMask( PhysicsWorld::DEBUGDRAW_ALL );
-//    scene->getPhysicsWorld()->setDebugDrawMask( PhysicsWorld::DEBUGDRAW_NONE );
+//    scene->getPhysicsWorld()->setDebugDrawMask( PhysicsWorld::DEBUGDRAW_ALL );
+    scene->getPhysicsWorld()->setDebugDrawMask( PhysicsWorld::DEBUGDRAW_NONE );
     
     scene->getPhysicsWorld()->setGravity( Vec2( 0, -0.9 ) );
     
@@ -100,10 +105,10 @@ void GameScene::getUserDataFromStruct()
 
 void GameScene::loadLevelData( int levelNumber )
 {
-    float barrelSpawnTime = enemyData[levelNumber].enemy[0].spawnTime;
-    float mineSpawnTime = enemyData[levelNumber].enemy[1].spawnTime;
-    float submarineSpawnTime = enemyData[levelNumber].enemy[2].spawnTime;
-    float rocketSpawnTime = enemyData[levelNumber].enemy[3].spawnTime;
+    float barrelSpawnTime = enemyData[levelNumber].enemy[BARREL].spawnTime;
+    float mineSpawnTime = enemyData[levelNumber].enemy[MINE].spawnTime;
+    float submarineSpawnTime = enemyData[levelNumber].enemy[SUBMARINE].spawnTime;
+    float rocketSpawnTime = enemyData[levelNumber].enemy[ROCKET].spawnTime;
     
     barrelSpawnTime = enemyData[levelNumber].enemy[0].spawnTime;
     barrelSpeedMin = enemyData[levelNumber].enemy[0].speedMin;

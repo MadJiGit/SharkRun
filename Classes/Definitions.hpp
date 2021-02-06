@@ -11,6 +11,7 @@
 
 // print some stuff for debuging
 #define DEBUGING 1
+#define USERISACTIVE 1
 
 
 #define MAX_TIME 2000000000

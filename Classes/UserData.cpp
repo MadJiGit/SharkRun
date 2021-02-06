@@ -6,6 +6,7 @@
 //
 
 #include "UserData.hpp"
+#include "Definitions.hpp"
 
 UserData        *UserData::_userData;
 
@@ -63,37 +64,43 @@ void UserData::initStats()
     
     for (i = 1; i <= ALL_LEVELS; i++ )
     {
-        // for test only => for production comment all rows bellow
         
+/*
+         Need for tet only - simulate registered user, who is played a few levels
+*/
+#ifdef USERISACTIVE
         _dataStruct.oneLevelData[i].ld_levelNumber = i;
         _dataStruct.oneLevelData[i].ld_isUnlocked = true;
         _dataStruct.oneLevelData[i].ld_stars = 2;
         _dataStruct.oneLevelData[i].ld_fishEaten = 10;
         _dataStruct.oneLevelData[i].ld_score = 123;
         _dataStruct.oneLevelData[i].ld_playTime = 90;
-        
-        // for production uncomment rows below
-        
-//        _dataStruct.oneLevelData[i].ld_levelNumber = i;
-//        _dataStruct.oneLevelData[i].ld_isUnlocked = false;
-//        _dataStruct.oneLevelData[i].ld_stars = 0;
-//        _dataStruct.oneLevelData[i].ld_fishEaten = 0;
-//        _dataStruct.oneLevelData[i].ld_score = 0;
-//        _dataStruct.oneLevelData[i].ld_playTime = 0;
+#else
+        _dataStruct.oneLevelData[i].ld_levelNumber = i;
+        _dataStruct.oneLevelData[i].ld_isUnlocked = false;
+        _dataStruct.oneLevelData[i].ld_stars = 0;
+        _dataStruct.oneLevelData[i].ld_fishEaten = 0;
+        _dataStruct.oneLevelData[i].ld_score = 0;
+        _dataStruct.oneLevelData[i].ld_playTime = 0;
+#endif
     }
     
     _dataStruct.oneLevelData[1].ld_isUnlocked = true;
     
     
-    // for test only => for production comment row bellow
+/*
+         Need for tet only - simulate registered user, who is played a few levels
+*/
+#ifdef USERISACTIVE
     _dataStruct.ds_levelsPlayed = ALL_LEVELS;
     _dataStruct.ds_isUserRegister = true;
     this->setUsername( "alo" );
+#else
+    _dataStruct.ds_levelsPlayed = 0;
+    _dataStruct.ds_isUserRegister = false;
+    this->setUsername( "" );
+#endif
     
-        // for production uncomment rows below
-//    _dataStruct.ds_levelsPlayed = 0;
-//    _dataStruct.ds_isUserRegister = false;
-//    this->setUsername( "" );
     _dataStruct.ds_defaultSharkLives = 5;
     _dataStruct.ds_currentSharkLives = 5;
     _dataStruct.ds_currentLevel = 1;
@@ -120,6 +127,7 @@ dataStruct *UserData::getDataStruct()
 int UserData::loadDataFromFile()
 {
 
+    /* Test */
     return -1;
     
     auto fileToSave = FileUtils::getInstance()->getWritablePath() + "sgud.db";
@@ -198,36 +206,41 @@ void UserData::saveUserData()
     
 }
 
-// FOR TEST ONLY
+/*
+         Need for test only - print all saved data
+*/
+#ifdef USERISACTIVE
 
 void UserData::printData()
 {
-//    auto testStruct = getDataStruct();
+
+    auto testStruct = getDataStruct();
     
-//    log("row 167 - UserData::printData EFFECTS %f", _dataStruct.ds_soundEffectsVolumeLevel );
-//    log("row 167 - UserData::printData MUSIC %f",_dataStruct.ds_musicVolumeLevel);
+    log("row 167 - UserData::printData EFFECTS %f", _dataStruct.ds_soundEffectsVolumeLevel );
+    log("row 167 - UserData::printData MUSIC %f",_dataStruct.ds_musicVolumeLevel);
     
-//    log("row 226 UD username %s", testStruct->ds_username);
-//    std::cout << std::boolalpha << testStruct->ds_isUserRegister << std::endl;
+    log("row 226 UD username %s", testStruct->ds_username);
+    std::cout << std::boolalpha << testStruct->ds_isUserRegister << std::endl;
     
-//    log("UD row 170 default shark lives %d", testStruct->ds_defaultSharkLives);
-//    log("UD row 185 current shark lives %d", testStruct->ds_currentSharkLives);
-//    log("UD row 186 time first %lu", testStruct->ds_timeFirstLifeLose);
-//    log("UD row 187 time second %lu", testStruct->ds_timeSecondLifeLose);
-//    log("UD row 188 time thidt %lu", testStruct->ds_timeThirdLifeLose);
-//    log("UD row 189 time fourth %lu", testStruct->ds_timeFourthLifeLose);
-//    log("UD row 190 time fifth %lu", testStruct->ds_timeFifthLifeLose);
+    log("UD row 170 default shark lives %d", testStruct->ds_defaultSharkLives);
+    log("UD row 185 current shark lives %d", testStruct->ds_currentSharkLives);
+    log("UD row 186 time first %lu", testStruct->ds_timeFirstLifeLose);
+    log("UD row 187 time second %lu", testStruct->ds_timeSecondLifeLose);
+    log("UD row 188 time thidt %lu", testStruct->ds_timeThirdLifeLose);
+    log("UD row 189 time fourth %lu", testStruct->ds_timeFourthLifeLose);
+    log("UD row 190 time fifth %lu", testStruct->ds_timeFifthLifeLose);
     
-//    log("UD row 185 current shark lives %d", _dataStruct.ds_currentSharkLives);
-//    log("UD row 186 time first %lu", _dataStruct.ds_timeFirstLifeLose);
-//    log("UD row 187 time second %lu", _dataStruct.ds_timeSecondLifeLose);
-//    log("UD row 188 time thidt %lu", _dataStruct.ds_timeThirdLifeLose);
-//    log("UD row 189 time fourth %lu", _dataStruct.ds_timeFourthLifeLose);
-//    log("UD row 190 time fifth %lu", _dataStruct.ds_timeFifthLifeLose);
-//    log("UD row 191 ----------------------------------");
-//    log("UD row 192 music level %f", _dataStruct.ds_musicVolumeLevel);
-//    log("UD row 193 effect level %f", _dataStruct.ds_soundEffectsVolumeLevel);
+    log("UD row 185 current shark lives %d", _dataStruct.ds_currentSharkLives);
+    log("UD row 186 time first %lu", _dataStruct.ds_timeFirstLifeLose);
+    log("UD row 187 time second %lu", _dataStruct.ds_timeSecondLifeLose);
+    log("UD row 188 time thidt %lu", _dataStruct.ds_timeThirdLifeLose);
+    log("UD row 189 time fourth %lu", _dataStruct.ds_timeFourthLifeLose);
+    log("UD row 190 time fifth %lu", _dataStruct.ds_timeFifthLifeLose);
+    log("UD row 191 ----------------------------------");
+    log("UD row 192 music level %f", _dataStruct.ds_musicVolumeLevel);
+    log("UD row 193 effect level %f", _dataStruct.ds_soundEffectsVolumeLevel);
     
     
 }
 
+#endif
