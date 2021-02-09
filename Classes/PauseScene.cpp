@@ -137,6 +137,7 @@ void PauseScene::goToChangeLevel( Ref *sender )
 {
 //    auto scene = SelectLevelScene::createScene();
 //    Director::getInstance()->replaceScene( TransitionFade::create( TRANSITION_TIME_BETWEEN_SCENE, scene ) );
+    DEBUG_INFO;
     Director::getInstance()->resume(); // don't know what hapens
     auto scene = SelectLevelScene::createScene();
     Director::getInstance()->pushScene( TransitionFade::create( TRANSITION_TIME_BETWEEN_SCENE, scene ) );

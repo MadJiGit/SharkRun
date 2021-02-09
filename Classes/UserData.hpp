@@ -18,32 +18,22 @@
 
 class GameData;
 
-
 using namespace cocos2d;
-
-//struct playerData
-//{
-//    char                username[20];
-//    int                 sharkLives;
-//    int                 levelsPlayed;
-//    int                 currentLevel;
-//};
 
 struct levelsData
 {       
     bool                ld_isUnlocked;
-            
+    
     int                 ld_levelNumber;
     int                 ld_stars;
     int                 ld_fishEaten;
     int                 ld_score;
-            
+    
     int                 ld_playTime;
 };
 
 struct dataStruct
 {
-//    playerData        playerRecord;
     levelsData          oneLevelData[ALL_LEVELS];
     
     char                ds_username[20];
@@ -77,13 +67,10 @@ private:
     
     static UserData     *_userData;
     dataStruct          _dataStruct;
-    
     GameData            *_gameData;
     
     long                currentTimeInSeconds;
-    
     long                getCurrentTimeInSeconds();
-    
     int                 saveDataToFile();
     
     
@@ -96,17 +83,11 @@ public:
     static  UserData    *getUserData();
     
     void                initStats();
-    
     dataStruct          *getDataStruct();
-    
     int                 loadDataFromFile();
-    
     void                setUsername( std::string data );
-    
     void                printData();
-    
     void                saveUserData();
-    
 };
 
 

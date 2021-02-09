@@ -8,6 +8,7 @@
 #include "UserData.hpp"
 #include "Definitions.hpp"
 
+
 UserData        *UserData::_userData;
 
 extern int global_var;
@@ -36,9 +37,6 @@ UserData *UserData::getInstance()
 
 UserData *UserData::getUserData()
 {
-    
-//    log( "row 69 UserData, %d", ++global_var );
-    
     if( _userData == nullptr )
     {
         _userData = new UserData();
@@ -56,18 +54,15 @@ UserData *UserData::getUserData()
 
 void UserData::initStats()
 {
-    log( "UD 69");
-//    _gameData = GameData::getGameData();
     memset(&_dataStruct, '\0', sizeof(_dataStruct));
-//    time(&now);
     int i;
     
     for (i = 1; i <= ALL_LEVELS; i++ )
     {
         
-/*
+        /*
          Need for tet only - simulate registered user, who is played a few levels
-*/
+         */
 #ifdef USERISACTIVE
         _dataStruct.oneLevelData[i].ld_levelNumber = i;
         _dataStruct.oneLevelData[i].ld_isUnlocked = true;
@@ -88,9 +83,9 @@ void UserData::initStats()
     _dataStruct.oneLevelData[1].ld_isUnlocked = true;
     
     
-/*
-         Need for tet only - simulate registered user, who is played a few levels
-*/
+    /*
+     Need for tet only - simulate registered user, who is played a few levels
+     */
 #ifdef USERISACTIVE
     _dataStruct.ds_levelsPlayed = ALL_LEVELS;
     _dataStruct.ds_isUserRegister = true;
@@ -126,8 +121,17 @@ dataStruct *UserData::getDataStruct()
 
 int UserData::loadDataFromFile()
 {
+    
 
-    /* Test */
+    DEBUG_INFO;
+    
+    /*
+        Used for test only. Did not load data from file.
+     */
+    
+    
+    DEBUG_INFO;
+    
     return -1;
     
     auto fileToSave = FileUtils::getInstance()->getWritablePath() + "sgud.db";
@@ -136,14 +140,11 @@ int UserData::loadDataFromFile()
     if ( f == nullptr ) {
         return -1;
     }
-//    log("file name %s", fileToSave.c_str());
-//    CCLOG("row 88 UserData::loadDataFromFile file name -> %s", fileToSave.c_str() );
     
     fread( &_dataStruct, sizeof( _dataStruct ), 1, f );
     
     fclose( f );
     
-//    log("UD row 109 ------------- L O A D -------------");
     printData();
     
     return 0;
@@ -152,9 +153,6 @@ int UserData::loadDataFromFile()
 
 int UserData::saveDataToFile()
 {
-//    log("UserData::saveDataToFile EFFECTS %f", _dataStruct.ds_soundEffectsVolumeLevel );
-//    log("UserData::saveDataToFile MUSIC %f",_dataStruct.ds_musicVolumeLevel);
-//    log("UD row 120 ------------- S A V E -------------");
     auto fileToSave = FileUtils::getInstance()->getWritablePath() + "sgud.db";
     
     FILE *f;
@@ -169,9 +167,6 @@ int UserData::saveDataToFile()
     
     fclose( f );
     
-//    log("file name %s", fileToSave.c_str());
-    
-   
     printData();
     
     return 0;
@@ -184,9 +179,6 @@ long UserData::getCurrentTimeInSeconds()
 
 void UserData::setUsername( std::string data )
 {
-//    strcpy( _dataStruct.ds_username, data.c_str() );
-    
-//    log( "setUsername %s and size is %zu", data.c_str(), strlen(data.c_str()) );
     
     if ( strlen(data.c_str()) == 0 ) {
         data = "";
@@ -194,26 +186,21 @@ void UserData::setUsername( std::string data )
     
     strcpy( _dataStruct.ds_username, &data[0] );
     
-//    printData();
-    
 }
 
 void UserData::saveUserData()
 {
-//    log("row 166 ---------- S A V E --------UserData ");
     saveDataToFile();
-//    printData();
-    
 }
 
 /*
-         Need for test only - print all saved data
-*/
+ Need for test only - print all saved data
+ */
 #ifdef USERISACTIVE
 
 void UserData::printData()
 {
-
+    
     auto testStruct = getDataStruct();
     
     log("row 167 - UserData::printData EFFECTS %f", _dataStruct.ds_soundEffectsVolumeLevel );
@@ -244,3 +231,6 @@ void UserData::printData()
 }
 
 #endif
+
+
+

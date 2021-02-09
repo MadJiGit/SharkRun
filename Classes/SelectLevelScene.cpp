@@ -387,7 +387,8 @@ void SelectLevelScene::setButtons()
             case cocos2d::ui::Widget::TouchEventType::ENDED:
                 playButtonEndClick();
                 loadNextSix( _gameData->getNumberOfLeftUpperLevel() );
-                printf("SLS 390 _gameData->getNumberOfLeftUpperLevel() %d\n", _gameData->getNumberOfLeftUpperLevel());
+                DEBUG_INFO;
+                printf("_gameData->getNumberOfLeftUpperLevel() %d\n", _gameData->getNumberOfLeftUpperLevel());
                 goToSelectedLevelScene();
 //                isLevelUpdated = false;
                 break;
@@ -408,6 +409,7 @@ void SelectLevelScene::setBackground()
 
 void SelectLevelScene::goToSelectedLevelScene()
 {
+    DEBUG_INFO;
     auto scene = SelectLevelScene::createScene();
     Director::getInstance( )->replaceScene( TransitionFade::create( TRANSITION_TIME_BETWEEN_SCENE, scene ) );
 }
@@ -419,7 +421,7 @@ void SelectLevelScene::goBackToSettingsMenu( Ref *sender )
 
 void SelectLevelScene::goToLevel( int number )
 {
-    printf("SLS 416 go to level %d\n", number);
+    DEBUG_INFO;
     _gameData->setCurrentLevel( number );
     _gameData->saveUserData();
     
@@ -439,7 +441,8 @@ void SelectLevelScene::loadCurrentSix( int number )
     _gameData->setNumberOfLeftUpperLevel( 6 * firstNum + 1 );
 
 #ifdef DEBUGING
-    printf("SLS 431 number = %d\t _gameData->getNumberOfLeftUpperLevel() = %d\n", number, _gameData->getNumberOfLeftUpperLevel());
+    DEBUG_INFO;
+    printf("number = %d\t _gameData->getNumberOfLeftUpperLevel() = %d\n", number, _gameData->getNumberOfLeftUpperLevel());
 #endif
 
     showSixLevels();
@@ -448,16 +451,19 @@ void SelectLevelScene::loadCurrentSix( int number )
 
 void SelectLevelScene::loadPreviosSix( int number )
 {
+    DEBUG_INFO;
     loadCurrentSix( number - 6 );
 }
 
 void SelectLevelScene::loadNextSix( int number )
 {
+    DEBUG_INFO;
     loadCurrentSix( number + 6 );
 }
 
 void SelectLevelScene::checkButtonsStatus( int currentLevelNumber )
 {
+    DEBUG_INFO;
     if ( _gameData->getNumberOfLeftUpperLevel() == 1 )
     {
         leftButton->setEnabled( false );
@@ -493,7 +499,8 @@ void SelectLevelScene::loadMaxLevelNubmer()
 {
     maxLevelNumber = _gameData->getLastLevelNumber();
 #ifdef DEBUGING
-    log("SLS 485 setMaxLevelNumber %d", maxLevelNumber);
+    DEBUG_INFO;
+    log("setMaxLevelNumber %d", maxLevelNumber);
 #endif
 }
 
@@ -515,6 +522,7 @@ void SelectLevelScene::loadGameData()
 
 void SelectLevelScene::loadCurrentLevelNumber()
 {
+    DEBUG_INFO;
     numberOfCurrentPlayedLevel = _gameData->getCurrentLevelNumber();
 }
 
@@ -549,6 +557,7 @@ void SelectLevelScene::playButtonEndClick()
 
 void SelectLevelScene::loadUserData()
 {
+    DEBUG_INFO;
     _userData = UserData::getUserData();
     _dataStruct = _userData->getDataStruct();
 }

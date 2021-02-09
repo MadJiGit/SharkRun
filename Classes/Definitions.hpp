@@ -8,10 +8,18 @@
 #ifndef Definitions_hpp
 #define Definitions_hpp
 
-
 // print some stuff for debuging
 #define DEBUGING 1
 #define USERISACTIVE 1
+
+// Print debug flow
+#if DEBUGING
+static int debug_counter;
+#define DEBUG_INFO printf("%d %s %d %s\n", debug_counter++, __FILE_NAME__, __LINE__, __FUNCTION__);
+#else
+#define DEBUG_INFO
+#endif
+
 
 
 #define MAX_TIME 2000000000

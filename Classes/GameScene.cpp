@@ -178,7 +178,7 @@ bool GameScene::onContactBegin( PhysicsContact &contact )
         }
         
         if ( fish_temp == nullptr ){
-            log("GS 202 ERROR at Class fish is nullptr after contact with shark");
+//            log("GS 202 ERROR at Class fish is nullptr after contact with shark");
         }
         else {
         addToGameScore( fish_temp->getPoints() );
@@ -259,7 +259,7 @@ bool GameScene::onContactBegin( PhysicsContact &contact )
     }
     else
     {
-        log( "GS 279 error with collision method");
+//        log( "GS 279 error with collision method");
     }
     
     return true;
@@ -458,9 +458,9 @@ void GameScene::update( float dt )
     }
     
     if ( selectLevelScene != NULL && !selectLevelScene->isLevelUpdated ) {
-#ifdef DEBUGING
-    printf("GS 457 load new SLS\n");
-#endif
+
+        DEBUG_INFO;
+
         selectLevelScene->showSixLevels();
         selectLevelScene->isLevelUpdated = true;
     }
@@ -642,12 +642,6 @@ void GameScene::setBackground()
                             bg32->getContentSize().height/2 + origin.y ) );
     bg40->setPosition( Vec2( visibleSize.width/2 - bg40->getContentSize().width, bg40->getContentSize().height + origin.y - BOTTOM_POSITION ) );
     bg41->setPosition( Vec2( bg40->getPositionX() + bg40->getContentSize().width, bg41->getContentSize().height - BOTTOM_POSITION ) );
-
-#ifdef DEBUGING
-    
-    log("GS 655 bg size width %f", bg32->getContentSize().width );
-    
-#endif
     
     this->addChild( bg00, - 100 );
     this->addChild( bg10, - 90 );
