@@ -14,29 +14,27 @@
 
 struct enemyStruct
 {
-    // barrel - 1, mine - 2, submarine - 3, rocket - 4
-    int         enemyType;
-    float       spawnTime;
-    float       speedMin;
-    float       speedMax;
+    int         enemyType;          /* barrel - 1, mine - 2, submarine - 3, rocket - 4 */
+    float       spawnTime;          /* time to push the next enemy */
+    float       speedMin;           /* min speed of sprite */
+    float       speedMax;           /* max speed of sprite */
 };
 
 struct fishStruct
 {
-    // small - 1, medium - 2, star - 3, heart - 4
-    
-    float       fishSpawnTime;
-    float       heartSpawnTime;
+    /* small - 1, medium - 2, star - 3, heart - 4 */
+    float       fishSpawnTime;      /* time to push the next fish */
+    float       heartSpawnTime;     /* time to push heart */
 };
 
 struct levelStruct
 {
     int         levelNumber;
-    int         oneStarPoint;
-    int         twoStarsPoint;
-    int         threeStarsPoint;
-    int         passLevelPoints;
-    int         passLevelTime;
+    int         oneStarPoint;       /*  points to win first star */
+    int         twoStarsPoint;      /*  points to win second star */
+    int         threeStarsPoint;    /*  points to win third star */
+    int         passLevelPoints;    /*  earned points to pass the level */
+    int         passLevelTime;      /*  needed played time to pass the level */
 };
 
 struct enemyStat

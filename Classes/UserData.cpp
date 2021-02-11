@@ -62,7 +62,7 @@ void UserData::initStats()
     {
         
         /*
-         Need for tet only - simulate registered user, who is played a few levels
+         Need for test only - simulate registered user, who is passed a few levels
          */
 #ifdef USERISACTIVE
         _dataStruct.oneLevelData[i].ld_levelNumber = i;
@@ -85,7 +85,7 @@ void UserData::initStats()
     
     
     /*
-     Need for tet only - simulate registered user, who is played a few levels
+     Need for tet only - simulate registered user, who is passed a few levels
      */
 #ifdef USERISACTIVE
     _dataStruct.ds_levelsPlayed = ALL_LEVELS;
@@ -154,6 +154,15 @@ int UserData::loadDataFromFile()
     return 0;
 }
 
+void UserData::saveUserData()
+{
+        
+}
+
+//void UserData::saveUserData()
+//{
+//    saveDataToFile();
+//}
 
 int UserData::saveDataToFile()
 {
@@ -190,11 +199,6 @@ void UserData::setUsername( std::string data )
     
     strcpy( _dataStruct.ds_username, &data[0] );
     
-}
-
-void UserData::saveUserData()
-{
-    saveDataToFile();
 }
 
 /*

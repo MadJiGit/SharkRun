@@ -359,7 +359,7 @@ void LevelCompleteScene::removeScene()
 void LevelCompleteScene::fadeOutSprites()
 {
     scene->unscheduleUpdate();
-    _gameData->saveUserData();
+    _gameData->writeDataToUserData();
     retryButton->setEnabled( false );
     menuButton->setEnabled( false );
     playButton->setEnabled( false );

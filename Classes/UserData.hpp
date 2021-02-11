@@ -22,7 +22,7 @@ using namespace cocos2d;
 
 struct levelsData
 {       
-    bool                ld_isUnlocked;
+    bool                ld_isUnlocked; 
     
     int                 ld_levelNumber;
     int                 ld_stars;
@@ -38,18 +38,19 @@ struct dataStruct
     
     char                ds_username[20];
     int                 ds_defaultSharkLives;
-    int                 ds_currentSharkLives;
-    int                 ds_levelsPlayed;
+    int                 ds_currentSharkLives; /* This number is used to logic for shark lives loses */
+    int                 ds_levelsPlayed;    /* Needed to show max unlocked level into SelectLevelScene levels grid */
     int                 ds_currentLevel;
-    int                 ds_numberOfLeftUpperLevel;
+    int                 ds_numberOfLeftUpperLevel; /* This number is used to show last seen grid with levels in SelectLevelScene */
     int                 ds_maxLevel;
     
     float               ds_soundEffectsVolumeLevel;
     float               ds_musicVolumeLevel;
-    long                ds_lastSaveTime;
+    long                ds_lastSaveTime; /* This time is used to calculate how much time passed since last game and if needed to return shark lives  */
     
     bool                ds_isUserRegister;
     
+    /* This time records are needed to caclulate when to return shark lives */
     long                ds_timeFirstLifeLose;
     long                ds_timeSecondLifeLose;
     long                ds_timeThirdLifeLose;
@@ -87,6 +88,7 @@ public:
     int                 loadDataFromFile();
     void                setUsername( std::string data );
     void                printData();
+//    void                saveUserData();
     void                saveUserData();
 };
 

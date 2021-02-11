@@ -384,5 +384,5 @@ void SharkLives::saveData()
     _gameData->setFourthLifeLoseTimer( timeFourthLifeReturn );
     _gameData->setFifthLifeLoseTimer( timeFifthLifeReturn );
     _gameData->setCurrentSharkLives( getCurrentSharkLives() );
-    _gameData->saveUserData();
+    _gameData->writeDataToUserData();
 }

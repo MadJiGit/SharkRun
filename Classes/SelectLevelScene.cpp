@@ -414,7 +414,7 @@ void SelectLevelScene::goToLevel( int number )
     DEBUG_INFO;
     printf("number = %d\n", number);
     _gameData->setCurrentLevel( number );
-    _gameData->saveUserData();
+    _gameData->writeDataToUserData();
     
     playChoseMenuSound();
     

@@ -205,7 +205,7 @@ void WelcomeScene::setUsername()
 {
     _gameData->changeUsername( username );
     _gameData->changeUserRegisterStatus( true );
-    _gameData->saveUserData();
+    _gameData->writeDataToUserData();
     
     goToMainMenuScene();
 }

@@ -1,151 +1,171 @@
-//
-//  GameData.hpp
-//  TestGame-mobile
-//
-//  Created by Madji on 18.07.19.
-//
+    //
+    //  GameData.hpp
+    //  TestGame-mobile
+    //
+    //  Created by Madji on 18.07.19.
+    //  CHANGED
 
-#ifndef GameData_hpp
-#define GameData_hpp
+    #ifndef GameData_hpp
+    #define GameData_hpp
 
-#pragma once
-#include <stdio.h>
-#include "cocos2d.h"
-#include "ui/CocosGUI.h"
-#include "Definitions.hpp"
-#include "UserData.hpp"
-#include "SharkLives.hpp"
+    #pragma once
+    #include <stdio.h>
+    #include "cocos2d.h"
+    #include "ui/CocosGUI.h"
+    #include "Definitions.hpp"
+    #include "UserData.hpp"
+    #include "SharkLives.hpp"
 
-class UserData;
-class SharkLives;
-struct dataStruct;
+    class UserData;
+    class SharkLives;
+    struct dataStruct;
 
-using namespace cocos2d;
+    using namespace cocos2d;
 
-class GameData {
-private:
-    
-    UserData            *_userData;
-    dataStruct          *_dataStruct;
-    
-    static GameData     *_gameData;
-    SharkLives          *sharkLives;
-    
-    time_t              now;
-    long                getTimeStampInSeconds();
-    
-    int                 pointsForFirstStar, pointsForSecondStar, pointsForThirdStar;
-    int                 passLevelPoints;
-    int                 starsCounter, earnedStars;
-    int                 scoreCounter;
-    int                 fishCounter;
-    int                 timeCounter;
-    int                 countdownTimeCounter;
-    int                 timerSeconds;
-    int                 timerMinutes;
-    int                 currentLevel;
-    int                 numberOfLeftUpperLevel;
-    int                 levelsPlayed;
-    int                 maxLevel;
-    int                 currentSharkLives;
-    int                 defaultSharkLives;
-    std::string         username;
-    bool                isUserRegister;
-    
-    
-    long                timeFirstLifeLose;
-    long                timeSecondLifeLose;
-    long                timeThirdLifeLose;
-    long                timeFourthLifeLose;
-    long                timeFifthLifeLose;
-    
-    void                calculateTimeForText( int time );
-    
-    void                setStarsCounter( int stars );
-    void                calculateStars();
-    
-    void                getUserData();
-    void                setUsername( std::string name );
-    
-    void                setLevelsPlayed( int levelNum );
-    void                increaseLevelsPlayed( int levelNum );
-    void                setDefaultSharkLives( int lives );
-    void                setUserRegister( bool status );
-    
-    
-public:
-    
-    GameData();
-    virtual             ~GameData();
-    
-    static GameData     *getInstance();
-    static GameData     *getGameData();
-    
-    void                initStats();
-    
-    void                setCurrentLevel( int levelNum );
-    
-    int                 getTimerCounter();
-    int                 countdownTimerCounterDefaultSec;
-    int                 countdownTimerCounterDefaultMin;
-    void                setCountdownTimerCounter( int levelNum );
-    void                setTimerCounterToZero();
-    void                setTimerCounterToInitValue();
-    void                increaseTimerCounter();
-    void                decreaseTimerCounter();
-    int                 getTimerMinutes();
-    int                 getTimerSeconds();
-    
-    int                 getScoreCounter();
-    void                setScoreCounterToZero();
-    void                increaseScore( int score );
-    
-    void                setFishCounter( int fishes );
-    void                increaseFishCounter();
-    int                 getFishCounter();
-    void                resetFishCounterToZero();
-    
-    int                 getStarsCounter();
-    int                 getEarnedStarsFromDB( int levelNumber );
-    int                 getToPassLevelPoints( int levelNumber );
-    int                 getCurrentLevelNumber();
-    int                 getLastLevelNumber();
-    int                 getCurrentSharkLives();
-    int                 getDefaultSharkLives();
-    int                 getLevelsPlayed();
-    int                 getNumberOfLeftUpperLevel();
-    std::string         getUsername();
-    void                decreaseSharkLives();
-    void                increaseSharkLives();
-    
-    bool                getUserRegisterStatus();
-    void                changeUsername( std::string newName );
-    void                changeUserRegisterStatus( bool newStatus );
-    
-    void                setFirstLifeLoseTimer( long time);
-    void                setSecondLifeLoseTimer( long time);
-    void                setThirdLifeLoseTimer( long time);
-    void                setFourthLifeLoseTimer( long time);
-    void                setFifthLifeLoseTimer( long time);
-    void                setCurrentSharkLives( int lives );
-    void                setLastLevelNumber( int levels );
-    void                setNumberOfLeftUpperLevel( int number );
-    void                resetStarsCounter();
-    
-    long                getFirstLifeLoseTimer();
-    long                getSecondLifeLoseTimer();
-    long                getThirdLifeLoseTimer();
-    long                getFourthLifeLoseTimer();
-    long                getFifthLifeLoseTimer();
-    
-    bool                checkLevelIsUnlocked( int number );
-    GameData            loadlevelStatsByNumber( int number );
-    
-    void                saveUserData();
-    
-    void                printLongMax();
-    
-};
+    class GameData {
+    private:
+        
+        static GameData     *_gameData;
+        
+        UserData            *_userData;
+        SharkLives          *sharkLives;
+        
+        /*
+         Needed for time calculate:
+         - lose lives time
+         - game time duration
+         - game timer
+         */
+        time_t              now;
+        long                getTimeStampInSeconds();
+        
+        /* Var from UserData */
+        std::string         username;
+        int                 defaultSharkLives;
+        int                 currentSharkLives;
+        int                 levelsPlayed;
+        int                 currentLevel;
+        int                 numberOfLeftUpperLevel;
+        int                 maxLevel;
+        bool                isUserRegister;
+        
+        long                timeFirstLifeLose;
+        long                timeSecondLifeLose;
+        long                timeThirdLifeLose;
+        long                timeFourthLifeLose;
+        long                timeFifthLifeLose;
+        
+        /* Levels Data */
+        int                 earnedStars;
+        int                 scoreCounter;
+        int                 fishCounter;
+        int                 timeCounter;
+        
+        /* Level Statistic */
+        int                 pointsForFirstStar;
+        int                 pointsForSecondStar;
+        int                 pointsForThirdStar;
+        int                 passLevelPoints;
+        
+        /* Gameplay var */
+        int                 starsCounter;
+        int                 countdownTimeCounter;
+        int                 timerSeconds;
+        int                 timerMinutes;
+        void                calculateTimeForText( int time );
+        void                setStarsCounter( int stars );
+        void                calculateStars();
+        void                setLevelsPlayed( int levelNum );
+        void                increaseLevelsPlayed( int levelNum );
+           
+    public:
+        
+        GameData();
+        virtual             ~GameData();
+        
+        static GameData     *getInstance();
+        static GameData     *getGameData();
+        void                initStats();
+        
+        /* from UserData */
+        
+        void                getDataFromUserData();  /* load all user data from UserData */
+        std::string         getUsername();
+        int                 getDefaultSharkLives();
+        int                 getCurrentSharkLives();
+        int                 getLevelsPlayed();
+        int                 getCurrentLevelNumber();
+        int                 getNumberOfLeftUpperLevel();
+        int                 getLastLevelNumber();
+        bool                getUserRegisterStatus();
+        
+        long                getFirstLifeLoseTimer();
+        long                getSecondLifeLoseTimer();
+        long                getThirdLifeLoseTimer();
+        long                getFourthLifeLoseTimer();
+        long                getFifthLifeLoseTimer();
+
+        void                writeDataToUserData();
+        void                setUsername( std::string name );
+        void                setDefaultSharkLives( int lives );
+        void                setCurrentSharkLives( int lives );
+        void                setCurrentLevel( int levelNum );
+        void                setNumberOfLeftUpperLevel( int number );
+        void                setLastLevelNumber( int levels );
+        void                setUserRegisterStatus( bool status );
+        
+        void                setFirstLifeLoseTimer( long time);
+        void                setSecondLifeLoseTimer( long time);
+        void                setThirdLifeLoseTimer( long time);
+        void                setFourthLifeLoseTimer( long time);
+        void                setFifthLifeLoseTimer( long time);
+        
+        
+        /* Levels Data */
+        int                 getEarnedStarsFromLevelsData( int levelNumber );
+        bool                checkLevelIsUnlockedFromLevelsData( int number );
+        
+        
+        /* Level Statistic */
+        GameData            loadlevelStatsByNumber( int number );
+        int                 getToPassLevelPoints( int levelNumber );
+
+        
+
+        void                changeUsername( std::string newName );
+        void                changeUserRegisterStatus( bool newStatus );
+        
+        /* time calculations */
+        int                 countdownTimerCounterDefaultSec;
+        int                 countdownTimerCounterDefaultMin;
+        
+        int                 getTimerCounter();
+        void                setCountdownTimerCounter( int levelNum );
+        void                setTimerCounterToZero();
+        void                setTimerCounterToInitValue();
+        void                increaseTimerCounter();
+        void                decreaseTimerCounter();
+        
+        void                setScoreCounterToZero();
+        void                increaseScore( int score );
+        int                 getTimerMinutes();
+        int                 getTimerSeconds();
+        int                 getScoreCounter();
+
+        void                setFishCounter( int fishes );
+        void                increaseFishCounter();
+        int                 getFishCounter();
+        void                resetFishCounterToZero();
+
+        int                 getStarsCounter();
+        void                resetStarsCounter();
+
+        void                decreaseSharkLives();
+        void                increaseSharkLives();
+        
+        void                printLongMax();
+        
+    };
 
 
-#endif /* GameData_hpp */
+    #endif /* GameData_hpp */

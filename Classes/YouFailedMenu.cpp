@@ -205,7 +205,7 @@ void YouFailedMenu::removeMenu()
 void YouFailedMenu::fadeOutSprites()
 {
     scene->unscheduleUpdate();
-    _gameData->saveUserData();
+    _gameData->writeDataToUserData();
     retryButton->setEnabled( false );
     exitButton->setEnabled( false );
     
