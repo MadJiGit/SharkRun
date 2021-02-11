@@ -54,6 +54,7 @@ UserData *UserData::getUserData()
 
 void UserData::initStats()
 {
+
     memset(&_dataStruct, '\0', sizeof(_dataStruct));
     int i;
     
@@ -110,6 +111,9 @@ void UserData::initStats()
     _dataStruct.ds_timeFourthLifeLose = MAX_TIME;
     _dataStruct.ds_timeFifthLifeLose = MAX_TIME;
     
+    DEBUG_INFO;
+    log("UD Current Level %d left upper level %d\n", _dataStruct.ds_currentLevel, _dataStruct.ds_numberOfLeftUpperLevel);
+    
 }
 
 
@@ -145,7 +149,7 @@ int UserData::loadDataFromFile()
     
     fclose( f );
     
-    printData();
+//    printData();
     
     return 0;
 }
@@ -167,7 +171,7 @@ int UserData::saveDataToFile()
     
     fclose( f );
     
-    printData();
+//    printData();
     
     return 0;
 }

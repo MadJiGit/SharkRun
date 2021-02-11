@@ -84,7 +84,11 @@ int GameData::getCurrentLevelNumber()
 
 void GameData::setCurrentLevel( int levelNum )
 {
+    DEBUG_INFO;
+    printf("number = %d\n", levelNum);
     this->currentLevel = levelNum;
+    DEBUG_INFO;
+    printf("this->currentLevel = %d\n", this->currentLevel);
 }
 
 int GameData::getLevelsPlayed()
@@ -117,11 +121,19 @@ int GameData::getLastLevelNumber()
 
 void GameData::setNumberOfLeftUpperLevel( int number )
 {
+    DEBUG_INFO;
+    printf("setNumberOfLeftUpperLevel = %d\n", number);
     this->numberOfLeftUpperLevel = number;
+//    printf("number to pass = %d\n", number);
+//    this->numberOfLeftUpperLevel = number;
+    saveUserData();
+    printf("numberOfLeftUpperLevel after set = %d\n", this->numberOfLeftUpperLevel);
 }
 
 int GameData::getNumberOfLeftUpperLevel()
 {
+    DEBUG_INFO;
+    printf("numberOfLeftUpperLevel = %d\n", this->numberOfLeftUpperLevel);
     return this->numberOfLeftUpperLevel;
 }
 
@@ -370,8 +382,11 @@ long GameData::getFifthLifeLoseTimer()
 void GameData::getUserData()
 {
     auto tempUserData = _userData->getUserData()->getDataStruct();
-    
+    DEBUG_INFO;
+    log("tempUserData->ds_currentLevel %d", tempUserData->ds_currentLevel);
+    log("currentLevel befor set %d", currentLevel);
     setCurrentLevel( tempUserData->ds_currentLevel );
+    log("currentLevel after set %d", currentLevel);
     setCurrentSharkLives( tempUserData->ds_currentSharkLives );
 //    log("GD 329 default shark lives %d", tempUserData->ds_defaultSharkLives );
     setDefaultSharkLives( tempUserData->ds_defaultSharkLives );
@@ -384,14 +399,13 @@ void GameData::getUserData()
     setFifthLifeLoseTimer( tempUserData->ds_timeFifthLifeLose );
     setLastLevelNumber( tempUserData->ds_maxLevel );
     
+    setNumberOfLeftUpperLevel( tempUserData->ds_numberOfLeftUpperLevel );
+    
     pointsForFirstStar = levelData[currentLevel].level[0].oneStarPoint;
     pointsForSecondStar = levelData[currentLevel].level[0].twoStarsPoint;
     pointsForThirdStar = levelData[currentLevel].level[0].threeStarsPoint;
     passLevelPoints = levelData[currentLevel].level[0].passLevelPoints;
 
-#ifdef DEBUGING
-    log("GD 342 points FS %d points SS %d points TS %d", pointsForFirstStar, pointsForSecondStar, pointsForThirdStar );
-#endif
 }
 
 void GameData::saveUserData()
@@ -400,15 +414,11 @@ void GameData::saveUserData()
     auto gameScore = getScoreCounter();
     auto earnedStars = getStarsCounter();
     
-#ifdef DEBUGING
-    printf("GD 373 earnedStars %d\n", earnedStars);
-#endif
+    DEBUG_INFO;
+    printf("this->currentLevel = %d\n", this->currentLevel);
+    printf("this->leftUpperLevel = %d\n", this->numberOfLeftUpperLevel);
     
     auto fishEaten = getFishCounter();
-    
-#ifdef DEBUGING
-    printf("GD 376 earnedStars %d\n", earnedStars);
-#endif
     
     if (_dataStruct->oneLevelData[currentLevel].ld_stars < earnedStars )
     {

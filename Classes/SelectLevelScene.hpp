@@ -54,7 +54,8 @@ private:
     void            loadLevelsStatsFromDbByLevelNumber( int number );
     void            loadEarnedStars( int level );
     bool            isTheLevelUnlocked( int level );
-    void            setCurrentLevel();
+    void            setCurrentLevel(int number);
+    int             getCurrentLevel();
     
     void            setBackground();
     void            setStars();
