@@ -31,8 +31,8 @@ private:
     
     Label               *gameScoreLabel, *fishEatenLabel, *gameTimerLabel;
     
-    MusicData           *_musicData;
-    GameData            *_gameData;
+    MusicData           *musicData;
+    GameData            *gameData;
     
     cocos2d::ui::Button *retryButton, *menuButton, *playButton;
     MenuItemLabel       *gameScore, *fishEaten, *gameTimer;

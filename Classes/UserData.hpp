@@ -20,7 +20,7 @@ class GameData;
 
 using namespace cocos2d;
 
-struct levelsData
+struct LevelData
 {       
     bool                ld_isUnlocked; 
     
@@ -34,7 +34,7 @@ struct levelsData
 
 struct dataStruct
 {
-    levelsData          oneLevelData[ALL_LEVELS];
+    LevelData           oneLevelData[ALL_LEVELS];
     
     char                ds_username[20];
     int                 ds_defaultSharkLives;
@@ -68,7 +68,7 @@ private:
     
     static UserData     *_userData;
     dataStruct          _dataStruct;
-    GameData            *_gameData;
+    GameData            *gameData;
     
     long                currentTimeInSeconds;
     long                getCurrentTimeInSeconds();
@@ -85,10 +85,10 @@ public:
     
     void                initStats();
     dataStruct          *getDataStruct();
+    LevelData           getOneLevelDataByLevelNumber(int number);
     int                 loadDataFromFile();
     void                setUsername( std::string data );
     void                printData();
-//    void                saveUserData();
     void                saveUserData();
 };
 

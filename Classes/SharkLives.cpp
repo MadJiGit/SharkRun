@@ -378,6 +378,7 @@ void SharkLives::saveGameData()
 
 void SharkLives::saveData()
 {
+    DEBUG_INFO;
     _gameData->setFirstLifeLoseTimer( timeFirstLifeReturn );
     _gameData->setSecondLifeLoseTimer( timeSecondLifeReturn );
     _gameData->setThirdLifeLoseTimer( timeThirdLifeReturn );

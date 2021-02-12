@@ -47,8 +47,8 @@ bool LevelCompleteScene::init()
     createMenu();
     createButtons();
     createStars( getStarsEarned() );
-    _gameData->resetStarsCounter();
-    _gameData->resetFishCounterToZero();
+    gameData->resetStarsCounter();
+    gameData->resetFishCounterToZero();
     createLevelCompleteScene();
     
     return true;
@@ -56,8 +56,8 @@ bool LevelCompleteScene::init()
 
 void LevelCompleteScene::loadData()
 {
-    _musicData = MusicData::getMusicData();
-    _gameData = GameData::getGameData();
+    musicData = MusicData::getMusicData();
+    gameData = GameData::getGameData();
 }
 
 void LevelCompleteScene::setStarsEarned()
@@ -108,13 +108,6 @@ void LevelCompleteScene::createLevelCompleteScene()
 
 void LevelCompleteScene::createStars( int stars )
 {
-
-#ifdef DEBUGING
-    
-    printf("LCS 112 stars %d\n", stars);
-    
-#endif
-    
     if (stars > 2) {
         oneStar = Sprite::create("three_stars_lcm.png");
     } else if ( stars > 1 ){
@@ -272,22 +265,22 @@ void LevelCompleteScene::setInvisible()
 
 void LevelCompleteScene::playButtonStartClick()
 {
-    _musicData->playButtonStartClickSound();
+    musicData->playButtonStartClickSound();
 }
 
 void LevelCompleteScene::playButtonEndClick()
 {
-    _musicData->playButtonEndClickSound();
+    musicData->playButtonEndClickSound();
 }
 
 void LevelCompleteScene::stopGameMusic()
 {
-    _musicData->stopGameMusic();
+    musicData->stopGameMusic();
 }
 
 void LevelCompleteScene::pauseGameMusic()
 {
-    _musicData->pauseGameMusic();
+    musicData->pauseGameMusic();
 }
 
 void LevelCompleteScene::goToRetryScene()
@@ -313,7 +306,7 @@ void LevelCompleteScene::goToGameOverScene()
 
 void LevelCompleteScene::goToNextLevel()
 {
-    _gameData->setCurrentLevel( _gameData->getCurrentLevelNumber() + 1 );
+    gameData->setCurrentLevel( gameData->getCurrentLevelNumber() + 1 );
     fadeOutSprites();
     
     auto scene = GameScene::createScene();
@@ -322,33 +315,33 @@ void LevelCompleteScene::goToNextLevel()
 
 int LevelCompleteScene::getGameTimerSeconds()
 {
-    return _gameData->countdownTimerCounterDefaultSec;
+    return gameData->countdownTimerCounterDefaultSec;
 }
 
 int LevelCompleteScene::getGameTimerMinutes()
 {
-    return _gameData->countdownTimerCounterDefaultMin;
+    return gameData->countdownTimerCounterDefaultMin;
 }
 
 int LevelCompleteScene::getGameScore()
 {
-    return _gameData->getScoreCounter();
+    return gameData->getScoreCounter();
 }
 
 int LevelCompleteScene::getFishEaten()
 {
 #ifdef DEBUGING
-    printf("LCS 339 getFishCounter %d\n", _gameData->getFishCounter());
+    printf("LCS 339 getFishCounter %d\n", gameData->getFishCounter());
 #endif
-    return _gameData->getFishCounter();
+    return gameData->getFishCounter();
 }
 
 int LevelCompleteScene::getStarsEarned()
 {
 #ifdef DEBUGING
-    printf("LCS 340 getStarsEarned %d\n", _gameData->getStarsCounter());
+    printf("LCS 340 getStarsEarned %d\n", gameData->getStarsCounter());
 #endif
-    return _gameData->getStarsCounter();
+    return gameData->getStarsCounter();
 }
 
 void LevelCompleteScene::removeScene()
@@ -358,8 +351,9 @@ void LevelCompleteScene::removeScene()
 
 void LevelCompleteScene::fadeOutSprites()
 {
+    DEBUG_INFO;
     scene->unscheduleUpdate();
-    _gameData->writeDataToUserData();
+    gameData->writeDataToUserData();
     retryButton->setEnabled( false );
     menuButton->setEnabled( false );
     playButton->setEnabled( false );

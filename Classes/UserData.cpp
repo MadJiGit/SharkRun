@@ -1,9 +1,9 @@
-//
-//  UserData.cpp
-//  TestGame-mobile
-//
-//  Created by Madji on 11.06.19.
-//
+    //
+    //  UserData.cpp
+    //  TestGame-mobile
+    //
+    //  Created by Madji on 11.06.19.
+    //
 
 #include "UserData.hpp"
 #include "Definitions.hpp"
@@ -25,6 +25,7 @@ UserData::~UserData()
 
 UserData *UserData::getInstance()
 {
+    DEBUG_INFO
     if (!_userData)
     {
         return nullptr;
@@ -37,6 +38,7 @@ UserData *UserData::getInstance()
 
 UserData *UserData::getUserData()
 {
+    DEBUG_INFO
     if( _userData == nullptr )
     {
         _userData = new UserData();
@@ -54,7 +56,7 @@ UserData *UserData::getUserData()
 
 void UserData::initStats()
 {
-
+    
     memset(&_dataStruct, '\0', sizeof(_dataStruct));
     int i;
     
@@ -126,15 +128,12 @@ dataStruct *UserData::getDataStruct()
 int UserData::loadDataFromFile()
 {
     
-
+    
     DEBUG_INFO;
     
     /*
-        Used for test only. Did not load data from file.
+     Used for test only. Did not load data from file.
      */
-    
-    
-    DEBUG_INFO;
     
     return -1;
     
@@ -149,20 +148,90 @@ int UserData::loadDataFromFile()
     
     fclose( f );
     
-//    printData();
+        //    printData();
     
     return 0;
 }
 
-void UserData::saveUserData()
+LevelData UserData::getOneLevelDataByLevelNumber(int number)
 {
-        
+    return _dataStruct.oneLevelData[number];
 }
 
-//void UserData::saveUserData()
-//{
-//    saveDataToFile();
-//}
+void UserData::saveUserData()
+{
+    DEBUG_INFO
+    auto gameTimer = gameData->getTimerCounter();
+    auto gameScore = gameData->getScoreCounter();
+    auto earnedStars = gameData->getStarsCounter();
+    auto currentLevel = gameData->getCurrentLevelNumber();
+    auto leftUpperLevel = gameData->getNumberOfLeftUpperLevel();
+    
+    DEBUG_INFO;
+    printf("currentLevel = %d\n", currentLevel);
+    printf("leftUpperLevel = %d\n", leftUpperLevel);
+    
+    auto fishEaten = gameData->getFishCounter();
+    
+    
+    /*
+     The calculation of which part of level info to update
+     For example if there are already 3 stars but now player has won 2,
+     the info about the stars should not be updated and etc.
+     */
+    
+    if (_dataStruct.oneLevelData[currentLevel].ld_stars < earnedStars )
+    {
+        _dataStruct.oneLevelData[currentLevel].ld_stars = earnedStars;
+        _dataStruct.oneLevelData[currentLevel].ld_score = gameScore;
+        _dataStruct.oneLevelData[currentLevel].ld_playTime = gameTimer;
+        _dataStruct.oneLevelData[currentLevel].ld_fishEaten = fishEaten;
+    }
+    else if ( _dataStruct.oneLevelData[currentLevel].ld_stars == earnedStars )
+    {
+        if ( _dataStruct.oneLevelData[currentLevel].ld_score < gameScore )
+        {
+            _dataStruct.oneLevelData[currentLevel].ld_score = gameScore;
+            _dataStruct.oneLevelData[currentLevel].ld_playTime = gameTimer;
+            _dataStruct.oneLevelData[currentLevel].ld_fishEaten = fishEaten;
+            
+        }
+        else if ( _dataStruct.oneLevelData[currentLevel].ld_score == gameScore )
+        {
+            if ( _dataStruct.oneLevelData[currentLevel].ld_playTime > gameTimer )
+            {
+                _dataStruct.oneLevelData[currentLevel].ld_playTime = gameTimer;
+                _dataStruct.oneLevelData[currentLevel].ld_fishEaten = fishEaten;
+            }
+            else if ( _dataStruct.oneLevelData[currentLevel].ld_playTime == gameTimer )
+            {
+                if ( _dataStruct.oneLevelData[currentLevel].ld_fishEaten < fishEaten ) {
+                    _dataStruct.oneLevelData[currentLevel].ld_fishEaten = fishEaten;
+                }
+            }
+        }
+    }
+    
+
+    _userData->setUsername(gameData->getUsername());
+
+    _dataStruct.oneLevelData[currentLevel].ld_isUnlocked = true;
+    
+    _dataStruct.ds_levelsPlayed             = gameData->getLevelsPlayed();
+    _dataStruct.ds_isUserRegister           = gameData->getUserRegisterStatus();
+    _dataStruct.ds_currentSharkLives        = gameData->getCurrentSharkLives();
+    _dataStruct.ds_currentLevel             = gameData->getCurrentLevelNumber();
+    _dataStruct.ds_numberOfLeftUpperLevel   = gameData->getNumberOfLeftUpperLevel();
+    _dataStruct.ds_timeFirstLifeLose        = gameData->getFirstLifeLoseTimer();
+    _dataStruct.ds_timeSecondLifeLose       = gameData->getSecondLifeLoseTimer();
+    _dataStruct.ds_timeThirdLifeLose        = gameData->getThirdLifeLoseTimer();
+    _dataStruct.ds_timeFourthLifeLose       = gameData->getFourthLifeLoseTimer();
+    _dataStruct.ds_timeFifthLifeLose        = gameData->getFifthLifeLoseTimer();
+    
+    
+    saveDataToFile();
+    
+}
 
 int UserData::saveDataToFile()
 {
@@ -180,7 +249,7 @@ int UserData::saveDataToFile()
     
     fclose( f );
     
-//    printData();
+        //    printData();
     
     return 0;
 }

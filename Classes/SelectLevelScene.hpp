@@ -34,21 +34,25 @@ private:
     GameScene       *gameScene;
     Size            visibleSize;
     Vec2            origin;
-    UserData        *_userData;
-    dataStruct      *_dataStruct;
-    GameData        *_gameData, *tempGameData;
-    MusicData       *_musicData;
+
     
     Sprite          *background, *menuLayer,  *oneStar, *twoStars, *threeStars, *threeStars_4, *oneStar_5, *twoStars_6;
     
     Menu            *menu;
     Button          *backButton, *leftButton, *rightButton;
     MenuItemImage   *emptyLevel, *lockedLevel, *testLevel_1, *testLevel_2, *testLevel_3, *testLevel_4, *testLevel_5, *testLevel_6;
+    std::vector<cocos2d::MenuItemImage*> singleScreenLevels;
     MenuItemImage   *t_one_number, *t_double_number, *t_stars;
     
     int             numberOfLeftUpperLevel, numberOfCurrentPlayedLevel, maxLevelNumber, maxLevelPlayed;
     
-    void            loadMusicAndSoundEffects();
+    /* Data */
+    UserData        *userData;
+//    dataStruct      *_dataStruct;
+    GameData        *gameData, *tempGameData;
+    MusicData       *_musicData;
+    
+    /* from GameData */
     void            loadGameData();
     void            loadCurrentLevelNumber();
     void            loadLevelsStatsFromDbByLevelNumber( int number );
@@ -56,6 +60,14 @@ private:
     bool            isTheLevelUnlocked( int level );
     void            setCurrentLevel(int number);
     int             getCurrentLevel();
+    void            loadMaxLevelNubmer();
+    void            loadMaxPlayedLevel();
+    
+    /* UserData */
+    void            loadUserData();
+    void            loadUserDataFromSelectedLevel( int level );
+
+    void            loadMusicAndSoundEffects();
     
     void            setBackground();
     void            setStars();
@@ -65,16 +77,12 @@ private:
     void            setLevelImageFirstNumber( int number );
     void            setLevelImageSecondNumber( int number );
     void            setLevelImageStars( int levelNumber );
-    void            loadMaxLevelNubmer();
-    void            loadMaxPlayedLevel();
     void            loadCurrentSix( int number );
     void            loadPreviosSix( int number );
     void            loadNextSix( int number );
     void            goToMainMenu();
     void            goBackToSettingsMenu( Ref *sender );
     
-    void            loadUserData();
-    void            loadUserDataFromSelectedLevel( int level );
     void            goToSelectedLevelScene();
     void            goToLevel( int number );
     bool            levelStats_isUnlocked;
@@ -83,9 +91,6 @@ private:
     int             levelStats_fishEaten;
     int             levelStats_score;
     int             levelStats_playTime;
-    
-    
-    
     
     void            playButtonStartClick();
     void            playButtonEndClick();

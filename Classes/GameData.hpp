@@ -19,6 +19,7 @@
     class UserData;
     class SharkLives;
     struct dataStruct;
+    struct LevelData;
 
     using namespace cocos2d;
 
@@ -27,7 +28,7 @@
         
         static GameData     *_gameData;
         
-        UserData            *_userData;
+        UserData            *userData;
         SharkLives          *sharkLives;
         
         /*
@@ -59,7 +60,7 @@
         int                 earnedStars;
         int                 scoreCounter;
         int                 fishCounter;
-        int                 timeCounter;
+        int                 timerCounter;
         
         /* Level Statistic */
         int                 pointsForFirstStar;
@@ -90,6 +91,7 @@
         /* from UserData */
         
         void                getDataFromUserData();  /* load all user data from UserData */
+        LevelData           getOneLevelDataByLevelNumber(int number);
         std::string         getUsername();
         int                 getDefaultSharkLives();
         int                 getCurrentSharkLives();
@@ -130,8 +132,6 @@
         GameData            loadlevelStatsByNumber( int number );
         int                 getToPassLevelPoints( int levelNumber );
 
-        
-
         void                changeUsername( std::string newName );
         void                changeUserRegisterStatus( bool newStatus );
         
@@ -140,6 +140,7 @@
         int                 countdownTimerCounterDefaultMin;
         
         int                 getTimerCounter();
+        void                setTimerCounter( int value );
         void                setCountdownTimerCounter( int levelNum );
         void                setTimerCounterToZero();
         void                setTimerCounterToInitValue();

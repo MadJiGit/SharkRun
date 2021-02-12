@@ -28,18 +28,14 @@ bool WelcomeScene::init( )
         return false;
     }
     
+    DEBUG_INFO;
+    _userData = UserData::getInstance();
     _gameData = GameData::getGameData();
-    
-    // only for TEST
-//    log("WS 34 MUST REMOVE NEXT ROW");
-//    _gameData->setCurrentLevel( 2 );
-    
+
     loadMusicAndSoundEffects();
     
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
-    
-//    log("WS 42 visible X %f Y %f", visibleSize.width, visibleSize.height);
     
     textSize = visibleSize.height / 13;
     textBoxSizeX = visibleSize.width / 4;
@@ -203,6 +199,7 @@ void WelcomeScene::showOkButton()
 
 void WelcomeScene::setUsername()
 {
+    DEBUG_INFO;
     _gameData->changeUsername( username );
     _gameData->changeUserRegisterStatus( true );
     _gameData->writeDataToUserData();

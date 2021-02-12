@@ -21,6 +21,7 @@
 
     GameData *GameData::getInstance()
     {
+        DEBUG_INFO;
         if (!_gameData)
         {
             return nullptr;
@@ -33,14 +34,15 @@
 
     void GameData::initStats()
     {
-        timeCounter = 0;
+        DEBUG_INFO
+        timerCounter = 0;
         timerMinutes = 0;
         timerSeconds = 0;
         scoreCounter = 0;
         starsCounter = 0;
         fishCounter = 0;
 
-        _userData = UserData::getUserData();
+        userData = UserData::getUserData();
 
         getDataFromUserData();
         setCountdownTimerCounter( getCurrentLevelNumber() );
@@ -48,6 +50,7 @@
 
     GameData *GameData::getGameData()
     {
+        DEBUG_INFO
         if ( _gameData == nullptr )
         {
             _gameData = new GameData();
@@ -58,13 +61,9 @@
         return _gameData;
     }
 
-    /*
-        Get level time for current level from LevelsData and set it to the display
-     */
-    void GameData::setCountdownTimerCounter( int levelNum ){
-        countdownTimeCounter = levelData[levelNum].level[0].passLevelTime;
-        countdownTimerCounterDefaultSec = countdownTimeCounter % 60;
-        countdownTimerCounterDefaultMin = ( countdownTimeCounter / 60 ) % 60;
+    LevelData GameData::getOneLevelDataByLevelNumber(int number)
+    {
+        return _gameData->userData->getOneLevelDataByLevelNumber(number);
     }
 
     /*
@@ -82,7 +81,7 @@
     int GameData::getEarnedStarsFromLevelsData( int levelNumber )
     {
     //    return _dataStruct->oneLevelData[levelNumber].ld_stars;
-        return _userData->getDataStruct()->oneLevelData[levelNumber].ld_stars;
+        return userData->getDataStruct()->oneLevelData[levelNumber].ld_stars;
     }
 
     /*
@@ -101,7 +100,6 @@
         DEBUG_INFO;
         printf("number = %d\n", levelNum);
         currentLevel = levelNum;
-        DEBUG_INFO;
         printf("currentLevel = %d\n", currentLevel);
     }
 
@@ -162,7 +160,7 @@
         numberOfLeftUpperLevel = number;
     //    printf("number to pass = %d\n", number);
     //    numberOfLeftUpperLevel = number;
-        writeDataToUserData();
+//        writeDataToUserData();
         printf("numberOfLeftUpperLevel after set = %d\n", numberOfLeftUpperLevel);
     }
 
@@ -279,21 +277,48 @@
 
     void GameData::increaseScore( int score )
     {
-    //    printf("GD 227 scoreCounter + score %d\n", score);
         scoreCounter += score;
         calculateStars();
     }
 
     // TIME stuffs
 
+
+    /*
+        Get level time for current level from LevelsData and set it to the display
+     */
+    void GameData::setCountdownTimerCounter( int levelNum )
+    {
+        DEBUG_INFO;
+        countdownTimeCounter = levelData[levelNum].level[0].passLevelTime;
+        countdownTimerCounterDefaultSec = countdownTimeCounter % 60;
+        countdownTimerCounterDefaultMin = ( countdownTimeCounter / 60 ) % 60;
+        
+        log("countdownTimeCounter %d\n", countdownTimeCounter);
+    }
+    
+    void GameData::setTimerCounter(int value)
+    {
+        DEBUG_INFO;
+        timerCounter = value;
+        log("timerCounter %d\n", getTimerCounter());
+    }
+
     int GameData::getTimerCounter()
     {
-        return timeCounter;
+        DEBUG_INFO;
+//        log("countdownTimeCounter %d\n", countdownTimeCounter);
+//        log("timeCounter %d\n", (timerCounter - countdownTimeCounter));
+//        return timerCounter;
+        return 0;
     }
 
     void GameData::setTimerCounterToInitValue()
     {
+        DEBUG_INFO;
     //    countdownTimeCounter = levelData[getCurrentLevelNumber()].level[0].passLevelTime;
+        log("countdownTimeCounter %d\n", countdownTimeCounter);
+        setTimerCounter(countdownTimeCounter);
         timerSeconds = countdownTimeCounter % 60;
         timerMinutes = ( countdownTimeCounter / 60 ) % 60;
 
@@ -301,21 +326,21 @@
 
     void GameData::setTimerCounterToZero()
     {
-        timeCounter = 0;
+        DEBUG_INFO;
+        setTimerCounter(0);
         timerSeconds = 0;
         timerMinutes = 0;
     }
 
     void GameData::decreaseTimerCounter()
     {
-    //    countdownTimeCounter--;
         calculateTimeForText( countdownTimeCounter-- );
     }
 
     void GameData::increaseTimerCounter()
     {
 
-        calculateTimeForText( timeCounter++ );
+        calculateTimeForText( timerCounter++ );
     }
 
     void GameData::calculateTimeForText( int time )
@@ -326,19 +351,16 @@
 
     int GameData::getTimerMinutes()
     {
-    //    return timerMinutes;
         return ((countdownTimeCounter / 60 ) % 60);
     }
 
     int GameData::getTimerSeconds()
     {
-    //    return timerSeconds;
         return timerSeconds = (countdownTimeCounter % 60);
     }
 
     void GameData::setDefaultSharkLives( int lives )
     {
-    //    log("GD 243 def shark lives %d", lives);
         defaultSharkLives = lives;
     }
 
@@ -420,7 +442,7 @@
 
     void GameData::getDataFromUserData()
     {
-        auto tempUserData = _userData->getUserData()->getDataStruct();
+        auto tempUserData = userData->getUserData()->getDataStruct();
 
         setUsername( tempUserData->ds_username );
         setDefaultSharkLives( tempUserData->ds_defaultSharkLives );
@@ -450,69 +472,8 @@
 
     void GameData::writeDataToUserData()
     {
-        /*
-        auto gameTimer = getTimerCounter();
-        auto gameScore = getScoreCounter();
-        auto earnedStars = getStarsCounter();
-
         DEBUG_INFO;
-        printf("currentLevel = %d\n", currentLevel);
-        printf("leftUpperLevel = %d\n", numberOfLeftUpperLevel);
-
-        auto fishEaten = getFishCounter();
-        auto _dataStruct = _userData->getDataStruct();
-
-        if (_dataStruct->oneLevelData[currentLevel].ld_stars < earnedStars )
-        {
-            _dataStruct->oneLevelData[currentLevel].ld_stars = earnedStars;
-            _dataStruct->oneLevelData[currentLevel].ld_score = gameScore;
-            _dataStruct->oneLevelData[currentLevel].ld_playTime = gameTimer;
-            _dataStruct->oneLevelData[currentLevel].ld_fishEaten = fishEaten;
-        }
-        else if ( _dataStruct->oneLevelData[currentLevel].ld_stars == earnedStars )
-        {
-            if ( _dataStruct->oneLevelData[currentLevel].ld_score < gameScore )
-            {
-                _dataStruct->oneLevelData[currentLevel].ld_score = gameScore;
-                _dataStruct->oneLevelData[currentLevel].ld_playTime = gameTimer;
-                _dataStruct->oneLevelData[currentLevel].ld_fishEaten = fishEaten;
-
-            }
-            else if ( _dataStruct->oneLevelData[currentLevel].ld_score == gameScore )
-            {
-                if ( _dataStruct->oneLevelData[currentLevel].ld_playTime > gameTimer )
-                {
-                    _dataStruct->oneLevelData[currentLevel].ld_playTime = gameTimer;
-                    _dataStruct->oneLevelData[currentLevel].ld_fishEaten = fishEaten;
-                }
-                else if ( _dataStruct->oneLevelData[currentLevel].ld_playTime == gameTimer )
-                {
-                    if ( _dataStruct->oneLevelData[currentLevel].ld_fishEaten < fishEaten ) {
-                        _dataStruct->oneLevelData[currentLevel].ld_fishEaten = fishEaten;
-                    }
-                }
-            }
-        }
-    //
-    //    log( "GD 386 GameData save data earned stars %d %d", earnedStars, _dataStruct->oneLevelData[currentLevel].ld_stars );
-    //    log("GD row 362 GameData save data first %lu", getFirstLifeLoseTimer());
-    //    log("GD row 363 GameData save data second %lu", getSecondLifeLoseTimer());
-
-        _dataStruct->oneLevelData[currentLevel].ld_isUnlocked = true;
-        _dataStruct->ds_levelsPlayed = getLevelsPlayed();
-        _userData->setUsername( username );
-        _dataStruct->ds_isUserRegister = getUserRegisterStatus();
-    //    _dataStruct->ds_defaultSharkLives
-        _dataStruct->ds_currentSharkLives = getCurrentSharkLives();
-        _dataStruct->ds_currentLevel = getCurrentLevelNumber();
-        _dataStruct->ds_numberOfLeftUpperLevel = getNumberOfLeftUpperLevel();
-        _dataStruct->ds_timeFirstLifeLose = getFirstLifeLoseTimer();
-        _dataStruct->ds_timeSecondLifeLose = getSecondLifeLoseTimer();
-        _dataStruct->ds_timeThirdLifeLose = getThirdLifeLoseTimer();
-        _dataStruct->ds_timeFourthLifeLose = getFourthLifeLoseTimer();
-        _dataStruct->ds_timeFifthLifeLose = getFifthLifeLoseTimer();
-        */
-        _userData->saveUserData();
+        userData->saveUserData();
     }
 
     long GameData::getTimeStampInSeconds()
