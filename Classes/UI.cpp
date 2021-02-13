@@ -46,10 +46,10 @@ bool UI::init( )
     origin = Director::getInstance()->getVisibleOrigin();
 
 //    frameSize = Director::getInstance()->getOpenGLView()->getFrameSize();
-
-    gameData = GameData::getGameData();
-    musicData = MusicData::getMusicData();
-
+    
+    loadGameData();
+    loadMusicData();
+    
     setUI();
 
 //    setGameTimerToZero();
@@ -67,6 +67,16 @@ bool UI::init( )
 
     return true;
 
+}
+
+void UI::loadGameData()
+{
+    gameData = GameData::getGameData();
+}
+
+void UI::loadMusicData()
+{
+    musicData = MusicData::getMusicData();
 }
 
 // SHARK stuff

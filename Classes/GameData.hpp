@@ -57,6 +57,7 @@
         long                timeFifthLifeLose;
         
         /* Levels Data */
+        void                loadUserData();
         int                 earnedStars;
         int                 scoreCounter;
         int                 fishCounter;
@@ -69,8 +70,8 @@
         int                 passLevelPoints;
         
         /* Game Settings */
-        float                 musicVolumeLevel;
-        float                 soundEffectsVolumeLevel;
+        float               musicVolumeLevel;
+        float               soundEffectsVolumeLevel;
         
         /* Gameplay var */
         int                 starsCounter;
@@ -140,7 +141,8 @@
         void                changeUsername( std::string newName );
         void                changeUserRegisterStatus( bool newStatus );
         
-        /* Game Settigns */
+        /* Game Play Settigns */
+        void                setInitialGamePlayValues();
         void                setMusicVolumeLevel(float level);
         float               getMusicVolumeLevel();
         
@@ -151,15 +153,17 @@
         int                 countdownTimerCounterDefaultSec;
         int                 countdownTimerCounterDefaultMin;
         
-        int                 getTimerCounter();
         void                setTimerCounter( int value );
+        void                setScoreCounter( int value );
+        void                setScoreCounterToZero();
+        
+        int                 getTimerCounter();
         void                setCountdownTimerCounter( int levelNum );
         void                setTimerCounterToZero();
         void                setTimerCounterToInitValue();
         void                increaseTimerCounter();
         void                decreaseTimerCounter();
         
-        void                setScoreCounterToZero();
         void                increaseScore( int score );
         int                 getTimerMinutes();
         int                 getTimerSeconds();

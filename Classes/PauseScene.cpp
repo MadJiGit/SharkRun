@@ -33,7 +33,7 @@ bool PauseScene::init( )
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
     
-    _musicData = MusicData::getMusicData();
+    musicData = MusicData::getMusicData();
     
     setBackground();
     setMenuLayer();
@@ -174,11 +174,11 @@ void PauseScene::exitGameScene( Ref *sender )
 
 void PauseScene::resumeBackgroundMusic()
 {
-    _musicData->resumeGameMusic();
+    musicData->resumeGameMusic();
 }
 
 
 void PauseScene::playBackgroundMusic()
 {
-    _musicData->playGameMusic();
+    musicData->playGameMusic();
 }

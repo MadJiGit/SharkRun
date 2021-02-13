@@ -39,8 +39,8 @@ MusicData *MusicData::getMusicData()
 
 void MusicData::initStats()
 {
-    gameData - GameData::getGameData();
     
+    loadGameData();
     setTemporaryLevels();
     preloadGameMusic();
     preloadAllEffects();
@@ -48,6 +48,13 @@ void MusicData::initStats()
     setGameMusicLevel( getTemporaryMusicLevel() );
     setGameEffectsLevel( getTemporaryEffectsLevel() );
     
+}
+
+void MusicData::loadGameData()
+{
+    DEBUG_INFO;
+    gameData = GameData::getGameData();
+    printf("gameData address %p\n", gameData);
 }
 
 void MusicData::setTemporaryLevels()

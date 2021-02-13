@@ -41,18 +41,23 @@ bool YouFailedMenu::initFailedMenu()
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
     
-    loadData();
+    loadGameData();
+    loadMusicData();
+    
     createFailedMenu();
     
     return true;
 }
 
-void YouFailedMenu::loadData()
+void YouFailedMenu::loadGameData()
 {
-    _musicData = MusicData::getMusicData();
-    _gameData = GameData::getGameData();
+    gameData = GameData::getGameData();
 }
 
+void YouFailedMenu::loadMusicData()
+{
+    musicData = MusicData::getMusicData();
+}
 
 void YouFailedMenu::createFailedMenu()
 {
@@ -158,12 +163,12 @@ void YouFailedMenu::setInvisible()
 
 void YouFailedMenu::playButtonStartClick()
 {
-    _musicData->playButtonStartClickSound();
+    musicData->playButtonStartClickSound();
 }
 
 void YouFailedMenu::playButtonEndClick()
 {
-    _musicData->playButtonEndClickSound();
+    musicData->playButtonEndClickSound();
 }
 
 void YouFailedMenu::goToRetryTestScene()
@@ -183,18 +188,18 @@ void YouFailedMenu::goToGameOverScene()
 
 int YouFailedMenu::getGameTimerSeconds()
 {
-    return _gameData->countdownTimerCounterDefaultSec;
+    return gameData->countdownTimerCounterDefaultSec;
 }
 
 int YouFailedMenu::getGameTimerMinutes()
 {
-    return _gameData->countdownTimerCounterDefaultMin;
+    return gameData->countdownTimerCounterDefaultMin;
 }
 
 int YouFailedMenu::getGameScore()
 {
-//    printf("YFM 196 getScoreCounter %d\n", _gameData->getScoreCounter());
-    return _gameData->getScoreCounter();
+//    printf("YFM 196 getScoreCounter %d\n", gameData->getScoreCounter());
+    return gameData->getScoreCounter();
 }
 
 void YouFailedMenu::removeMenu()
@@ -205,7 +210,7 @@ void YouFailedMenu::removeMenu()
 void YouFailedMenu::fadeOutSprites()
 {
     scene->unscheduleUpdate();
-    _gameData->writeDataToUserData();
+    gameData->writeDataToUserData();
     retryButton->setEnabled( false );
     exitButton->setEnabled( false );
     

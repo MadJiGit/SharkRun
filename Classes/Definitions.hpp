@@ -9,11 +9,11 @@
 #define Definitions_hpp
 
 // print some stuff for debuging
-#define DEBUGING 1
+#define ALLOWDEBUGING 1
 #define USERISACTIVE 1
 
 // Print debug flow
-#if DEBUGING
+#if ALLOWDEBUGING
 static int debug_counter;
 #define DEBUG_INFO printf("%d %s %d %s\n", debug_counter++, __FILE_NAME__, __LINE__, __FUNCTION__);
 #else

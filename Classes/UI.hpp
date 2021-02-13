@@ -86,6 +86,9 @@ private:
     void                playButtonEndClick();
     void                pauseBackgroundMusic();
     
+    void                loadGameData();
+    void                loadMusicData();
+    
 public:
     
     void setScene( GameScene *scene );

@@ -22,17 +22,8 @@
     void GameData::initStats()
     {
         DEBUG_INFO
-        timerCounter = 0;
-        timerMinutes = 0;
-        timerSeconds = 0;
-        scoreCounter = 0;
-        starsCounter = 0;
-        fishCounter = 0;
-
-        userData = UserData::getUserData();
-
-        getDataFromUserData();
-        setCountdownTimerCounter( getCurrentLevelNumber() );
+        loadUserData();
+        setInitialGamePlayValues();
     }
 
     GameData *GameData::getGameData()
@@ -44,13 +35,33 @@
 
             _gameData->initStats();
         }
-
+        
+        printf("_gameData address %p\n", _gameData);
         return _gameData;
     }
 
     LevelData GameData::getOneLevelDataByLevelNumber(int number)
     {
         return _gameData->userData->getOneLevelDataByLevelNumber(number);
+    }
+
+    void GameData::setInitialGamePlayValues()
+    {
+        DEBUG_INFO;
+        setTimerCounter(0);
+        setScoreCounter(0);
+        setStarsCounter(0);
+        setFishCounter(0);
+        setMusicVolumeLevel(0.0f);
+        setSoundEffectsVolumeLevel(0.0f);
+        printf("musicVolumeLevel with address %p and value %f \n", this->musicVolumeLevel, this->musicVolumeLevel);
+    }
+
+    void GameData::loadUserData()
+    {
+        DEBUG_INFO;
+        userData = UserData::getUserData();
+        getDataFromUserData();
     }
 
     /*
@@ -87,7 +98,7 @@
         DEBUG_INFO;
         printf("number = %d\n", levelNum);
         currentLevel = levelNum;
-        printf("currentLevel = %d\n", currentLevel);
+        printf("currentLevel addrees %p and value %d\n", currentLevel, currentLevel);
     }
 
     /*
@@ -251,6 +262,11 @@
     }
 
     // SCORE stuffs
+    
+    void GameData::setScoreCounter(int value)
+    {
+        scoreCounter = value;
+    }
 
     int GameData::getScoreCounter()
     {
@@ -288,6 +304,8 @@
     {
         DEBUG_INFO;
         timerCounter = value;
+        timerSeconds = value;
+        timerMinutes = value;
         log("timerCounter %d\n", getTimerCounter());
     }
 
@@ -296,16 +314,14 @@
         DEBUG_INFO;
 //        log("countdownTimeCounter %d\n", countdownTimeCounter);
 //        log("timeCounter %d\n", (timerCounter - countdownTimeCounter));
-//        return timerCounter;
-        return 0;
+        return timerCounter;
+//        return 0;
     }
 
     void GameData::setTimerCounterToInitValue()
     {
         DEBUG_INFO;
     //    countdownTimeCounter = levelData[getCurrentLevelNumber()].level[0].passLevelTime;
-        log("countdownTimeCounter %d\n", countdownTimeCounter);
-        setTimerCounter(countdownTimeCounter);
         timerSeconds = countdownTimeCounter % 60;
         timerMinutes = ( countdownTimeCounter / 60 ) % 60;
 
@@ -354,22 +370,33 @@
     /* Game Settigns */
     void GameData::setMusicVolumeLevel(float level)
     {
+        DEBUG_INFO;
         musicVolumeLevel = level;
+        printf("musicVolumeLevel with address %p and value %f \n", musicVolumeLevel, musicVolumeLevel);
+        this->musicVolumeLevel = level;
+        printf("musicVolumeLevel with address %p and value %f \n", this->musicVolumeLevel, this->musicVolumeLevel);
+        _gameData->musicVolumeLevel = level;
+        printf("musicVolumeLevel with address %p and value %f \n", _gameData->musicVolumeLevel, _gameData->musicVolumeLevel);
         
     }
 
     float GameData::getMusicVolumeLevel()
     {
+        DEBUG_INFO;
+        printf("_gameData address %p\n", _gameData);
+        printf("musicVolumeLevel with address %p and value %f \n", this->musicVolumeLevel, this->musicVolumeLevel);
         return musicVolumeLevel;
     }
 
     void GameData::setSoundEffectsVolumeLevel(float level)
     {
+        DEBUG_INFO;
         soundEffectsVolumeLevel = level;
     }
 
     float GameData::getSoundEffectsVolumeLevel()
     {
+        DEBUG_INFO;
         return soundEffectsVolumeLevel;
     }
 
@@ -451,34 +478,36 @@
 
     void GameData::getDataFromUserData()
     {
-        auto tempUserData = userData->getUserData()->getDataStruct();
+        auto dataStruct = userData->getDataStruct();
 
-        setUsername( tempUserData->ds_username );
-        setDefaultSharkLives( tempUserData->ds_defaultSharkLives );
+        setDefaultSharkLives( dataStruct->ds_defaultSharkLives );
 
         DEBUG_INFO;
-        log("tempUserData->ds_currentLevel %d", tempUserData->ds_currentLevel);
+        log("dataStruct->ds_currentLevel %d", dataStruct->ds_currentLevel);
         log("currentLevel befor set %d", currentLevel);
-        setCurrentLevel( tempUserData->ds_currentLevel );
+        setCurrentLevel( dataStruct->ds_currentLevel );
         log("currentLevel after set %d", currentLevel);
 
-        setNumberOfLeftUpperLevel( tempUserData->ds_numberOfLeftUpperLevel );
-        setLastLevelNumber( tempUserData->ds_maxLevel );
-        setUserRegisterStatus( tempUserData->ds_isUserRegister );
+        setNumberOfLeftUpperLevel( dataStruct->ds_numberOfLeftUpperLevel );
+        setLastLevelNumber( dataStruct->ds_maxLevel );
+        setUserRegisterStatus( dataStruct->ds_isUserRegister );
 
-        setFirstLifeLoseTimer( tempUserData->ds_timeFirstLifeLose );
-        setSecondLifeLoseTimer( tempUserData->ds_timeSecondLifeLose );
-        setThirdLifeLoseTimer( tempUserData->ds_timeThirdLifeLose );
-        setFourthLifeLoseTimer( tempUserData->ds_timeFourthLifeLose );
-        setFifthLifeLoseTimer( tempUserData->ds_timeFifthLifeLose );
+        setFirstLifeLoseTimer( dataStruct->ds_timeFirstLifeLose );
+        setSecondLifeLoseTimer( dataStruct->ds_timeSecondLifeLose );
+        setThirdLifeLoseTimer( dataStruct->ds_timeThirdLifeLose );
+        setFourthLifeLoseTimer( dataStruct->ds_timeFourthLifeLose );
+        setFifthLifeLoseTimer( dataStruct->ds_timeFifthLifeLose );
 
         pointsForFirstStar = levelData[currentLevel].level[0].oneStarPoint;
         pointsForSecondStar = levelData[currentLevel].level[0].twoStarsPoint;
         pointsForThirdStar = levelData[currentLevel].level[0].threeStarsPoint;
         passLevelPoints = levelData[currentLevel].level[0].passLevelPoints;
         
-        setMusicVolumeLevel( tempUserData->ds_musicVolumeLevel );
-        setSoundEffectsVolumeLevel( tempUserData->ds_soundEffectsVolumeLevel );
+        setMusicVolumeLevel( dataStruct->ds_musicVolumeLevel );
+        DEBUG_INFO;
+        log("setMusicVolumeLevel( dataStruct->ds_musicVolumeLevel ) %f", dataStruct->ds_musicVolumeLevel);
+        setSoundEffectsVolumeLevel( dataStruct->ds_soundEffectsVolumeLevel );
+        log("setMusicVolumeLevel( dataStruct->ds_soundEffectsVolumeLevel ) %f", dataStruct->ds_soundEffectsVolumeLevel);
 
     }
 

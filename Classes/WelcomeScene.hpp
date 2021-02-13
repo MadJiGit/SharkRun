@@ -40,9 +40,7 @@ private:
     
     Menu            *menu;
     
-    UserData        *_userData;
-    dataStruct      *_dataStruct;
-    MusicData       *_musicData;
+    MusicData       *musicData;
     GameData        *gameData;
     
     
@@ -80,6 +78,8 @@ private:
     
     void goToMainMenuScene();
     void exitGameScene();
+    
+    void loadGameData();
     
 
     

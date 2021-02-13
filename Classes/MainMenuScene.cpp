@@ -211,27 +211,27 @@ void MainMenuScene::goToFacebookButton()
 void MainMenuScene::loadMusicAndSoundEffects()
 {
 //    log("row 85 MainMenuScene::loadMusicAndSoundEffects" );
-    _musicData = MusicData::getMusicData();
+    musicData = MusicData::getMusicData();
 }
 
 void MainMenuScene::playBackgroundMusic()
 {
 //    log("row 91 MainMenuScene::playBackgroundMusic" );
-    //    _musicData->playGameMusic();
+    //    musicData->playGameMusic();
 }
 
 void MainMenuScene::playChoseMenuSound()
 {
 //    log("row 97 MainMenuScene::playChoseMenuSound" );
-    _musicData->playChoseMenuSound();
+    musicData->playChoseMenuSound();
 }
 
 void MainMenuScene::playButtonStartClick()
 {
-    _musicData->playButtonStartClickSound();
+    musicData->playButtonStartClickSound();
 }
 void MainMenuScene::playButtonEndClick()
 {
-    _musicData->playButtonEndClickSound();
+    musicData->playButtonEndClickSound();
 }
 

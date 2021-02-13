@@ -29,7 +29,7 @@ bool WelcomeScene::init( )
     }
     
     DEBUG_INFO;
-    gameData = GameData::getGameData();
+    loadGameData();
 
     loadMusicAndSoundEffects();
     
@@ -49,7 +49,10 @@ bool WelcomeScene::init( )
     return true;
 }
 
-
+void WelcomeScene::loadGameData()
+{
+    gameData = GameData::getGameData();
+}
 
 void WelcomeScene::loadBg()
 {
@@ -95,7 +98,6 @@ void WelcomeScene::logoGoUp()
 
 void WelcomeScene::showText()
 {
-//    username = _dataStruct->ds_username;
     username = gameData->getUsername();
     std::string welcomeText = "Welcome back";
     if ( 0 < strlen(username.c_str()) ) {
@@ -115,17 +117,12 @@ void WelcomeScene::showText()
 
 void WelcomeScene::checkIfUserExist()
 {
-//    if ( false == _dataStruct->ds_isUserRegister )
-//    std::cout << std::boolalpha << gameData->getUserRegisterStatus() << std::endl;
-//    log("row 119 Welccome screen %", gameData->getUserRegisterStatus() );
     if ( false == gameData->getUserRegisterStatus() )
     {
-//        log("ifuserExist = false");
         showEnterUsernameScreen();
     }
     else
     {
-//        username = _dataStruct->ds_username;
         username = gameData->getUsername();
         showText();
         loadButtons();
@@ -303,17 +300,17 @@ void WelcomeScene::exitGameScene( )
 
 void WelcomeScene::loadMusicAndSoundEffects()
 {
-    _musicData = MusicData::getMusicData();
+    musicData = MusicData::getMusicData();
 }
 void WelcomeScene::playButtonStartClick()
 {
-    _musicData->playButtonStartClickSound();
+    musicData->playButtonStartClickSound();
 }
 void WelcomeScene::playButtonEndClick()
 {
-    _musicData->playButtonEndClickSound();
+    musicData->playButtonEndClickSound();
 }
 void WelcomeScene::playChoseMenuSound()
 {
-    _musicData->playChoseMenuSound();
+    musicData->playChoseMenuSound();
 }

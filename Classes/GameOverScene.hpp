@@ -28,7 +28,7 @@ private:
     
     Sprite          *background;
     Menu            *menu;
-    MusicData       *_musicData;
+    MusicData       *musicData;
     
     void setBackground();
     void setReturnBack();

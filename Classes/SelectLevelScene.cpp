@@ -38,7 +38,7 @@ bool SelectLevelScene::init( )
     setBackground();
     setButtons();
     
-    loadCurrentLevelNumber();
+    loadCurrentLevelNumberFromGameData();
     loadMaxLevelNubmer();
     loadMaxPlayedLevel();
     DEBUG_INFO;
@@ -522,20 +522,22 @@ void SelectLevelScene::setCurrentLevel(int number)
 
 int SelectLevelScene::getCurrentLevel()
 {
-//    return this->numberOfCurrentPlayedLevel;
-    return gameData->getCurrentLevelNumber();
+    DEBUG_INFO;
+    log("numberOfCurrentPlayedLevel %d\n", numberOfCurrentPlayedLevel);
+    return numberOfCurrentPlayedLevel;
 }
 
 void SelectLevelScene::loadGameData()
 {
+    DEBUG_INFO;
     gameData = GameData::getGameData();
 }
 
-void SelectLevelScene::loadCurrentLevelNumber()
+void SelectLevelScene::loadCurrentLevelNumberFromGameData()
 {
     DEBUG_INFO;
+    log("gameData->getCurrentLevelNumber() %d\n", gameData->getCurrentLevelNumber());
     setCurrentLevel(gameData->getCurrentLevelNumber());
-//    numberOfCurrentPlayedLevel = _gameData->getCurrentLevelNumber();
 }
 
 void SelectLevelScene::loadMusicAndSoundEffects()

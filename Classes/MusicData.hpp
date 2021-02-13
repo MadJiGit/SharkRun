@@ -86,6 +86,8 @@ private:
     void setTemporaryLevels();
     void saveData();
     
+    void loadGameData();
+    
     MusicData();
     virtual ~MusicData();
     

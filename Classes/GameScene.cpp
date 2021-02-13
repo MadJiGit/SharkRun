@@ -50,8 +50,8 @@ bool GameScene::init( )
     
     setUI();
     
-    musicData = MusicData::getMusicData();
-    gameData = GameData::getGameData();
+    loadGameData();
+    loadMusicData();
     
     currentLevel = gameData->getCurrentLevelNumber();
     timeNeedToPassLevel = levelData[currentLevel].level[0].passLevelTime;
@@ -76,6 +76,16 @@ bool GameScene::init( )
     
 }
 
+void GameScene::loadGameData()
+{
+    gameData = GameData::getGameData();
+}
+
+void GameScene::loadMusicData()
+{
+    musicData = MusicData::getMusicData();
+}
+
 bool GameScene::checkCanPlayGS()
 {
     return ui->checkCanPlayBG();
@@ -91,14 +101,6 @@ void GameScene::watchAd()
 void GameScene::saveUserData()
 {
     ui->saveUserData();
-}
-
-void GameScene::getUserDataFromStruct()
-{
-    currentLevel = gameData->getCurrentLevelNumber();
-//    log("GS 102 load current level num %d", currentLevel );
-    loadLevelData( currentLevel );
-    
 }
 
 void GameScene::loadLevelData( int levelNumber )

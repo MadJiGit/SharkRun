@@ -53,7 +53,7 @@ private:
     
     /* from GameData */
     void            loadGameData();
-    void            loadCurrentLevelNumber();
+    void            loadCurrentLevelNumberFromGameData();
     void            loadLevelsStatsFromDbByLevelNumber( int number );
     void            loadEarnedStars( int level );
     bool            isTheLevelUnlocked( int level );

@@ -18,8 +18,6 @@
 #include "UserData.hpp"
 #include "MusicData.hpp"
 
-class UserData;
-struct dataStruct;
 
 using namespace cocos2d;
 
@@ -37,9 +35,7 @@ private:
     
     Sprite          *background, *menuLayer;
     
-    UserData        *_userData;
-    dataStruct      *_dataStruct;
-    MusicData       *_musicData;
+    MusicData       *musicData;
     
     void setBackground();
     void setMenuLayer();

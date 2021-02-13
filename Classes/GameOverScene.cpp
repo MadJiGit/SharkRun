@@ -28,7 +28,7 @@ bool GameOverScene::init( )
         return false;
     }
     
-    _musicData = MusicData::getMusicData();
+    musicData = MusicData::getMusicData();
     
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();

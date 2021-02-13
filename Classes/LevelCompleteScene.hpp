@@ -48,7 +48,9 @@ private:
     int                 fishes;
     int                 stars;
     bool                init();
-    void                loadData();
+    
+    void                loadGameData();
+    void                loadMusicData();
     
     void                playButtonStartClick();
     void                playButtonEndClick();

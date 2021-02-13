@@ -41,9 +41,7 @@ private:
     
     float             loadMusicVolumeLevelFromFile, loadSoundEffectsVolumeLevelFromFile;
     
-    UserData        *_userData;
-    dataStruct      *_dataStruct;
-    MusicData       *_musicData;
+    MusicData       *musicData;
     
     void            setBackground();
     void            setButtons();

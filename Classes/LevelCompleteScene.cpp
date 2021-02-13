@@ -41,7 +41,8 @@ bool LevelCompleteScene::init()
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
     
-    loadData();
+    loadGameData();
+    loadMusicData();
     stopGameMusic();
     setStarsEarned();
     createMenu();
@@ -54,10 +55,14 @@ bool LevelCompleteScene::init()
     return true;
 }
 
-void LevelCompleteScene::loadData()
+void LevelCompleteScene::loadGameData()
+{
+    gameData = GameData::getGameData();
+}
+
+void LevelCompleteScene::loadMusicData()
 {
     musicData = MusicData::getMusicData();
-    gameData = GameData::getGameData();
 }
 
 void LevelCompleteScene::setStarsEarned()

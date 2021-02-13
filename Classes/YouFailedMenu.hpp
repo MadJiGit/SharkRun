@@ -31,8 +31,8 @@ private:
     
     Label               *gameTimerLabel, *gameScoreLabel;
     
-    MusicData           *_musicData;
-    GameData            *_gameData;
+    MusicData           *musicData;
+    GameData            *gameData;
     
 //    MenuItemImage       *pauseButton, *retryButton, *exitButton;
     cocos2d::ui::Button *exitButton, *retryButton;
@@ -46,7 +46,8 @@ private:
     int                 min;
     int                 score;
     bool                initFailedMenu();
-    void                loadData();
+    void                loadGameData();
+    void                loadMusicData();
     
     void                playButtonStartClick();
     void                playButtonEndClick();

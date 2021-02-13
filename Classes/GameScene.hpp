@@ -116,6 +116,9 @@ private:
     
     bool                playGameOrWatchAdvertise();
     
+    void                loadGameData();
+    void                loadMusicData();
+    
     void                pushEnemies( float spawnBarrelFrequency,
                                     float spawnMineFrequency,
                                     float spawnSubmarineFrequency,
@@ -136,7 +139,6 @@ private:
     bool                checkCanPlayGS();
     void                startTimer();
     void                loadLevelData( int levelNumber );
-    void                getUserDataFromStruct();
     void                saveUserData();
     
     void                loadMusicAndSoundEffects();

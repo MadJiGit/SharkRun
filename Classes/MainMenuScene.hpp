@@ -36,7 +36,7 @@ private:
     
     Menu            *menu;
     
-    MusicData       *_musicData;
+    MusicData       *musicData;
     
     void            setBackground();
     void            setStartGameLabel();

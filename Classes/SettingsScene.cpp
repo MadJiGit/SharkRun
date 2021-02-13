@@ -82,18 +82,18 @@ bool SettingsScene::init( )
 
 void SettingsScene::loadMusicAndSoundEffects()
 {
-    _musicData = MusicData::getMusicData();
+    musicData = MusicData::getMusicData();
 }
 
 void SettingsScene::playMusic()
 {
-    if ( false == _musicData->returnIsGameMusicIsRunning() )
+    if ( false == musicData->returnIsGameMusicIsRunning() )
     {
-        _musicData->playGameMusic();
+        musicData->playGameMusic();
     }
     else
     {
-        _musicData->resumeGameMusic();
+        musicData->resumeGameMusic();
     }
 }
 
@@ -103,7 +103,7 @@ void SettingsScene::setMusicVolumeSlider()
     musicVolumeSlider->loadBarTexture( "slider_empty_SM.png" );
     musicVolumeSlider->loadSlidBallTextures( "slider_button_SM.png" );
     musicVolumeSlider->loadProgressBarTexture( "slider_full_SM.png" );
-    musicVolumeSlider->setPercent( _musicData->getTemporaryMusicLevel() * 100 );
+    musicVolumeSlider->setPercent( musicData->getTemporaryMusicLevel() * 100 );
     musicVolumeSlider->setMaxPercent( 100 );
     musicVolumeSlider->setScale9Enabled( true );
     
@@ -128,7 +128,7 @@ void SettingsScene::setSoundEffectsVolumeSlider()
     soundEffectsVolumeSlider->loadBarTexture( "slider_empty_SM.png" );
     soundEffectsVolumeSlider->loadSlidBallTextures( "slider_button_SM.png" );
     soundEffectsVolumeSlider->loadProgressBarTexture( "slider_full_SM.png" );
-    soundEffectsVolumeSlider->setPercent( _musicData->getTemporaryEffectsLevel() * 100 );
+    soundEffectsVolumeSlider->setPercent( musicData->getTemporaryEffectsLevel() * 100 );
     soundEffectsVolumeSlider->setMaxPercent( 100 );
     
     soundEffectsVolumeSlider->addTouchEventListener([&] (Ref* sender, Widget::TouchEventType type ){
@@ -151,13 +151,13 @@ void SettingsScene::setSoundEffectsVolumeSlider()
 void SettingsScene::updateMusicVolumeLevel( float dt )
 {
     displayMusicVolumeLevel( musicVolumeSlider->getPercent() );
-    _musicData->setGameMusicLevel( musicVolumeSlider->getPercent() / 100.0f );
+    musicData->setGameMusicLevel( musicVolumeSlider->getPercent() / 100.0f );
 }
 
 void SettingsScene::updateEffectsVolumeLevel( float dt )
 {
     displaySoundEffectsVolumeLevel( soundEffectsVolumeSlider->getPercent() );
-    _musicData->setGameEffectsLevel( soundEffectsVolumeSlider->getPercent() / 100.0f );
+    musicData->setGameEffectsLevel( soundEffectsVolumeSlider->getPercent() / 100.0f );
 }
 
 void SettingsScene::setButtons()
@@ -232,8 +232,8 @@ void SettingsScene::displayMusicVolumeLevel( int level )
 
 void SettingsScene::saveSettingsScene( Ref *sender )
 {
-    _musicData->saveMusicLevel( musicVolumeSlider->getPercent() / 100.0f );
-    _musicData->saveEffectsLevel( soundEffectsVolumeSlider->getPercent() / 100.0f );
+    musicData->saveMusicLevel( musicVolumeSlider->getPercent() / 100.0f );
+    musicData->saveEffectsLevel( soundEffectsVolumeSlider->getPercent() / 100.0f );
 //    pauseGameMusic();
 //    Director::getInstance()->popScene();
     cocos2d::Director::getInstance()->pushScene(
@@ -244,7 +244,7 @@ void SettingsScene::saveSettingsScene( Ref *sender )
 
 void SettingsScene::exitSettingsScene( Ref *sender )
 {
-//    _musicData->pauseGameMusic();
+//    musicData->pauseGameMusic();
 //    Director::getInstance()->popScene();
 //    cocos2d::Director::getInstance()->pushScene(
 //                                                pop_scene_with<cocos2d::TransitionFlipX>::create(TRANSITION_TIME_BETWEEN_SCENE, cocos2d::TransitionScene::Orientation::RIGHT_OVER)
@@ -257,17 +257,17 @@ void SettingsScene::exitSettingsScene( Ref *sender )
 
 void SettingsScene::playButtonStartClick()
 {
-    _musicData->playButtonStartClickSound();
+    musicData->playButtonStartClickSound();
 }
 
 void SettingsScene::playButtonEndClick()
 {
-    _musicData->playButtonEndClickSound();
+    musicData->playButtonEndClickSound();
 }
 
 void SettingsScene::pauseGameMusic()
 {
-//    _musicData->pauseGameMusic();
+//    musicData->pauseGameMusic();
 }
 
 void SettingsScene::removeMenu()
