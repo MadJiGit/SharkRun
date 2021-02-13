@@ -26,18 +26,6 @@ MusicData::~MusicData()
     
 }
 
-MusicData *MusicData::getInstance()
-{
-    if (!_musicData)
-    {
-        return nullptr;
-    }
-    else
-    {
-        return _musicData;
-    }
-}
-
 MusicData *MusicData::getMusicData()
 {
     if ( _musicData == nullptr )
@@ -51,8 +39,7 @@ MusicData *MusicData::getMusicData()
 
 void MusicData::initStats()
 {
-    _userData = UserData::getUserData();
-    _dataStruct = _userData->getDataStruct();
+    gameData - GameData::getGameData();
     
     setTemporaryLevels();
     preloadGameMusic();
@@ -65,36 +52,34 @@ void MusicData::initStats()
 
 void MusicData::setTemporaryLevels()
 {
-    this->tempMusicLevel = _dataStruct->ds_musicVolumeLevel;
-    this->tempEffectsLevel = _dataStruct->ds_soundEffectsVolumeLevel;
+    tempMusicLevel = gameData->getMusicVolumeLevel();
+    tempEffectsLevel = gameData->getSoundEffectsVolumeLevel();
 }
 
 void MusicData::saveData()
 {
+    gameData->writeDataToUserData();
     setTemporaryLevels();
-    _userData->saveUserData();
 }
 
 void MusicData::saveMusicLevel( float data )
 {
-    _dataStruct->ds_musicVolumeLevel = data;
-    saveData();
+    gameData->setMusicVolumeLevel( data );
 }
 
 void MusicData::saveEffectsLevel( float data )
 {
-    _dataStruct->ds_soundEffectsVolumeLevel = data;
-    saveData();
+    gameData->setSoundEffectsVolumeLevel( data );
 }
 
 float MusicData::getTemporaryMusicLevel()
 {
-    return this->tempMusicLevel;
+    return tempMusicLevel;
 }
 
 float MusicData::getTemporaryEffectsLevel()
 {
-    return this->tempEffectsLevel;
+    return tempEffectsLevel;
 }
 
 void MusicData::setGameEffectsLevel( float data )

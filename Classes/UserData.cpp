@@ -9,7 +9,7 @@
 #include "Definitions.hpp"
 
 
-UserData        *UserData::_userData;
+UserData *UserData::_userData;
 
 extern int global_var;
 
@@ -23,18 +23,6 @@ UserData::~UserData()
     
 }
 
-UserData *UserData::getInstance()
-{
-    DEBUG_INFO
-    if (!_userData)
-    {
-        return nullptr;
-    }
-    else
-    {
-        return _userData;
-    }
-}
 
 UserData *UserData::getUserData()
 {
@@ -127,8 +115,6 @@ dataStruct *UserData::getDataStruct()
 
 int UserData::loadDataFromFile()
 {
-    
-    
     DEBUG_INFO;
     
     /*

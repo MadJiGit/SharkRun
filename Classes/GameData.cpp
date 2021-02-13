@@ -19,19 +19,6 @@
 
     }
 
-    GameData *GameData::getInstance()
-    {
-        DEBUG_INFO;
-        if (!_gameData)
-        {
-            return nullptr;
-        }
-        else
-        {
-            return _gameData;
-        }
-    }
-
     void GameData::initStats()
     {
         DEBUG_INFO
@@ -364,6 +351,28 @@
         defaultSharkLives = lives;
     }
 
+    /* Game Settigns */
+    void GameData::setMusicVolumeLevel(float level)
+    {
+        musicVolumeLevel = level;
+        
+    }
+
+    float GameData::getMusicVolumeLevel()
+    {
+        return musicVolumeLevel;
+    }
+
+    void GameData::setSoundEffectsVolumeLevel(float level)
+    {
+        soundEffectsVolumeLevel = level;
+    }
+
+    float GameData::getSoundEffectsVolumeLevel()
+    {
+        return soundEffectsVolumeLevel;
+    }
+
     // USER stuffs
 
     bool GameData::getUserRegisterStatus()
@@ -467,6 +476,9 @@
         pointsForSecondStar = levelData[currentLevel].level[0].twoStarsPoint;
         pointsForThirdStar = levelData[currentLevel].level[0].threeStarsPoint;
         passLevelPoints = levelData[currentLevel].level[0].passLevelPoints;
+        
+        setMusicVolumeLevel( tempUserData->ds_musicVolumeLevel );
+        setSoundEffectsVolumeLevel( tempUserData->ds_soundEffectsVolumeLevel );
 
     }
 

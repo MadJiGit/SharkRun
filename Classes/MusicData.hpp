@@ -18,6 +18,7 @@ using namespace cocos2d::ui;
 using namespace cocos2d::experimental;
 
 class UserData;
+class GameData;
 struct dataStruct;
 
 class MusicData
@@ -26,8 +27,7 @@ private:
     
     static  MusicData   *_musicData;
     
-    UserData            *_userData;
-    dataStruct          *_dataStruct;
+    GameData            *gameData;
     
     float               musicLevelFromFile;
     float               effectsLevelFromFile;
@@ -86,13 +86,12 @@ private:
     void setTemporaryLevels();
     void saveData();
     
-public:
-    
     MusicData();
     virtual ~MusicData();
     
+public:
+
     
-    static MusicData    *getInstance();
     static MusicData    *getMusicData();
 
     void initStats();

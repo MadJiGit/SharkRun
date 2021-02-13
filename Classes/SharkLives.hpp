@@ -28,8 +28,8 @@ class SharkLives : Sprite
 private:
     
     UI                  *ui;
-    GameData            *_gameData;
-    MusicData           *_musicData;
+    GameData            *gameData;
+    MusicData           *musicData;
     Sprite              *sharkLife_1, *sharkLife_2, *sharkLife_3, *sharkLife_4, *sharkLife_5;
     int                 defaultSharkLives;
     int                 currentSharkLives;

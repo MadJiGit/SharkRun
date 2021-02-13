@@ -68,6 +68,10 @@
         int                 pointsForThirdStar;
         int                 passLevelPoints;
         
+        /* Game Settings */
+        float                 musicVolumeLevel;
+        float                 soundEffectsVolumeLevel;
+        
         /* Gameplay var */
         int                 starsCounter;
         int                 countdownTimeCounter;
@@ -79,12 +83,13 @@
         void                setLevelsPlayed( int levelNum );
         void                increaseLevelsPlayed( int levelNum );
            
-    public:
-        
         GameData();
         virtual             ~GameData();
         
-        static GameData     *getInstance();
+        
+    public:
+    
+        
         static GameData     *getGameData();
         void                initStats();
         
@@ -134,6 +139,13 @@
 
         void                changeUsername( std::string newName );
         void                changeUserRegisterStatus( bool newStatus );
+        
+        /* Game Settigns */
+        void                setMusicVolumeLevel(float level);
+        float               getMusicVolumeLevel();
+        
+        void                setSoundEffectsVolumeLevel(float level);
+        float               getSoundEffectsVolumeLevel();
         
         /* time calculations */
         int                 countdownTimerCounterDefaultSec;

@@ -37,8 +37,8 @@ private:
     Vec2                origin;
     PhysicsBody         *edgeBody;
     
-    GameData            *_gameData;
-    MusicData           *_musicData;
+    GameData            *gameData;
+    MusicData           *musicData;
     SharkLives          *sharkLives;
     
 //    Sprite              *ui, *bgTest,

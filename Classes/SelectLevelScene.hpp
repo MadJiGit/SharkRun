@@ -41,16 +41,15 @@ private:
     Menu            *menu;
     Button          *backButton, *leftButton, *rightButton;
     MenuItemImage   *emptyLevel, *lockedLevel, *testLevel_1, *testLevel_2, *testLevel_3, *testLevel_4, *testLevel_5, *testLevel_6;
+    
     std::vector<cocos2d::MenuItemImage*> singleScreenLevels;
     MenuItemImage   *t_one_number, *t_double_number, *t_stars;
     
     int             numberOfLeftUpperLevel, numberOfCurrentPlayedLevel, maxLevelNumber, maxLevelPlayed;
     
     /* Data */
-    UserData        *userData;
-//    dataStruct      *_dataStruct;
-    GameData        *gameData, *tempGameData;
-    MusicData       *_musicData;
+    GameData        *gameData;
+    MusicData       *musicData;
     
     /* from GameData */
     void            loadGameData();
@@ -64,7 +63,6 @@ private:
     void            loadMaxPlayedLevel();
     
     /* UserData */
-    void            loadUserData();
     void            loadUserDataFromSelectedLevel( int level );
 
     void            loadMusicAndSoundEffects();

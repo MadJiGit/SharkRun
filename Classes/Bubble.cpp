@@ -32,12 +32,12 @@ void Bubble::initBubble( float x, float y, float directionX )
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
     
-    this->setScale( 0.5 );
+    setScale( 0.5 );
     
-    this->setPosition( Vec2( x, y ) );
+    setPosition( Vec2( x, y ) );
     float bubbleLifeTime = ( ( float ) arc4random() / 0x100000000 ) * 7;
     
-    auto moveBubble = MoveBy::create( 9, Vec2( directionX, this->visibleSize.height + this->getContentSize().height ) );
+    auto moveBubble = MoveBy::create( 9, Vec2( directionX, visibleSize.height + getContentSize().height ) );
     
 //    auto delayTime = DelayTime::create( bubbleLifeTime );
     float time = 0.5;
@@ -52,8 +52,8 @@ void Bubble::initBubble( float x, float y, float directionX )
     auto seq = Sequence::create( moveBubble, delayTimeBeforeFadeOut, fadeOut, RemoveSelf::create(), nullptr );
     auto seq1 = Sequence::create( zoomIn, delayTimeZoomIn, zoomOut, delayTimeZoomOut, nullptr );
     
-    this->runAction( seq );
-    this->runAction( seq1 );
+    runAction( seq );
+    runAction( seq1 );
 }
 
 int Bubble::randomNumberBetweenTwoNumbers( int first, int second )

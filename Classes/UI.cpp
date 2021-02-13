@@ -47,8 +47,8 @@ bool UI::init( )
 
 //    frameSize = Director::getInstance()->getOpenGLView()->getFrameSize();
 
-    _gameData = GameData::getGameData();
-    _musicData = MusicData::getMusicData();
+    gameData = GameData::getGameData();
+    musicData = MusicData::getMusicData();
 
     setUI();
 
@@ -174,13 +174,13 @@ void UI::displayGameTimer()
 
 int UI::getGameScoreCounter()
 {
-    return _gameData->getScoreCounter();
+    return gameData->getScoreCounter();
 }
 
 void UI::addPointsToGameScore( int points )
 {
     printf("UI 165 increaseScore with %d", points);
-    _gameData->increaseScore( points );
+    gameData->increaseScore( points );
     
     if ( false == thirdStar ){
         updateEarnedStars();
@@ -190,7 +190,7 @@ void UI::addPointsToGameScore( int points )
 
 void UI::setScoreCounterToZero()
 {
-    _gameData->setScoreCounterToZero();
+    gameData->setScoreCounterToZero();
 }
 
 void UI::startTimer()
@@ -205,39 +205,39 @@ void UI::stopTimer()
 
 void UI::updateGameTimer( float dt )
 {
-    //_gameData->increaseTimerCounter();
+    //gameData->increaseTimerCounter();
     
     // countdown timer with init value level[0].timeToPassLevel
-    _gameData->decreaseTimerCounter();
+    gameData->decreaseTimerCounter();
 }
 
 void UI::setGameTimerToInitValue()
 {
-    _gameData->setTimerCounterToInitValue();
+    gameData->setTimerCounterToInitValue();
 }
 
 void UI::setGameTimerToZero()
 {
-    _gameData->setTimerCounterToZero();
+    gameData->setTimerCounterToZero();
 }
 
 int UI::getGameTimerSeconds()
 {
-    return _gameData->getTimerSeconds();
+    return gameData->getTimerSeconds();
 }
 int UI::getGameTimerMinutes()
 {
-    return _gameData->getTimerMinutes();
+    return gameData->getTimerMinutes();
 }
 
 int UI::getGameTimerCounter()
 {
-    return _gameData->getTimerCounter();
+    return gameData->getTimerCounter();
 }
 
 int UI::getEarnedStars()
 {
-    return _gameData->getStarsCounter();
+    return gameData->getStarsCounter();
 }
 
 void UI::updateEarnedStars()
@@ -276,7 +276,7 @@ void UI::update( float dt )
 
 void UI::playEarnStarSound()
 {
-    _musicData->playEarnStarSound();
+    musicData->playEarnStarSound();
 }
 
 void UI::setUI( )
@@ -287,7 +287,7 @@ void UI::setUI( )
 void UI::setLevelLabel()
 {
 //    CCLabelTTF* cycleLabel1 = CCLabelTTF::create(" ", "Roboto Thin", 80);
-    tempLevelNumber = __String::createWithFormat( "Lv %02d", _gameData->getCurrentLevelNumber() );
+    tempLevelNumber = __String::createWithFormat( "Lv %02d", gameData->getCurrentLevelNumber() );
     levelLabel = Label::createWithTTF( tempLevelNumber->getCString() , FONT , visibleSize.height * SCORE_FONT_SIZE );
     levelLabel->setColor( Color3B::RED );
     levelLabel->setPosition(Point( gameTimerLabel->getPositionX() - (gameTimerLabel->getContentSize().width)*1.3, gameTimerLabel->getPositionY() ));
@@ -301,7 +301,7 @@ void UI::setLevelLabel()
 
 void UI::displayLevelNumber()
 {
-    levelLabel->setString( __String::createWithFormat( "Lv %02d", _gameData->getCurrentLevelNumber() )->getCString() );
+    levelLabel->setString( __String::createWithFormat( "Lv %02d", gameData->getCurrentLevelNumber() )->getCString() );
 }
 
 void UI::saveUserData()
@@ -341,15 +341,15 @@ void UI::setPauseButton()
 
 void UI::playButtonStartClick()
 {
-    _musicData->playButtonStartClickSound();
+    musicData->playButtonStartClickSound();
 }
 void UI::playButtonEndClick()
 {
-    _musicData->playButtonEndClickSound();
+    musicData->playButtonEndClickSound();
 }
 void UI::pauseBackgroundMusic()
 {
-    _musicData->pauseGameMusic();
+    musicData->pauseGameMusic();
 }
 
 void UI::goToPauseScene( Ref *sender )

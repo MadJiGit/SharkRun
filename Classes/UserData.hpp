@@ -43,9 +43,10 @@ struct dataStruct
     int                 ds_currentLevel;
     int                 ds_numberOfLeftUpperLevel; /* This number is used to show last seen grid with levels in SelectLevelScene */
     int                 ds_maxLevel;
-    
+    /* */
     float               ds_soundEffectsVolumeLevel;
     float               ds_musicVolumeLevel;
+    
     long                ds_lastSaveTime; /* This time is used to calculate how much time passed since last game and if needed to return shark lives  */
     
     bool                ds_isUserRegister;
@@ -69,21 +70,20 @@ private:
     static UserData     *_userData;
     dataStruct          _dataStruct;
     GameData            *gameData;
+    void                initStats();
     
     long                currentTimeInSeconds;
     long                getCurrentTimeInSeconds();
     int                 saveDataToFile();
     
-    
-public:
-    
     UserData();
     virtual ~UserData();
     
-    static  UserData    *getInstance();
-    static  UserData    *getUserData();
     
-    void                initStats();
+public:
+    
+    static  UserData    *getUserData();
+
     dataStruct          *getDataStruct();
     LevelData           getOneLevelDataByLevelNumber(int number);
     int                 loadDataFromFile();

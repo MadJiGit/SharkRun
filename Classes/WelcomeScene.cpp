@@ -29,8 +29,7 @@ bool WelcomeScene::init( )
     }
     
     DEBUG_INFO;
-    _userData = UserData::getInstance();
-    _gameData = GameData::getGameData();
+    gameData = GameData::getGameData();
 
     loadMusicAndSoundEffects();
     
@@ -97,7 +96,7 @@ void WelcomeScene::logoGoUp()
 void WelcomeScene::showText()
 {
 //    username = _dataStruct->ds_username;
-    username = _gameData->getUsername();
+    username = gameData->getUsername();
     std::string welcomeText = "Welcome back";
     if ( 0 < strlen(username.c_str()) ) {
         welcomeText += ", " + username;
@@ -117,9 +116,9 @@ void WelcomeScene::showText()
 void WelcomeScene::checkIfUserExist()
 {
 //    if ( false == _dataStruct->ds_isUserRegister )
-//    std::cout << std::boolalpha << _gameData->getUserRegisterStatus() << std::endl;
-//    log("row 119 Welccome screen %", _gameData->getUserRegisterStatus() );
-    if ( false == _gameData->getUserRegisterStatus() )
+//    std::cout << std::boolalpha << gameData->getUserRegisterStatus() << std::endl;
+//    log("row 119 Welccome screen %", gameData->getUserRegisterStatus() );
+    if ( false == gameData->getUserRegisterStatus() )
     {
 //        log("ifuserExist = false");
         showEnterUsernameScreen();
@@ -127,7 +126,7 @@ void WelcomeScene::checkIfUserExist()
     else
     {
 //        username = _dataStruct->ds_username;
-        username = _gameData->getUsername();
+        username = gameData->getUsername();
         showText();
         loadButtons();
     }
@@ -200,9 +199,9 @@ void WelcomeScene::showOkButton()
 void WelcomeScene::setUsername()
 {
     DEBUG_INFO;
-    _gameData->changeUsername( username );
-    _gameData->changeUserRegisterStatus( true );
-    _gameData->writeDataToUserData();
+    gameData->changeUsername( username );
+    gameData->changeUserRegisterStatus( true );
+    gameData->writeDataToUserData();
     
     goToMainMenuScene();
 }
@@ -296,7 +295,8 @@ void WelcomeScene::goToMainMenuScene( )
 
 void WelcomeScene::exitGameScene( )
 {
-    _userData->saveUserData();
+    gameData->writeDataToUserData();
+    
     Director::getInstance()->end();
     exit(TRANSITION_TIME_BETWEEN_SCENE * 3 );
 }

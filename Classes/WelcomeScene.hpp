@@ -43,7 +43,7 @@ private:
     UserData        *_userData;
     dataStruct      *_dataStruct;
     MusicData       *_musicData;
-    GameData        *_gameData;
+    GameData        *gameData;
     
     
     TextField       *textField;

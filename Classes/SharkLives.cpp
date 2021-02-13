@@ -41,7 +41,7 @@ bool SharkLives::init()
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
     
-    _musicData = MusicData::getMusicData();
+    musicData = MusicData::getMusicData();
     
     loadGameData();
     sizeOfSharkLifesVector = defaultSharkLives;
@@ -56,14 +56,15 @@ bool SharkLives::init()
 
 void SharkLives::loadGameData()
 {
-    _gameData = GameData::getGameData();
-    defaultSharkLives = _gameData->getDefaultSharkLives();
-
-    timeFirstLifeReturn = _gameData->getFirstLifeLoseTimer();
-    timeSecondLifeReturn = _gameData->getSecondLifeLoseTimer();
-    timeThirdLifeReturn = _gameData->getThirdLifeLoseTimer();
-    timeFourthLifeReturn = _gameData->getFourthLifeLoseTimer();
-    timeFifthLifeReturn = _gameData->getFifthLifeLoseTimer();
+    gameData = GameData::getGameData();
+    
+    defaultSharkLives = gameData->getDefaultSharkLives();
+    
+    timeFirstLifeReturn = gameData->getFirstLifeLoseTimer();
+    timeSecondLifeReturn = gameData->getSecondLifeLoseTimer();
+    timeThirdLifeReturn = gameData->getThirdLifeLoseTimer();
+    timeFourthLifeReturn = gameData->getFourthLifeLoseTimer();
+    timeFifthLifeReturn = gameData->getFifthLifeLoseTimer();
 }
 
 void SharkLives::fillAllSharkLifesVector( int data )
@@ -368,7 +369,7 @@ void SharkLives::updateSharkTimer( float dt )
 
 void SharkLives::playWinHeartSound()
 {
-    _musicData->playEarnHeartSound();
+    musicData->playEarnHeartSound();
 }
 
 void SharkLives::saveGameData()
@@ -379,11 +380,11 @@ void SharkLives::saveGameData()
 void SharkLives::saveData()
 {
     DEBUG_INFO;
-    _gameData->setFirstLifeLoseTimer( timeFirstLifeReturn );
-    _gameData->setSecondLifeLoseTimer( timeSecondLifeReturn );
-    _gameData->setThirdLifeLoseTimer( timeThirdLifeReturn );
-    _gameData->setFourthLifeLoseTimer( timeFourthLifeReturn );
-    _gameData->setFifthLifeLoseTimer( timeFifthLifeReturn );
-    _gameData->setCurrentSharkLives( getCurrentSharkLives() );
-    _gameData->writeDataToUserData();
+    gameData->setFirstLifeLoseTimer( timeFirstLifeReturn );
+    gameData->setSecondLifeLoseTimer( timeSecondLifeReturn );
+    gameData->setThirdLifeLoseTimer( timeThirdLifeReturn );
+    gameData->setFourthLifeLoseTimer( timeFourthLifeReturn );
+    gameData->setFifthLifeLoseTimer( timeFifthLifeReturn );
+    gameData->setCurrentSharkLives( getCurrentSharkLives() );
+    gameData->writeDataToUserData();
 }

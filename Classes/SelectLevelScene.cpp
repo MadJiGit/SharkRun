@@ -30,14 +30,10 @@ bool SelectLevelScene::init( )
         return false;
     }
     
-    userData = UserData::getUserData();
-//    _dataStruct = userData->getDataStruct();
-    
     visibleSize = Director::getInstance()->getVisibleSize();
     origin = Director::getInstance()->getVisibleOrigin();
     loadGameData();
     loadMusicAndSoundEffects();
-    loadUserData();
     
     setBackground();
     setButtons();
@@ -130,7 +126,7 @@ void SelectLevelScene::showSixLevels()
     
     for( i = 0; i < 6; i++ )
     {
-        auto levelData = userData->getOneLevelDataByLevelNumber(first + i);
+        auto levelData = gameData->getOneLevelDataByLevelNumber(first + i);
         if ( true == levelData.ld_isUnlocked ){
             singleScreenLevels[i] = MenuItemImage::create( "unlocked_level.png", "",
                                                      CC_CALLBACK_0( SelectLevelScene::goToLevel, this, (first + i)));
@@ -303,7 +299,7 @@ void SelectLevelScene::setLevelImageSecondNumber( int levelNumber )
 void SelectLevelScene::setLevelImageStars( int levelNumber )
 {
 
-    int starsNum = userData->getDataStruct()->oneLevelData[levelNumber].ld_stars;
+    int starsNum = gameData->getOneLevelDataByLevelNumber(levelNumber).ld_stars;
 
     switch ( starsNum ) {
         case 0:
@@ -484,7 +480,7 @@ void SelectLevelScene::checkButtonsStatus( int currentLevelNumber )
         leftButton->setEnabled( true );
     }
     
-    if ( false == userData->getDataStruct()->oneLevelData[gameData->getNumberOfLeftUpperLevel() + 5].ld_isUnlocked )
+    if ( false == gameData->getOneLevelDataByLevelNumber(gameData->getNumberOfLeftUpperLevel() + 5).ld_isUnlocked )
     {
         rightButton->setEnabled( false );
     }
@@ -544,44 +540,37 @@ void SelectLevelScene::loadCurrentLevelNumber()
 
 void SelectLevelScene::loadMusicAndSoundEffects()
 {
-    _musicData = MusicData::getMusicData();
+    musicData = MusicData::getMusicData();
 }
 
 void SelectLevelScene::playChoseMenuSound()
 {
-    _musicData->playChoseMenuSound();
+    musicData->playChoseMenuSound();
 }
 
 void SelectLevelScene::playChoseMenuSoundStart()
 {
-    _musicData->playChoseMenuSoundStart();
+    musicData->playChoseMenuSoundStart();
 }
 
 void SelectLevelScene::playChoseMenuSoundEnd()
 {
-    _musicData->playChoseMenuSoundEnd();
+    musicData->playChoseMenuSoundEnd();
 }
 
 void SelectLevelScene::playButtonStartClick()
 {
-    _musicData->playButtonStartClickSound();
+    musicData->playButtonStartClickSound();
 }
 void SelectLevelScene::playButtonEndClick()
 {
-    _musicData->playButtonEndClickSound();
-}
-
-void SelectLevelScene::loadUserData()
-{
-    DEBUG_INFO;
-    userData = UserData::getUserData();
-//    _dataStruct = userData->getDataStruct();
+    musicData->playButtonEndClickSound();
 }
 
 void SelectLevelScene::loadUserDataFromSelectedLevel( int level )
 {
 //    auto levelStatsFromDB = userData->getDataStruct()->oneLevelData[level];
-    auto levelStatsFromDB = userData->getOneLevelDataByLevelNumber(level);
+    auto levelStatsFromDB = gameData->getOneLevelDataByLevelNumber(level);
     
     levelStats_isUnlocked = levelStatsFromDB.ld_isUnlocked;
     levelStats_levelNumber = levelStatsFromDB.ld_levelNumber;

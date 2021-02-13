@@ -50,14 +50,12 @@ bool GameScene::init( )
     
     setUI();
     
-    _userData = UserData::getUserData();
-    _dataStruct = _userData->getDataStruct();
-    _musicData = MusicData::getMusicData();
-    _gameData = GameData::getGameData();
+    musicData = MusicData::getMusicData();
+    gameData = GameData::getGameData();
     
-    currentLevel = _gameData->getCurrentLevelNumber();
+    currentLevel = gameData->getCurrentLevelNumber();
     timeNeedToPassLevel = levelData[currentLevel].level[0].passLevelTime;
-    _gameData->setCountdownTimerCounter( currentLevel );
+    gameData->setCountdownTimerCounter( currentLevel );
 
     loadLevelData( currentLevel );
 
@@ -65,7 +63,7 @@ bool GameScene::init( )
         watchAd();
     }
     
-//    log("GS 59 level number %d", _gameData->getCurrentLevelNumber() );
+//    log("GS 59 level number %d", gameData->getCurrentLevelNumber() );
     
     spawnShark();
     createContactListener();
@@ -97,7 +95,7 @@ void GameScene::saveUserData()
 
 void GameScene::getUserDataFromStruct()
 {
-    currentLevel = _gameData->getCurrentLevelNumber();
+    currentLevel = gameData->getCurrentLevelNumber();
 //    log("GS 102 load current level num %d", currentLevel );
     loadLevelData( currentLevel );
     
@@ -182,7 +180,7 @@ bool GameScene::onContactBegin( PhysicsContact &contact )
         }
         else {
         addToGameScore( fish_temp->getPoints() );
-            _gameData->increaseFishCounter();
+            gameData->increaseFishCounter();
             fish_temp->removeFromParentAndCleanup( true );
     //        this->RemoveSprite( fish_temp );
     //        fish_temp->removeFish();
@@ -281,7 +279,7 @@ void GameScene::addToGameScore( int points )
      This is logic for pass level depending on max earn score
      Levels->levelStat passLevelPoints
      
-    if ( ui->getGameScoreCounter() > _gameData->getToPassLevelPoints( currentLevel ) ){
+    if ( ui->getGameScoreCounter() > gameData->getToPassLevelPoints( currentLevel ) ){
         goToLevelCompleteScene();
     }
      */
@@ -342,7 +340,7 @@ void GameScene::goToLevelCompleteScene( )
 void GameScene::retryGameLevel()
 {
     ui->setPauseButtonCondition( true );
-//    _gameData->setCountdownTimerCounter( currentLevel );
+//    gameData->setCountdownTimerCounter( currentLevel );
     spawnShark();
 }
 
@@ -523,39 +521,39 @@ void GameScene::update( float dt )
 
 void GameScene::playBackgroundMusic()
 {
-    _musicData->playGameMusic();
+    musicData->playGameMusic();
 }
 void GameScene::pauseBackgroundMusic()
 {
-    _musicData->pauseGameMusic();
+    musicData->pauseGameMusic();
 }
 void GameScene::resumeBackgroundMusic()
 {
-    _musicData->resumeGameMusic();
+    musicData->resumeGameMusic();
 }
 void GameScene::stopBackgroundMusic()
 {
-    _musicData->stopGameMusic();
+    musicData->stopGameMusic();
 }
 void GameScene::playButtonStartClick()
 {
-    _musicData->playButtonStartClickSound();
+    musicData->playButtonStartClickSound();
 }
 void GameScene::playButtonEndClick()
 {
-    _musicData->playButtonEndClickSound();
+    musicData->playButtonEndClickSound();
 }
 void GameScene::playEatFishSound()
 {
-    _musicData->playEatFishSound();
+    musicData->playEatFishSound();
 }
 void GameScene::playExplosionSound()
 {
-    _musicData->playHitMineSound();
+    musicData->playHitMineSound();
 }
 void GameScene::playKillSharkSound()
 {
-    _musicData->playSharkDiedSound();
+    musicData->playSharkDiedSound();
 }
 
 void GameScene::createEdgeBody()

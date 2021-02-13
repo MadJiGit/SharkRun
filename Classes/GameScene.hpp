@@ -88,10 +88,8 @@ private:
     
 //    Button              *pauseButton;
 
-    MusicData           *_musicData;
-    UserData            *_userData;
-    dataStruct          *_dataStruct;
-    GameData            *_gameData;
+    MusicData           *musicData;
+    GameData            *gameData;
     
     std::string         playerName;
 
