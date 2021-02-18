@@ -13,6 +13,7 @@ using namespace cocos2d;
 
 UI *UI::createUI( GameScene *scene )
 {
+    DEBUG_INFO;
     UI *sprite;
     sprite = new UI();
 
@@ -223,25 +224,30 @@ void UI::updateGameTimer( float dt )
 
 void UI::setGameTimerToInitValue()
 {
+    DEBUG_INFO;
     gameData->setTimerCounterToInitValue();
 }
 
 void UI::setGameTimerToZero()
 {
+    DEBUG_INFO;
     gameData->setTimerCounterToZero();
 }
 
 int UI::getGameTimerSeconds()
 {
+    DEBUG_INFO;
     return gameData->getTimerSeconds();
 }
 int UI::getGameTimerMinutes()
 {
+    DEBUG_INFO;
     return gameData->getTimerMinutes();
 }
 
 int UI::getGameTimerCounter()
 {
+    DEBUG_INFO;
     return gameData->getTimerCounter();
 }
 

@@ -147,7 +147,8 @@ LevelData UserData::getOneLevelDataByLevelNumber(int number)
 void UserData::saveUserData()
 {
     DEBUG_INFO
-    auto gameTimer = gameData->getTimerCounter();
+//    auto gameTimer = gameData->getTimerCounter();
+    auto gameTimer = 0;
     auto gameScore = gameData->getScoreCounter();
     auto earnedStars = gameData->getStarsCounter();
     auto currentLevel = gameData->getCurrentLevelNumber();

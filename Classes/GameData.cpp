@@ -5,6 +5,7 @@
     //  Created by Madji on 18.07.19.
     //  CHANGED
 
+    #pragma once
     #include "GameData.hpp"
 
     GameData   *GameData::_gameData;
@@ -52,8 +53,8 @@
         setScoreCounter(0);
         setStarsCounter(0);
         setFishCounter(0);
-        setMusicVolumeLevel(0.0f);
-        setSoundEffectsVolumeLevel(0.0f);
+//        setMusicVolumeLevel(0.0f);
+//        setSoundEffectsVolumeLevel(0.0f);
         printf("musicVolumeLevel with address %p and value %f \n", this->musicVolumeLevel, this->musicVolumeLevel);
     }
 
@@ -304,18 +305,21 @@
     {
         DEBUG_INFO;
         timerCounter = value;
-        timerSeconds = value;
-        timerMinutes = value;
+//        timerSeconds = value;
+//        timerMinutes = value;
+        log("value %d\n", value);
+        log("timerCounter %d\n", this->timerCounter);
         log("timerCounter %d\n", getTimerCounter());
     }
 
     int GameData::getTimerCounter()
     {
         DEBUG_INFO;
-//        log("countdownTimeCounter %d\n", countdownTimeCounter);
-//        log("timeCounter %d\n", (timerCounter - countdownTimeCounter));
+        printf("gameData address %p\n", _gameData);
+//        printf("timeerCounter address %p\n", timerCounter);
+        printf("timeerCounter value %d\n", timerCounter);
+
         return timerCounter;
-//        return 0;
     }
 
     void GameData::setTimerCounterToInitValue()
@@ -324,7 +328,7 @@
     //    countdownTimeCounter = levelData[getCurrentLevelNumber()].level[0].passLevelTime;
         timerSeconds = countdownTimeCounter % 60;
         timerMinutes = ( countdownTimeCounter / 60 ) % 60;
-
+        printf("timerSeconds value %d timerMinutes value %d\n", timerSeconds, timerMinutes);
     }
 
     void GameData::setTimerCounterToZero()
@@ -371,12 +375,13 @@
     void GameData::setMusicVolumeLevel(float level)
     {
         DEBUG_INFO;
+        printf("_gameData address %p\n", _gameData);
         musicVolumeLevel = level;
         printf("musicVolumeLevel with address %p and value %f \n", musicVolumeLevel, musicVolumeLevel);
-        this->musicVolumeLevel = level;
-        printf("musicVolumeLevel with address %p and value %f \n", this->musicVolumeLevel, this->musicVolumeLevel);
-        _gameData->musicVolumeLevel = level;
-        printf("musicVolumeLevel with address %p and value %f \n", _gameData->musicVolumeLevel, _gameData->musicVolumeLevel);
+//        this->musicVolumeLevel = level;
+//        printf("musicVolumeLevel with address %p and value %f \n", this->musicVolumeLevel, this->musicVolumeLevel);
+//        _gameData->musicVolumeLevel = level;
+//        printf("musicVolumeLevel with address %p and value %f \n", _gameData->musicVolumeLevel, _gameData->musicVolumeLevel);
         
     }
 

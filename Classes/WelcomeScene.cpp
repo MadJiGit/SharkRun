@@ -5,7 +5,10 @@
 //  Created by Madji on 9.05.19.
 //
 
+#pragma once
+
 #include "WelcomeScene.hpp"
+#include "Definitions.hpp"
 
 extern int global_var;
 
@@ -292,6 +295,7 @@ void WelcomeScene::goToMainMenuScene( )
 
 void WelcomeScene::exitGameScene( )
 {
+    DEBUG_INFO;
     gameData->writeDataToUserData();
     
     Director::getInstance()->end();

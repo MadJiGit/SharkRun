@@ -65,6 +65,7 @@ void MusicData::setTemporaryLevels()
 
 void MusicData::saveData()
 {
+    DEBUG_INFO;
     gameData->writeDataToUserData();
     setTemporaryLevels();
 }

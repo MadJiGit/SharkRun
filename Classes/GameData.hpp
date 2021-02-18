@@ -61,7 +61,7 @@
         int                 earnedStars;
         int                 scoreCounter;
         int                 fishCounter;
-        int                 timerCounter;
+        int                 timerCounter = 0;
         
         /* Level Statistic */
         int                 pointsForFirstStar;
