@@ -90,6 +90,7 @@ public:
     void                setUsername( std::string data );
     void                printData();
     void                saveUserData();
+    void                unlockLevel( int number );
 };
 
 

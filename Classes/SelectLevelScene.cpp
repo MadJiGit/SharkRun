@@ -72,8 +72,6 @@ bool SelectLevelScene::init( )
     auto defaultPosLayerX = menuLayer->getPositionX();
     auto defaultPosLayerY = menuLayer->getPositionY();
     
-//    auto testLevelWidth = testLevel_1->getContentSize().width * SELECT_LEVEL_MENU_LAYER_SCALE ;
-//    auto testLevelHeight = testLevel_1->getContentSize().height * SELECT_LEVEL_MENU_LAYER_SCALE;
     auto testLevelWidth = testLevel_1->getContentSize().width;
     auto testLevelHeight = testLevel_1->getContentSize().height;
     auto offsetX = testLevelWidth / 3;
@@ -367,7 +365,8 @@ void SelectLevelScene::setButtons()
                 DEBUG_INFO;
                 printf("Left button clicked\n");
                 loadPreviousSix( gameData->getNumberOfLeftUpperLevel() );
-                Director::getInstance()->popScene();
+                goToSelectedLevelScene();
+//                Director::getInstance()->popScene();
 //                isLevelUpdated = false;
                 break;
             default:
@@ -385,10 +384,10 @@ void SelectLevelScene::setButtons()
             case cocos2d::ui::Widget::TouchEventType::ENDED:
                 playButtonEndClick();
                 DEBUG_INFO;
-                printf("++++++++ Right button clicked and _gameData->getNumberOfLeftUpperLevel() = %d\n", gameData->getNumberOfLeftUpperLevel());
+//                printf("++++++++ Right button clicked and _gameData->getNumberOfLeftUpperLevel() = %d\n",   gameData->getNumberOfLeftUpperLevel());
                 loadNextSix( gameData->getNumberOfLeftUpperLevel() );
                 DEBUG_INFO;
-                printf("After loading next six levels\n");
+//                printf("After loading next six levels\n");
                 goToSelectedLevelScene();
 //                isLevelUpdated = false;
                 break;

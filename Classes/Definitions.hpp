@@ -182,7 +182,7 @@ static int debug_counter;
 
 
 // LEVELS
-#define ALL_LEVELS 48
+#define ALL_LEVELS 30
 
 // STARS POINTS
 #define ONE_STAR_POINTS 20

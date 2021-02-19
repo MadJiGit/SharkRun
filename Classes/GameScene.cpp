@@ -59,6 +59,7 @@ bool GameScene::init( )
     gameData->setCountdownTimerCounter( currentLevel );
 
     loadLevelData( currentLevel );
+    
 
     if ( false == checkCanPlayGS() ) {
         watchAd();
@@ -92,6 +93,7 @@ bool GameScene::checkCanPlayGS()
     return ui->checkCanPlayBG();
 }
 
+/* TODO if game is real, there will be are logic for show ads */
 void GameScene::watchAd()
 {
     log("time for advertise movie");
@@ -236,11 +238,6 @@ bool GameScene::onContactBegin( PhysicsContact &contact )
     }
     else if ( ( b->getContactTestBitmask() == CONTACT_MASK_SHARK && a->getContactTestBitmask() == CONTACT_MASK_BACKGROUND ) ||  ( b->getContactTestBitmask() == CONTACT_MASK_BACKGROUND && a->getContactTestBitmask() == CONTACT_MASK_SHARK ) )
     {
-//        log( "GS 249 shark contact ground");
-//        shark->sharkHeadZero();
-//        shark->sharkMoving();
-//        shark->sharkFreeze();
-//        shark->runAction( RotateTo::create( SHARK_HEAD_ZERO_TIME, SHARK_HEAD_ZERO ) );
         shark->moveUpTimeCounter = SHARK_REST_COUNTER;
     }
     else if ( ( a->getContactTestBitmask() == CONTACT_MASK_BARREL && b->getContactTestBitmask() == CONTACT_MASK_BACKGROUND ) ||  ( a->getContactTestBitmask() == CONTACT_MASK_BACKGROUND && b->getContactTestBitmask() == CONTACT_MASK_BARREL ) )
@@ -251,18 +248,14 @@ bool GameScene::onContactBegin( PhysicsContact &contact )
         }
         
         if ( barrel_temp == nullptr ){
-//            log("GS 267 ERROR barrel is nullptr after contact with ground");
+            
         } else {
-//        auto radius1 = barrel_temp->getRotation();
-        barrel_temp->cancelRotation();
-//        barrel_temp->setRotation( 360 - radius1 );
-//        log("GS 273 radius1 %f", radius1);
-//        this->barrelContact( barrel_temp );
+            barrel_temp->cancelRotation();
         }
     }
     else
     {
-//        log( "GS 279 error with collision method");
+        
     }
     
     return true;
@@ -298,6 +291,7 @@ void GameScene::checkPassLevelConditions()
 //    printf("GS 297 earned stars %d\n", ui->getEarnedStars());
     
     isGame = false;
+    saveUserData();
     
     if ( ui->getEarnedStars()){
         goToLevelCompleteScene();
@@ -316,7 +310,7 @@ void GameScene::goToGameOverScene()
 void GameScene::goToYouFailedScene( )
 {
     DEBUG_INFO;
-    saveUserData();
+    
     
     if ( true == checkCanPlayGS() )
     {
@@ -334,7 +328,8 @@ void GameScene::goToYouFailedScene( )
 void GameScene::goToLevelCompleteScene( )
 {
     DEBUG_INFO;
-    saveUserData();
+    printf("curr level %d\n", currentLevel);
+    gameData->unlockLevel( currentLevel + 1 );
     ui->stopTimer();
     shark->unscheduleTouchListener();
     shark->removeShark();

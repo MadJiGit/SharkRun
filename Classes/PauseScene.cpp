@@ -110,7 +110,8 @@ void PauseScene::setChangeLabel()
 
 void PauseScene::setRetryLabel()
 {
-    retryLabel = MenuItemImage::create( "restart_level_layer_pm.png", "restart_level_layer_pm_clicked.png", CC_CALLBACK_1( PauseScene::goToMainMenuScene, this ) );
+//    retryLabel = MenuItemImage::create( "restart_level_layer_pm.png", "restart_level_layer_pm_clicked.png", CC_CALLBACK_1( PauseScene::goToMainMenuScene, this ) );
+    retryLabel = MenuItemImage::create( "restart_level_layer_pm.png", "restart_level_layer_pm_clicked.png", CC_CALLBACK_1( PauseScene::goToGameScene, this ) );
 //    retryLabel->setScale( BUTTON_RETRY_CHANGE_SCALE );
 }
 
@@ -156,6 +157,13 @@ void PauseScene::goToMainMenuScene( Ref *sender )
     
     Director::getInstance()->resume();
     auto scene = MainMenuScene::createScene();
+    Director::getInstance()->replaceScene( TransitionFade::create( TRANSITION_TIME_BETWEEN_SCENE, scene ) );
+}
+
+void PauseScene::goToGameScene( Ref *sender )
+{
+    Director::getInstance()->resume();
+    auto scene = GameScene::createScene();
     Director::getInstance()->replaceScene( TransitionFade::create( TRANSITION_TIME_BETWEEN_SCENE, scene ) );
 }
 

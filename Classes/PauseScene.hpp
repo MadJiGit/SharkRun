@@ -47,6 +47,7 @@ private:
     
     void goToMainMenuScene( Ref *sender );
     void backToGameScene( Ref *sender );
+    void goToGameScene( Ref *sender );
     void exitGameScene( Ref *sender );
     void goToSettings( Ref *sender );
     void goToChangeLevel( Ref *sender );

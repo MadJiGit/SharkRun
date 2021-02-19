@@ -58,10 +58,10 @@
         
         /* Levels Data */
         void                loadUserData();
-        int                 earnedStars = 0;
-        int                 scoreCounter = 0;
-        int                 fishCounter = 0;
-        int                 timerCounter = 0;
+        int                 earnedStars;
+        int                 scoreCounter;
+        int                 fishCounter;
+        int                 timerCounter;
         
         /* Level Statistic */
         int                 pointsForFirstStar;
@@ -127,6 +127,7 @@
         void                setThirdLifeLoseTimer( long time);
         void                setFourthLifeLoseTimer( long time);
         void                setFifthLifeLoseTimer( long time);
+        void                unlockLevel(int number );
         
         
         /* Levels Data */

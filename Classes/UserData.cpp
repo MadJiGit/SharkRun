@@ -45,7 +45,7 @@ UserData *UserData::getUserData()
 void UserData::initStats()
 {
     DEBUG_INFO
-//    memset(&_dataStruct, '\0', sizeof(_dataStruct));
+        //    memset(&_dataStruct, '\0', sizeof(_dataStruct));
     int i;
     
     for (i = 1; i <= ALL_LEVELS; i++ )
@@ -54,7 +54,8 @@ void UserData::initStats()
         /*
          Need for test only - simulate registered user, who is passed a few levels
          */
-#ifdef USERISACTIVE
+#if USERISACTIVE
+        log("ATTENTION USERISACTIVE IS ON!!!!");
         _dataStruct.oneLevelData[i].ld_levelNumber = i;
         _dataStruct.oneLevelData[i].ld_isUnlocked = true;
         _dataStruct.oneLevelData[i].ld_stars = 2;
@@ -62,6 +63,7 @@ void UserData::initStats()
         _dataStruct.oneLevelData[i].ld_score = 123;
         _dataStruct.oneLevelData[i].ld_playTime = 90;
 #else
+        log("ATTENTION USERISACTIVE IS OFFFFFFF!!!!");
         _dataStruct.oneLevelData[i].ld_levelNumber = i;
         _dataStruct.oneLevelData[i].ld_isUnlocked = false;
         _dataStruct.oneLevelData[i].ld_stars = 0;
@@ -87,8 +89,8 @@ void UserData::initStats()
     this->setUsername( "" );
 #endif
     
-    _dataStruct.ds_defaultSharkLives = 5;
-    _dataStruct.ds_currentSharkLives = 5;
+    _dataStruct.ds_defaultSharkLives = SHARK_ADDITIONAL_LIFE_COUNT;
+    _dataStruct.ds_currentSharkLives = SHARK_ADDITIONAL_LIFE_COUNT;
     _dataStruct.ds_currentLevel = 1;
     _dataStruct.ds_numberOfLeftUpperLevel = 1;
     _dataStruct.ds_maxLevel = ALL_LEVELS;
@@ -121,7 +123,7 @@ int UserData::loadDataFromFile()
      Used for test only. Did not load data from file.
      */
     
-//    return -1;
+        //    return -1;
     
     auto fileToSave = FileUtils::getInstance()->getWritablePath() + "sgud.db";
     
@@ -134,7 +136,7 @@ int UserData::loadDataFromFile()
     
     fclose( f );
     
-        //    printData();
+    printData();
     
     return 0;
 }
@@ -199,9 +201,9 @@ void UserData::saveUserData()
         }
     }
     
-
+    
     _userData->setUsername(gameData->getUsername());
-
+    
     _dataStruct.oneLevelData[currentLevel].ld_isUnlocked = true;
     
     _dataStruct.ds_levelsPlayed             = gameData->getLevelsPlayed();
@@ -255,6 +257,11 @@ void UserData::setUsername( std::string data )
     
     strcpy( _dataStruct.ds_username, &data[0] );
     
+}
+
+void UserData::unlockLevel(int number)
+{
+    _dataStruct.oneLevelData[number].ld_isUnlocked = true;
 }
 
 /*

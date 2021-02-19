@@ -216,9 +216,6 @@ void UI::stopTimer()
 
 void UI::updateGameTimer( float dt )
 {
-    //gameData->increaseTimerCounter();
-    
-    // countdown timer with init value level[0].timeToPassLevel
     gameData->decreaseTimerCounter();
 }
 
