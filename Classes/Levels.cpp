@@ -226,7 +226,79 @@ struct fishStat fishData[] = {
     {{
         { 0.0080, 0.0100 },
     }},
-    
+    // level 13
+    {{
+        { 0.0080, 0.0100 },
+    }},
+    // level 14
+    {{
+        { 0.0080, 0.0100 },
+    }},
+    // level 15
+    {{
+        { 0.0080, 0.0100 },
+    }},
+    // level 16
+    {{
+        { 0.0080, 0.0100 },
+    }},
+    // level 17
+    {{
+        { 0.0080, 0.0100 },
+    }},
+    // level 18
+    {{
+        { 0.0080, 0.0100 },
+    }},
+    // level 19
+    {{
+        { 0.0080, 0.0100 },
+    }},
+    // level 20
+    {{
+        { 0.0080, 0.0100 },
+    }},
+    // level 21
+    {{
+        { 0.0080, 0.0100 },
+    }},
+    // level 22
+    {{
+        { 0.0080, 0.0100 },
+    }},
+    // level 23
+    {{
+        { 0.0080, 0.0100 },
+    }},
+    // level 24
+    {{
+        { 0.0080, 0.0100 },
+    }},
+    // level 25
+    {{
+        { 0.0080, 0.0100 },
+    }},
+    // level 26
+    {{
+        { 0.0080, 0.0100 },
+    }},
+    // level 27
+    {{
+        { 0.0080, 0.0100 },
+    }},
+    // level 28
+    {{
+        { 0.0080, 0.0100 },
+    }},
+    // level 29
+    {{
+        { 0.0080, 0.0100 },
+    }},
+    // level 30
+    {{
+        { 0.0080, 0.0100 },
+    }},
+
 };
 
 
@@ -236,6 +308,7 @@ struct levelStat levelData[] = {
     {
         { 0, 0, 0, 0, 0, 0 },
     },
+// 1 screen
     // level 1
     {{
         { 1, 10, 20, 30, 30, PASSLEVELTIME },
@@ -260,6 +333,8 @@ struct levelStat levelData[] = {
    {{
        { 6, 70, 120, 170, 170, PASSLEVELTIME },
    }},
+    
+// 2 screen
     // level 7
     {{
         { 7, 70, 120, 170, 170, PASSLEVELTIME },
@@ -284,6 +359,8 @@ struct levelStat levelData[] = {
     {{
         { 12, 70, 120, 170, 170, PASSLEVELTIME },
     }},
+    
+// 3 screen
     // level 13
     {{
         { 13, 70, 120, 170, 170, PASSLEVELTIME },
@@ -308,5 +385,59 @@ struct levelStat levelData[] = {
     {{
         { 18, 70, 120, 170, 170, PASSLEVELTIME },
     }},
+ 
+// 4 screen
+    // level 19
+    {{
+        { 19, 70, 120, 170, 170, PASSLEVELTIME },
+    }},
+    // level 20
+    {{
+        { 20, 70, 120, 170, 170, PASSLEVELTIME },
+    }},
+    // level 21
+    {{
+        { 21, 70, 120, 170, 170, PASSLEVELTIME },
+    }},
+    // level 22
+    {{
+        { 22, 70, 120, 170, 170, PASSLEVELTIME },
+    }},
+    // level 23
+    {{
+        { 23, 70, 120, 170, 170, PASSLEVELTIME },
+    }},
+    // level 24
+    {{
+        { 24, 70, 120, 170, 170, PASSLEVELTIME },
+    }},
+    
+// 5 screen
+    // level 25
+    {{
+        { 25, 70, 120, 170, 170, PASSLEVELTIME },
+    }},
+    // level 26
+    {{
+        { 26, 70, 120, 170, 170, PASSLEVELTIME },
+    }},
+    // level 27
+    {{
+        { 27, 70, 120, 170, 170, PASSLEVELTIME },
+    }},
+    // level 28
+    {{
+        { 28, 70, 120, 170, 170, PASSLEVELTIME },
+    }},
+    // level 29
+    {{
+        { 29, 70, 120, 170, 170, PASSLEVELTIME },
+    }},
+    // level 30
+    {{
+        { 30, 70, 120, 170, 170, PASSLEVELTIME },
+    }},
+        
+// 6 screen
     
 };
