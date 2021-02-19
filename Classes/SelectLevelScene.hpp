@@ -76,7 +76,7 @@ private:
     void            setLevelImageSecondNumber( int number );
     void            setLevelImageStars( int levelNumber );
     void            loadCurrentSix( int number );
-    void            loadPreviosSix( int number );
+    void            loadPreviousSix( int number );
     void            loadNextSix( int number );
     void            goToMainMenu();
     void            goBackToSettingsMenu( Ref *sender );
@@ -107,7 +107,7 @@ public:
     bool            isLevelUpdated = false;
     
     void            removeMenu();
-    void            showSixLevels();
+    void            showSixLevels(int firstLevelNumber);
     
     CREATE_FUNC( SelectLevelScene );
 };

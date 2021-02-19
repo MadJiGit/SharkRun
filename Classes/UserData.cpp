@@ -44,8 +44,8 @@ UserData *UserData::getUserData()
 
 void UserData::initStats()
 {
-    
-    memset(&_dataStruct, '\0', sizeof(_dataStruct));
+    DEBUG_INFO
+//    memset(&_dataStruct, '\0', sizeof(_dataStruct));
     int i;
     
     for (i = 1; i <= ALL_LEVELS; i++ )
@@ -121,7 +121,7 @@ int UserData::loadDataFromFile()
      Used for test only. Did not load data from file.
      */
     
-    return -1;
+//    return -1;
     
     auto fileToSave = FileUtils::getInstance()->getWritablePath() + "sgud.db";
     
@@ -147,8 +147,8 @@ LevelData UserData::getOneLevelDataByLevelNumber(int number)
 void UserData::saveUserData()
 {
     DEBUG_INFO
-//    auto gameTimer = gameData->getTimerCounter();
-    auto gameTimer = 0;
+    
+    auto gameTimer = gameData->getTimerCounter();
     auto gameScore = gameData->getScoreCounter();
     auto earnedStars = gameData->getStarsCounter();
     auto currentLevel = gameData->getCurrentLevelNumber();

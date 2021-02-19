@@ -374,6 +374,7 @@ void SharkLives::playWinHeartSound()
 
 void SharkLives::saveGameData()
 {
+    DEBUG_INFO;
     this->saveData();
 }
 

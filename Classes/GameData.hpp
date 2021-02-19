@@ -58,9 +58,9 @@
         
         /* Levels Data */
         void                loadUserData();
-        int                 earnedStars;
-        int                 scoreCounter;
-        int                 fishCounter;
+        int                 earnedStars = 0;
+        int                 scoreCounter = 0;
+        int                 fishCounter = 0;
         int                 timerCounter = 0;
         
         /* Level Statistic */

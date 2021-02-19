@@ -41,6 +41,7 @@ static void problemLoading(const char* filename)
 
 bool GameScene::init( )
 {
+    DEBUG_INFO;
     if ( !Layer::init() ) {
         return false;
     }
@@ -100,6 +101,8 @@ void GameScene::watchAd()
 
 void GameScene::saveUserData()
 {
+//    gameData->writeDataToUserData();
+    DEBUG_INFO;
     ui->saveUserData();
 }
 
@@ -312,6 +315,7 @@ void GameScene::goToGameOverScene()
 
 void GameScene::goToYouFailedScene( )
 {
+    DEBUG_INFO;
     saveUserData();
     
     if ( true == checkCanPlayGS() )
@@ -329,6 +333,7 @@ void GameScene::goToYouFailedScene( )
 
 void GameScene::goToLevelCompleteScene( )
 {
+    DEBUG_INFO;
     saveUserData();
     ui->stopTimer();
     shark->unscheduleTouchListener();
@@ -461,7 +466,7 @@ void GameScene::update( float dt )
 
         DEBUG_INFO;
 
-        selectLevelScene->showSixLevels();
+        selectLevelScene->showSixLevels(gameData->getNumberOfLeftUpperLevel());
         selectLevelScene->isLevelUpdated = true;
     }
     

@@ -8,6 +8,8 @@
     #pragma once
     #include "GameData.hpp"
 
+#include "Levels.hpp"
+
     GameData   *GameData::_gameData;
 
     GameData::GameData()
@@ -53,9 +55,7 @@
         setScoreCounter(0);
         setStarsCounter(0);
         setFishCounter(0);
-//        setMusicVolumeLevel(0.0f);
-//        setSoundEffectsVolumeLevel(0.0f);
-        printf("musicVolumeLevel with address %p and value %f \n", this->musicVolumeLevel, this->musicVolumeLevel);
+        printf("musicVolumeLevel with address %p and value %f \n", _gameData->musicVolumeLevel, _gameData->musicVolumeLevel);
     }
 
     void GameData::loadUserData()
@@ -88,7 +88,9 @@
     */
     int GameData::getCurrentLevelNumber()
     {
-        return currentLevel;
+        DEBUG_INFO;
+        printf("currentLevel addrees %p and value %d\n", _gameData->currentLevel, _gameData->currentLevel);
+        return _gameData->currentLevel;
     }
 
     /*
@@ -98,8 +100,8 @@
     {
         DEBUG_INFO;
         printf("number = %d\n", levelNum);
-        currentLevel = levelNum;
-        printf("currentLevel addrees %p and value %d\n", currentLevel, currentLevel);
+        _gameData->currentLevel = levelNum;
+        printf("currentLevel addrees %p and value %d\n", _gameData->currentLevel, _gameData->currentLevel);
     }
 
     /*
@@ -108,7 +110,7 @@
      */
     int GameData::getLevelsPlayed()
     {
-        return levelsPlayed;
+        return _gameData->levelsPlayed;
     }
 
     /*
@@ -116,7 +118,7 @@
      */
     void GameData::setLevelsPlayed( int levelNum )
     {
-         levelsPlayed = levelNum;
+        _gameData->levelsPlayed = levelNum;
     }
 
     /*
@@ -135,7 +137,7 @@
      */
     void GameData::setLastLevelNumber( int levels )
     {
-        maxLevel = levels;
+        _gameData->maxLevel = levels;
     }
 
     /*
@@ -143,7 +145,7 @@
      */
     int GameData::getLastLevelNumber()
     {
-        return maxLevel;
+        return _gameData->maxLevel;
     }
 
     /*
@@ -156,11 +158,11 @@
     {
         DEBUG_INFO;
         printf("setNumberOfLeftUpperLevel = %d\n", number);
-        numberOfLeftUpperLevel = number;
+        _gameData->numberOfLeftUpperLevel = number;
     //    printf("number to pass = %d\n", number);
     //    numberOfLeftUpperLevel = number;
 //        writeDataToUserData();
-        printf("numberOfLeftUpperLevel after set = %d\n", numberOfLeftUpperLevel);
+        printf("numberOfLeftUpperLevel after set = %d\n", _gameData->numberOfLeftUpperLevel);
     }
 
     /*
@@ -169,35 +171,35 @@
     int GameData::getNumberOfLeftUpperLevel()
     {
         DEBUG_INFO;
-        printf("numberOfLeftUpperLevel = %d\n", numberOfLeftUpperLevel);
-        return numberOfLeftUpperLevel;
+        printf("numberOfLeftUpperLevel = %d\n", _gameData->numberOfLeftUpperLevel);
+        return _gameData->numberOfLeftUpperLevel;
     }
 
     // SHARK stuffs
 
     int GameData::getCurrentSharkLives()
     {
-        return currentSharkLives;
+        return _gameData->currentSharkLives;
     }
 
     void GameData::setCurrentSharkLives( int lives )
     {
-        currentSharkLives = lives;
+        _gameData->currentSharkLives = lives;
     }
 
     void GameData::decreaseSharkLives()
     {
-        currentSharkLives -= 1;
+        _gameData->currentSharkLives -= 1;
     }
 
     void GameData::increaseSharkLives()
     {
-        currentSharkLives += 1;
+        _gameData->currentSharkLives += 1;
     }
 
     int GameData::getDefaultSharkLives()
     {
-        return defaultSharkLives;
+        return _gameData->defaultSharkLives;
     }
 
 
@@ -205,54 +207,52 @@
 
     int GameData::getFishCounter()
     {
-        return fishCounter;
+        return _gameData->fishCounter;
     }
 
     void GameData::setFishCounter( int fishes )
     {
-        fishCounter = fishes;
+        _gameData->fishCounter = fishes;
     }
 
     void GameData::increaseFishCounter()
     {
-    //    printf("GD 160 fishCounter before %d\n", fishCounter);
-        fishCounter++;
-    //    printf("GD 160 fishCounter after %d\n", fishCounter);
+        _gameData->fishCounter++;
     }
 
     void GameData::resetFishCounterToZero()
     {
-        setFishCounter( 0 );
+        _gameData->setFishCounter( 0 );
     }
 
     // STARS stuffs
 
     void  GameData::resetStarsCounter()
     {
-        setStarsCounter( 0 );
+        _gameData->setStarsCounter( 0 );
     }
 
     int GameData::getStarsCounter()
     {
-        return starsCounter;
+        return _gameData->starsCounter;
     }
 
     void GameData::setStarsCounter( int stars )
     {
-        starsCounter = stars;
+        _gameData->starsCounter = stars;
     }
 
     void GameData::calculateStars()
     {
-        if ( getScoreCounter() >= pointsForThirdStar ){
+        if ( getScoreCounter() >= _gameData->pointsForThirdStar ){
 
             setStarsCounter( 3 );
 
-        } else if ( getScoreCounter() >= pointsForSecondStar ){
+        } else if ( getScoreCounter() >= _gameData->pointsForSecondStar ){
 
             setStarsCounter( 2 );
 
-        } else if ( getScoreCounter() >= pointsForFirstStar ){
+        } else if ( getScoreCounter() >= _gameData->pointsForFirstStar ){
 
             setStarsCounter( 1 );
 
@@ -266,22 +266,22 @@
     
     void GameData::setScoreCounter(int value)
     {
-        scoreCounter = value;
+        _gameData->scoreCounter = value;
     }
 
     int GameData::getScoreCounter()
     {
-        return scoreCounter;
+        return _gameData->scoreCounter;
     }
 
     void GameData::setScoreCounterToZero()
     {
-        scoreCounter = 0;
+        _gameData->scoreCounter = 0;
     }
 
     void GameData::increaseScore( int score )
     {
-        scoreCounter += score;
+        _gameData->scoreCounter += score;
         calculateStars();
     }
 
@@ -294,21 +294,21 @@
     void GameData::setCountdownTimerCounter( int levelNum )
     {
         DEBUG_INFO;
-        countdownTimeCounter = levelData[levelNum].level[0].passLevelTime;
-        countdownTimerCounterDefaultSec = countdownTimeCounter % 60;
-        countdownTimerCounterDefaultMin = ( countdownTimeCounter / 60 ) % 60;
+        _gameData->countdownTimeCounter = levelData[levelNum].level[0].passLevelTime;
+        _gameData->countdownTimerCounterDefaultSec = _gameData->countdownTimeCounter % 60;
+        _gameData->countdownTimerCounterDefaultMin = ( _gameData->countdownTimeCounter / 60 ) % 60;
         
-        log("countdownTimeCounter %d\n", countdownTimeCounter);
+        log("countdownTimeCounter %d\n", _gameData->countdownTimeCounter);
     }
     
     void GameData::setTimerCounter(int value)
     {
         DEBUG_INFO;
-        timerCounter = value;
+        _gameData->timerCounter = value;
 //        timerSeconds = value;
 //        timerMinutes = value;
-        log("value %d\n", value);
-        log("timerCounter %d\n", this->timerCounter);
+//        log("value %d\n", value);
+//        log("timerCounter %d\n", this->timerCounter);
         log("timerCounter %d\n", getTimerCounter());
     }
 
@@ -317,58 +317,60 @@
         DEBUG_INFO;
         printf("gameData address %p\n", _gameData);
 //        printf("timeerCounter address %p\n", timerCounter);
-        printf("timeerCounter value %d\n", timerCounter);
+//        printf("timeerCounter value %d\n", timerCounter);
 
-        return timerCounter;
+        return _gameData->timerCounter;
     }
 
     void GameData::setTimerCounterToInitValue()
     {
         DEBUG_INFO;
     //    countdownTimeCounter = levelData[getCurrentLevelNumber()].level[0].passLevelTime;
-        timerSeconds = countdownTimeCounter % 60;
-        timerMinutes = ( countdownTimeCounter / 60 ) % 60;
-        printf("timerSeconds value %d timerMinutes value %d\n", timerSeconds, timerMinutes);
+        
+        setTimerCounter( levelData[_gameData->getCurrentLevelNumber()].level->passLevelTime );
+        _gameData->timerSeconds = _gameData->countdownTimeCounter % 60;
+        _gameData->timerMinutes = ( _gameData->countdownTimeCounter / 60 ) % 60;
+        printf("timerSeconds value %d timerMinutes value %d\n", _gameData->timerSeconds, _gameData->timerMinutes);
     }
 
     void GameData::setTimerCounterToZero()
     {
         DEBUG_INFO;
         setTimerCounter(0);
-        timerSeconds = 0;
-        timerMinutes = 0;
+        _gameData->timerSeconds = 0;
+        _gameData->timerMinutes = 0;
     }
 
     void GameData::decreaseTimerCounter()
     {
-        calculateTimeForText( countdownTimeCounter-- );
+        calculateTimeForText( _gameData->countdownTimeCounter-- );
     }
 
     void GameData::increaseTimerCounter()
     {
 
-        calculateTimeForText( timerCounter++ );
+        calculateTimeForText( _gameData->timerCounter++ );
     }
 
     void GameData::calculateTimeForText( int time )
     {
-        timerSeconds = time % 60;
-        timerMinutes = ( time / 60 ) % 60;
+        _gameData->timerSeconds = time % 60;
+        _gameData->timerMinutes = ( time / 60 ) % 60;
     }
 
     int GameData::getTimerMinutes()
     {
-        return ((countdownTimeCounter / 60 ) % 60);
+        return ((_gameData->countdownTimeCounter / 60 ) % 60);
     }
 
     int GameData::getTimerSeconds()
     {
-        return timerSeconds = (countdownTimeCounter % 60);
+        return _gameData->timerSeconds = (_gameData->countdownTimeCounter % 60);
     }
 
     void GameData::setDefaultSharkLives( int lives )
     {
-        defaultSharkLives = lives;
+        _gameData->defaultSharkLives = lives;
     }
 
     /* Game Settigns */
@@ -376,8 +378,8 @@
     {
         DEBUG_INFO;
         printf("_gameData address %p\n", _gameData);
-        musicVolumeLevel = level;
-        printf("musicVolumeLevel with address %p and value %f \n", musicVolumeLevel, musicVolumeLevel);
+        _gameData->musicVolumeLevel = level;
+        printf("musicVolumeLevel with address %p and value %f \n", _gameData->musicVolumeLevel, _gameData->musicVolumeLevel);
 //        this->musicVolumeLevel = level;
 //        printf("musicVolumeLevel with address %p and value %f \n", this->musicVolumeLevel, this->musicVolumeLevel);
 //        _gameData->musicVolumeLevel = level;
@@ -389,32 +391,32 @@
     {
         DEBUG_INFO;
         printf("_gameData address %p\n", _gameData);
-        printf("musicVolumeLevel with address %p and value %f \n", this->musicVolumeLevel, this->musicVolumeLevel);
-        return musicVolumeLevel;
+        printf("musicVolumeLevel with address %p and value %f \n", _gameData->musicVolumeLevel, _gameData->musicVolumeLevel);
+        return _gameData->musicVolumeLevel;
     }
 
     void GameData::setSoundEffectsVolumeLevel(float level)
     {
         DEBUG_INFO;
-        soundEffectsVolumeLevel = level;
+        _gameData->soundEffectsVolumeLevel = level;
     }
 
     float GameData::getSoundEffectsVolumeLevel()
     {
         DEBUG_INFO;
-        return soundEffectsVolumeLevel;
+        return _gameData->soundEffectsVolumeLevel;
     }
 
     // USER stuffs
 
     bool GameData::getUserRegisterStatus()
     {
-        return isUserRegister;
+        return _gameData->isUserRegister;
     }
 
     void GameData::setUserRegisterStatus( bool status )
     {
-        isUserRegister = status;
+        _gameData->isUserRegister = status;
     }
 
     void GameData::changeUserRegisterStatus( bool newStatus )
@@ -424,12 +426,12 @@
 
     void GameData::setUsername( std::string name )
     {
-        username = name;
+        _gameData->username = name;
     }
 
     std::string GameData::getUsername()
     {
-        return username;
+        return _gameData->username;
     }
 
     void GameData::changeUsername( std::string newName )
@@ -441,44 +443,44 @@
 
     void GameData::setFirstLifeLoseTimer( long time)
     {
-        timeFirstLifeLose = time;
+        _gameData->timeFirstLifeLose = time;
     }
     void GameData::setSecondLifeLoseTimer( long time)
     {
-        timeSecondLifeLose = time;
+        _gameData->timeSecondLifeLose = time;
     }
     void GameData::setThirdLifeLoseTimer( long time)
     {
-        timeThirdLifeLose = time;
+        _gameData->timeThirdLifeLose = time;
     }
     void GameData::setFourthLifeLoseTimer( long time)
     {
-        timeFourthLifeLose = time;
+        _gameData->timeFourthLifeLose = time;
     }
     void GameData::setFifthLifeLoseTimer( long time)
     {
-        timeFifthLifeLose = time;
+        _gameData->timeFifthLifeLose = time;
     }
 
     long GameData::getFirstLifeLoseTimer()
     {
-        return timeFirstLifeLose;
+        return _gameData->timeFirstLifeLose;
     }
     long GameData::getSecondLifeLoseTimer()
     {
-        return timeSecondLifeLose;
+        return _gameData->timeSecondLifeLose;
     }
     long GameData::getThirdLifeLoseTimer()
     {
-        return timeThirdLifeLose;
+        return _gameData->timeThirdLifeLose;
     }
     long GameData::getFourthLifeLoseTimer()
     {
-        return timeFourthLifeLose;
+        return _gameData->timeFourthLifeLose;
     }
     long GameData::getFifthLifeLoseTimer()
     {
-        return timeFifthLifeLose;
+        return _gameData->timeFifthLifeLose;
     }
 
     void GameData::getDataFromUserData()
@@ -494,6 +496,7 @@
         log("currentLevel after set %d", currentLevel);
 
         setNumberOfLeftUpperLevel( dataStruct->ds_numberOfLeftUpperLevel );
+        log("dataStruct->ds_numberOfLeftUpperLevel %d", dataStruct->ds_numberOfLeftUpperLevel);
         setLastLevelNumber( dataStruct->ds_maxLevel );
         setUserRegisterStatus( dataStruct->ds_isUserRegister );
 
@@ -513,7 +516,6 @@
         log("setMusicVolumeLevel( dataStruct->ds_musicVolumeLevel ) %f", dataStruct->ds_musicVolumeLevel);
         setSoundEffectsVolumeLevel( dataStruct->ds_soundEffectsVolumeLevel );
         log("setMusicVolumeLevel( dataStruct->ds_soundEffectsVolumeLevel ) %f", dataStruct->ds_soundEffectsVolumeLevel);
-
     }
 
     void GameData::writeDataToUserData()

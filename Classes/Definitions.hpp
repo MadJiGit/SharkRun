@@ -10,7 +10,7 @@
 
 // print some stuff for debuging
 #define ALLOWDEBUGING 1
-#define USERISACTIVE 1
+#define USERISACTIVE 0
 
 // Print debug flow
 #if ALLOWDEBUGING

@@ -236,12 +236,10 @@ void UI::setGameTimerToZero()
 
 int UI::getGameTimerSeconds()
 {
-    DEBUG_INFO;
     return gameData->getTimerSeconds();
 }
 int UI::getGameTimerMinutes()
 {
-    DEBUG_INFO;
     return gameData->getTimerMinutes();
 }
 
@@ -322,6 +320,7 @@ void UI::displayLevelNumber()
 
 void UI::saveUserData()
 {
+    DEBUG_INFO;
     this->sharkLives->saveGameData();
 }
 
@@ -370,6 +369,7 @@ void UI::pauseBackgroundMusic()
 
 void UI::goToPauseScene( Ref *sender )
 {
+    DEBUG_INFO;
     pauseBackgroundMusic();
     saveUserData();
     auto pauseScene = PauseScene::createScene();
