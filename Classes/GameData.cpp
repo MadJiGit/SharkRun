@@ -310,6 +310,11 @@ void GameData::setCountdownTimerCounter( int levelNum )
     log("countdownTimeCounter %d\n", _gameData->countdownTimeCounter);
 }
 
+int GameData::getCountdownTimerCounter()
+{
+    return _gameData->countdownTimeCounter;
+}
+
 void GameData::setTimerCounter(int value)
 {
     _gameData->timerCounter = value;

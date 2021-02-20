@@ -362,12 +362,8 @@ void SelectLevelScene::setButtons()
                 break;
             case cocos2d::ui::Widget::TouchEventType::ENDED:
                 playButtonEndClick();
-                DEBUG_INFO;
-                printf("Left button clicked\n");
                 loadPreviousSix( gameData->getNumberOfLeftUpperLevel() );
                 goToSelectedLevelScene();
-//                Director::getInstance()->popScene();
-//                isLevelUpdated = false;
                 break;
             default:
                 break;
@@ -383,13 +379,8 @@ void SelectLevelScene::setButtons()
                 break;
             case cocos2d::ui::Widget::TouchEventType::ENDED:
                 playButtonEndClick();
-                DEBUG_INFO;
-//                printf("++++++++ Right button clicked and _gameData->getNumberOfLeftUpperLevel() = %d\n",   gameData->getNumberOfLeftUpperLevel());
                 loadNextSix( gameData->getNumberOfLeftUpperLevel() );
-                DEBUG_INFO;
-//                printf("After loading next six levels\n");
                 goToSelectedLevelScene();
-//                isLevelUpdated = false;
                 break;
             default:
                 break;

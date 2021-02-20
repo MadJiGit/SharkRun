@@ -36,6 +36,9 @@ private:
     Sprite          *background, *menuLayer;
     
     MusicData       *musicData;
+    GameData        *gameData;
+    
+    bool            canPlay;
     
     void setBackground();
     void setMenuLayer();

@@ -164,6 +164,7 @@
         void                setTimerCounterToInitValue();
         void                increaseTimerCounter();
         void                decreaseTimerCounter();
+        int                getCountdownTimerCounter();
         
         void                increaseScore( int score );
         int                 getTimerMinutes();

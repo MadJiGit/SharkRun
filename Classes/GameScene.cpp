@@ -93,7 +93,7 @@ bool GameScene::checkCanPlayGS()
     return ui->checkCanPlayBG();
 }
 
-/* TODO if game is real, there will be are logic for show ads */
+/* TODO: if game is real, there will be are logic for show ads */
 void GameScene::watchAd()
 {
     log("time for advertise movie");
@@ -183,7 +183,7 @@ bool GameScene::onContactBegin( PhysicsContact &contact )
         }
         
         if ( fish_temp == nullptr ){
-//            log("GS 202 ERROR at Class fish is nullptr after contact with shark");
+            
         }
         else {
         addToGameScore( fish_temp->getPoints() );

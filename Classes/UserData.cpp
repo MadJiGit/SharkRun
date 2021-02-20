@@ -216,6 +216,8 @@ void UserData::saveUserData()
     _dataStruct.ds_timeThirdLifeLose        = gameData->getThirdLifeLoseTimer();
     _dataStruct.ds_timeFourthLifeLose       = gameData->getFourthLifeLoseTimer();
     _dataStruct.ds_timeFifthLifeLose        = gameData->getFifthLifeLoseTimer();
+    _dataStruct.ds_soundEffectsVolumeLevel  = gameData->getSoundEffectsVolumeLevel();
+    _dataStruct.ds_musicVolumeLevel         = gameData->getMusicVolumeLevel();
     
     
     saveDataToFile();

@@ -34,6 +34,9 @@ bool PauseScene::init( )
     origin = Director::getInstance()->getVisibleOrigin();
     
     musicData = MusicData::getMusicData();
+    gameData = GameData::getGameData();
+    
+    canPlay = gameData->getCountdownTimerCounter() <= 0 ? false : true;
     
     setBackground();
     setMenuLayer();
@@ -117,7 +120,16 @@ void PauseScene::setRetryLabel()
 
 void PauseScene::setResumeLabel()
 {
-    resumeLabel = MenuItemImage::create( "resume_game_layer_pm.png", "resume_game_layer_pm_clicked.png", CC_CALLBACK_1( PauseScene::backToGameScene, this ) );
+    /*
+        canPlay is used to check if player has time to play. If user came here from "you failed menu" resume button must be disable
+        TODO: have to make a grey "resume label" button as a "locked level" button
+     */
+    if(canPlay) {
+        resumeLabel = MenuItemImage::create( "resume_game_layer_pm.png", "resume_game_layer_pm_clicked.png", CC_CALLBACK_1( PauseScene::backToGameScene, this ) );
+    } else {
+        resumeLabel = MenuItemImage::create( "resume_game_layer_pm.png", "resume_game_layer_pm_clicked.png" );
+        resumeLabel->setVisible(false);
+    }
 //    resumeLabel->setScale( BUTTON_RESUME_SETTINGS_SCALE );
 }
 
