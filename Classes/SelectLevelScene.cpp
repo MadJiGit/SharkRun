@@ -346,7 +346,7 @@ void SelectLevelScene::setButtons()
                 break;
             case cocos2d::ui::Widget::TouchEventType::ENDED:
                 playButtonEndClick();
-                goBackToSettingsMenu( this );
+                goBackToInvokeScene( this );
                 break;
             default:
                 break;
@@ -413,7 +413,7 @@ void SelectLevelScene::goToSelectedLevelScene()
     Director::getInstance( )->replaceScene( TransitionFade::create( TRANSITION_TIME_BETWEEN_SCENE, scene ) );
 }
 
-void SelectLevelScene::goBackToSettingsMenu( Ref *sender )
+void SelectLevelScene::goBackToInvokeScene( Ref *sender )
 {
     Director::getInstance()->popScene();
 }

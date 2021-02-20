@@ -79,7 +79,7 @@ private:
     void            loadPreviousSix( int number );
     void            loadNextSix( int number );
     void            goToMainMenu();
-    void            goBackToSettingsMenu( Ref *sender );
+    void            goBackToInvokeScene( Ref *sender );
     
     void            goToSelectedLevelScene();
     void            goToLevel( int number );

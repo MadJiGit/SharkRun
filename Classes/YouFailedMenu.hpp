@@ -55,6 +55,7 @@ private:
     void                goToGameOver();
     void                goToRetryTestScene();
     void                goToGameOverScene();
+    void                goToSelectLevelScene();
     int                 getGameTimerSeconds();
     int                 getGameTimerMinutes();
     int                 getGameScore();

@@ -101,7 +101,9 @@ void YouFailedMenu::createFailedMenu()
                                           else if ( cocos2d::ui::Widget::TouchEventType::ENDED == type )
                                           {
                                               playButtonEndClick();
-                                              goToGameOverScene();
+                                              /* Where want to go from there??? */
+                                              goToSelectLevelScene();
+//                                              goToGameOverScene();
                                           }
                                           else if ( cocos2d::ui::Widget::TouchEventType::MOVED == type )
                                           {
@@ -169,6 +171,13 @@ void YouFailedMenu::playButtonStartClick()
 void YouFailedMenu::playButtonEndClick()
 {
     musicData->playButtonEndClickSound();
+}
+
+void YouFailedMenu::goToSelectLevelScene()
+{
+    fadeOutSprites();
+    auto scene = PauseScene::createScene();
+    Director::getInstance( )->replaceScene( TransitionFade::create( TRANSITION_TIME_BETWEEN_SCENE, scene ) );
 }
 
 void YouFailedMenu::goToRetryTestScene()
