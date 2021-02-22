@@ -32,21 +32,6 @@ private:
     float               musicLevelFromFile;
     float               effectsLevelFromFile;
     
-    float               tempMusicLevel, tempEffectsLevel;
-
-//    SimpleAudioEngine   *gameMusic;
-//    SimpleAudioEngine   *eatFishSound;
-//    SimpleAudioEngine   *earnStarSound;
-//    SimpleAudioEngine   *hitBarrelSound;
-//    SimpleAudioEngine   *hitMineSound;
-//    SimpleAudioEngine   *sharkDiedSound;
-//    SimpleAudioEngine   *okButtonSound;
-//    SimpleAudioEngine   *regularButtonSound;
-//    SimpleAudioEngine   *denyButtonSound;
-//    SimpleAudioEngine   *choseMenuSound;
-//    SimpleAudioEngine   *startClickButtonSound;
-//    SimpleAudioEngine   *endClickButtonSound;
-    
     AudioEngine   *gameMusic;
     AudioEngine   *eatFishSound;
     AudioEngine   *earnStarSound;
@@ -83,7 +68,6 @@ private:
     
     AudioProfile     *audioProfileTest;
     
-    void setTemporaryLevels();
     void saveData();
     
     void loadGameData();

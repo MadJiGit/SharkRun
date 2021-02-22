@@ -156,9 +156,9 @@ void UserData::saveUserData()
     auto currentLevel = gameData->getCurrentLevelNumber();
     auto leftUpperLevel = gameData->getNumberOfLeftUpperLevel();
     
-    DEBUG_INFO;
-    printf("currentLevel = %d\n", currentLevel);
-    printf("leftUpperLevel = %d\n", leftUpperLevel);
+//    DEBUG_INFO;
+//    printf("currentLevel = %d\n", currentLevel);
+//    printf("leftUpperLevel = %d\n", leftUpperLevel);
     
     auto fishEaten = gameData->getFishCounter();
     
@@ -219,6 +219,8 @@ void UserData::saveUserData()
     _dataStruct.ds_soundEffectsVolumeLevel  = gameData->getSoundEffectsVolumeLevel();
     _dataStruct.ds_musicVolumeLevel         = gameData->getMusicVolumeLevel();
     
+    DEBUG_INFO;
+    printf("music level %f", _dataStruct.ds_musicVolumeLevel );
     
     saveDataToFile();
     
@@ -240,7 +242,7 @@ int UserData::saveDataToFile()
     
     fclose( f );
     
-        //    printData();
+            printData();
     
     return 0;
 }
@@ -276,9 +278,10 @@ void UserData::printData()
     
     auto testStruct = getDataStruct();
     
-    log("row 167 - UserData::printData EFFECTS %f", _dataStruct.ds_soundEffectsVolumeLevel );
-    log("row 167 - UserData::printData MUSIC %f",_dataStruct.ds_musicVolumeLevel);
+    log("row 167 - UserData::printData EFFECTS %f\n", _dataStruct.ds_soundEffectsVolumeLevel );
+    log("row 167 - UserData::printData MUSIC %f\n",_dataStruct.ds_musicVolumeLevel);
     
+    /*
     log("row 226 UD username %s", testStruct->ds_username);
     std::cout << std::boolalpha << testStruct->ds_isUserRegister << std::endl;
     
@@ -300,7 +303,7 @@ void UserData::printData()
     log("UD row 192 music level %f", _dataStruct.ds_musicVolumeLevel);
     log("UD row 193 effect level %f", _dataStruct.ds_soundEffectsVolumeLevel);
     
-    
+    */
 }
 
 #endif

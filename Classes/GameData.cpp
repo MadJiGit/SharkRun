@@ -22,14 +22,13 @@ GameData::~GameData()
 
 void GameData::initStats()
 {
-    DEBUG_INFO
     loadUserData();
     setInitialGamePlayValues();
 }
 
 GameData *GameData::getGameData()
 {
-    DEBUG_INFO
+
     if ( _gameData == nullptr )
     {
         _gameData = new GameData();
@@ -37,7 +36,7 @@ GameData *GameData::getGameData()
         _gameData->initStats();
     }
     
-    printf("_gameData address %p\n", _gameData);
+
     return _gameData;
 }
 
@@ -48,7 +47,6 @@ LevelData GameData::getOneLevelDataByLevelNumber(int number)
 
 void GameData::setInitialGamePlayValues()
 {
-    DEBUG_INFO;
     setTimerCounter(0);
     setScoreCounter(0);
     setStarsCounter(0);
@@ -57,7 +55,6 @@ void GameData::setInitialGamePlayValues()
 
 void GameData::loadUserData()
 {
-    DEBUG_INFO;
     userData = UserData::getUserData();
     getDataFromUserData();
 }
@@ -302,12 +299,9 @@ void GameData::increaseScore( int score )
  */
 void GameData::setCountdownTimerCounter( int levelNum )
 {
-    DEBUG_INFO;
     _gameData->countdownTimeCounter = levelData[levelNum].level[0].passLevelTime;
     _gameData->countdownTimerCounterDefaultSec = _gameData->countdownTimeCounter % 60;
     _gameData->countdownTimerCounterDefaultMin = ( _gameData->countdownTimeCounter / 60 ) % 60;
-    
-    log("countdownTimeCounter %d\n", _gameData->countdownTimeCounter);
 }
 
 int GameData::getCountdownTimerCounter()
@@ -523,7 +517,6 @@ void GameData::getDataFromUserData()
  */
 void GameData::writeDataToUserData()
 {
-    DEBUG_INFO;
     userData->saveUserData();
 }
 
@@ -532,11 +525,3 @@ long GameData::getTimeStampInSeconds()
     return time(&now);
 }
 
-void GameData::printLongMax()
-{
-        //    log( "GD row 383 print INT_MAX %d", INT_MAX );
-        //    log( "GD row 384 print LONG_MAX %ld", LONG_MAX );
-        //    log( "GD row 385 print LONG_MAX - MAX_TIME %ld", LONG_MAX - MAX_TIME );
-        //    log( "GD row 386 print LONG_MAX - time&now %ld", LONG_MAX - getTimeStampInSeconds() );
-        //    log( "GD row 387 print MAX_TIME - time&now %ld", MAX_TIME - getTimeStampInSeconds() );
-}

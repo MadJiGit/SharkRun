@@ -56,15 +56,6 @@ bool SettingsScene::init( )
     percentSoundEffectsVolumeLabel->setPosition( Vec2( defaultPosX, defaultPosY - ( percentSoundEffectsVolumeLabel->getContentSize().height ) ) );
     soundEffectsVolumeSlider->setPosition( Vec2( defaultPosX, percentSoundEffectsVolumeLabel->getPositionY() - percentSoundEffectsVolumeLabel->getContentSize().height - soundEffectsVolumeSlider->getContentSize().height ) );
     
-//    closeButton->setPosition( Vec2( defaultPosX - ( ( menuLayer->getContentSize().width * SETTINGS_MENU_LAYER_SCALE ) / 2 ), defaultPosY - ( menuLayer->getContentSize().height * SETTINGS_MENU_LAYER_SCALE / 2 ) ) );
-//    okButton->setPosition( Vec2( defaultPosX + ( ( menuLayer->getContentSize().width * SETTINGS_MENU_LAYER_SCALE ) / 2 ), defaultPosY - ( menuLayer->getContentSize().height * SETTINGS_MENU_LAYER_SCALE / 2 ) ) );
-//
-//    musicVolumeSlider->setPosition( Vec2( defaultPosX, defaultPosY + musicVolumeSlider->getContentSize().height * SETTINGS_MENU_SLIDER_SCALE * 1.5 ) );
-//    percentMusicVolumeLabel->setPosition( Vec2( defaultPosX, musicVolumeSlider->getPositionY() + musicVolumeSlider->getContentSize().height * SETTINGS_MENU_SLIDER_SCALE + percentMusicVolumeLabel->getContentSize().height * SETTINGS_MENU_SLIDER_SCALE ) );
-//
-//    percentSoundEffectsVolumeLabel->setPosition( Vec2( defaultPosX, defaultPosY - ( percentSoundEffectsVolumeLabel->getContentSize().height * SETTINGS_MENU_SLIDER_SCALE ) ) );
-//    soundEffectsVolumeSlider->setPosition( Vec2( defaultPosX, percentSoundEffectsVolumeLabel->getPositionY() - percentSoundEffectsVolumeLabel->getContentSize().height * SETTINGS_MENU_SLIDER_SCALE - soundEffectsVolumeSlider->getContentSize().height * SETTINGS_MENU_SLIDER_SCALE  ) );
-
     
     this->addChild( background, - 3 );
     this->addChild( menuLayer, - 2 );
@@ -234,23 +225,18 @@ void SettingsScene::saveSettingsScene( Ref *sender )
 {
     musicData->saveMusicLevel( musicVolumeSlider->getPercent() / 100.0f );
     musicData->saveEffectsLevel( soundEffectsVolumeSlider->getPercent() / 100.0f );
-//    pauseGameMusic();
-//    Director::getInstance()->popScene();
+    
     cocos2d::Director::getInstance()->pushScene(
-             pop_scene_with<cocos2d::TransitionFlipX>::create(TRANSITION_TIME_BETWEEN_SCENE, cocos2d::TransitionScene::Orientation::RIGHT_OVER)
+             pop_scene_with<cocos2d::TransitionFade>::create(TRANSITION_TIME_BETWEEN_SCENE)
         );
 }
 
 
 void SettingsScene::exitSettingsScene( Ref *sender )
 {
-//    musicData->pauseGameMusic();
-//    Director::getInstance()->popScene();
-//    cocos2d::Director::getInstance()->pushScene(
-//                                                pop_scene_with<cocos2d::TransitionFlipX>::create(TRANSITION_TIME_BETWEEN_SCENE, cocos2d::TransitionScene::Orientation::RIGHT_OVER)
     
     cocos2d::Director::getInstance()->pushScene(
-                                                pop_scene_with<cocos2d::TransitionFlipX>::create(TRANSITION_TIME_BETWEEN_SCENE, cocos2d::TransitionScene::Orientation::RIGHT_OVER)
+                                                pop_scene_with<cocos2d::TransitionFade>::create(TRANSITION_TIME_BETWEEN_SCENE)
                                                 
     );
 }

@@ -41,7 +41,6 @@ void MusicData::initStats()
 {
     
     loadGameData();
-    setTemporaryLevels();
     preloadGameMusic();
     preloadAllEffects();
     
@@ -52,22 +51,12 @@ void MusicData::initStats()
 
 void MusicData::loadGameData()
 {
-    DEBUG_INFO;
     gameData = GameData::getGameData();
-    printf("gameData address %p\n", gameData);
-}
-
-void MusicData::setTemporaryLevels()
-{
-    tempMusicLevel = gameData->getMusicVolumeLevel();
-    tempEffectsLevel = gameData->getSoundEffectsVolumeLevel();
 }
 
 void MusicData::saveData()
 {
-    DEBUG_INFO;
     gameData->writeDataToUserData();
-    setTemporaryLevels();
 }
 
 void MusicData::saveMusicLevel( float data )
@@ -82,12 +71,12 @@ void MusicData::saveEffectsLevel( float data )
 
 float MusicData::getTemporaryMusicLevel()
 {
-    return tempMusicLevel;
+    return gameData->getMusicVolumeLevel();
 }
 
 float MusicData::getTemporaryEffectsLevel()
 {
-    return tempEffectsLevel;
+    return gameData->getSoundEffectsVolumeLevel();
 }
 
 void MusicData::setGameEffectsLevel( float data )

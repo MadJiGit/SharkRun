@@ -164,7 +164,7 @@
         void                setTimerCounterToInitValue();
         void                increaseTimerCounter();
         void                decreaseTimerCounter();
-        int                getCountdownTimerCounter();
+        int                 getCountdownTimerCounter();
         
         void                increaseScore( int score );
         int                 getTimerMinutes();
@@ -181,9 +181,6 @@
 
         void                decreaseSharkLives();
         void                increaseSharkLives();
-        
-        void                printLongMax();
-        
     };
 
 

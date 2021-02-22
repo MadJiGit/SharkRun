@@ -96,26 +96,21 @@ bool PauseScene::init( )
 void PauseScene::setCloseButton()
 {
     closeButton = MenuItemImage::create( "close_button_pm.png", "close_button_pm_clicked.png", CC_CALLBACK_1( PauseScene::exitGameScene, this ) );
-//    closeButton->setScale( BUTTON_CLOSE_SCALE );
 }
 
 void PauseScene::setSettingsLabel()
 {
     settingsLabel = MenuItemImage::create( "settings_layer_pm.png", "settings_layer_pm_clicked.png", CC_CALLBACK_1( PauseScene::goToSettings, this ) );
-//    settingsLabel->setScale( BUTTON_RESUME_SETTINGS_SCALE );
 }
 
 void PauseScene::setChangeLabel()
 {
     changeLabel = MenuItemImage::create( "change_level_layer_pm.png", "change_level_layer_pm_clicked.png", CC_CALLBACK_1( PauseScene::goToChangeLevel, this ) );
-//    changeLabel->setScale( BUTTON_RETRY_CHANGE_SCALE );
 }
 
 void PauseScene::setRetryLabel()
 {
-//    retryLabel = MenuItemImage::create( "restart_level_layer_pm.png", "restart_level_layer_pm_clicked.png", CC_CALLBACK_1( PauseScene::goToMainMenuScene, this ) );
     retryLabel = MenuItemImage::create( "restart_level_layer_pm.png", "restart_level_layer_pm_clicked.png", CC_CALLBACK_1( PauseScene::goToGameScene, this ) );
-//    retryLabel->setScale( BUTTON_RETRY_CHANGE_SCALE );
 }
 
 void PauseScene::setResumeLabel()
@@ -130,38 +125,31 @@ void PauseScene::setResumeLabel()
         resumeLabel = MenuItemImage::create( "resume_game_layer_pm.png", "resume_game_layer_pm_clicked.png" );
         resumeLabel->setVisible(false);
     }
-//    resumeLabel->setScale( BUTTON_RESUME_SETTINGS_SCALE );
 }
 
 void PauseScene::setMenuLayer()
 {
     menuLayer = Sprite::create( "game_paused_menu_pm.png" );
-//    menuLayer->setScale( PAUSE_MENU_LAYER_SCALE );
 }
 
 
 void PauseScene::setBackground()
 {
     background = Sprite::create( "beach_bg_all.png" );
-//    background->setScale( PAUSE_MENU_BACKGROUND_SCALE );
 }
 
 void PauseScene::goToChangeLevel( Ref *sender )
 {
-//    auto scene = SelectLevelScene::createScene();
-//    Director::getInstance()->replaceScene( TransitionFade::create( TRANSITION_TIME_BETWEEN_SCENE, scene ) );
-    DEBUG_INFO;
-    Director::getInstance()->resume(); // don't know what hapens
+    Director::getInstance()->resume();
     auto scene = SelectLevelScene::createScene();
     Director::getInstance()->pushScene( TransitionFade::create( TRANSITION_TIME_BETWEEN_SCENE, scene ) );
 }
 
 void PauseScene::goToSettings( Ref *sender )
 {
-    Director::getInstance()->resume(); // don't know what hapens
+    Director::getInstance()->resume();
     auto scene = SettingsScene::createScene();
     Director::getInstance()->pushScene( TransitionFade::create( TRANSITION_TIME_BETWEEN_SCENE, scene ) );
-//    Director::getInstance()->replaceScene( TransitionFade::create( TRANSITION_TIME_BETWEEN_SCENE, scene ) );
 }
 
 void PauseScene::goToMainMenuScene( Ref *sender )
