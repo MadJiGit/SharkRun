@@ -8,6 +8,9 @@
 #ifndef Definitions_hpp
 #define Definitions_hpp
 
+// FOR DEBUG ONLY
+#define PASSLEVELTIME 90
+
 // print some stuff for debuging
 #define ALLOWDEBUGING 1
 #define USERISACTIVE 0

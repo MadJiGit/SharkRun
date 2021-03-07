@@ -310,8 +310,7 @@ void GameScene::goToGameOverScene()
 void GameScene::goToYouFailedScene( )
 {
     DEBUG_INFO;
-    
-    
+
     if ( true == checkCanPlayGS() )
     {
         ui->setPauseButtonCondition( false );
@@ -452,8 +451,7 @@ void GameScene::hitMine( PhysicsBody *a )
 
 void GameScene::update( float dt )
 {
-    
-    if ( isGame && !ui->getGameTimerSeconds() ) {
+    if ( isGame && !(ui->getGameTimerSeconds() || ui->getGameTimerMinutes()) ) {
         checkPassLevelConditions();
     }
     

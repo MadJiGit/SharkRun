@@ -242,7 +242,6 @@ int UI::getGameTimerMinutes()
 
 int UI::getGameTimerCounter()
 {
-    DEBUG_INFO;
     return gameData->getTimerCounter();
 }
 
