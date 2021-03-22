@@ -116,6 +116,7 @@ public:
     int                 getEarnedStars();
     void                displayEarnedStars( int stars );
     void                updateEarnedStars();
+    void                clearEarnedStars();
     
     void                update( float dt );
     

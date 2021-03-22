@@ -97,14 +97,11 @@ bool GameScene::checkCanPlayGS()
 void GameScene::watchAd()
 {
     log("time for advertise movie");
-//    background->increaseSharkLives();
 }
 
 
 void GameScene::saveUserData()
 {
-//    gameData->writeDataToUserData();
-    DEBUG_INFO;
     ui->saveUserData();
 }
 
@@ -123,7 +120,6 @@ void GameScene::loadLevelData( int levelNumber )
     mineSpeedMin = enemyData[levelNumber].enemy[1].speedMin;
     mineSpeedMax = enemyData[levelNumber].enemy[1].speedMax;
     
-//    float fishSpawnTime = fishData[levelNumber].fish[1].fishSpawnTime;
     float fishSpawnTime = fishData->fish[levelNumber].fishSpawnTime;
     float heartSpawnTime = fishData[levelNumber].fish[1].heartSpawnTime;
     pushEnemies( barrelSpawnTime, mineSpawnTime, submarineSpawnTime, rocketSpawnTime );
@@ -133,12 +129,10 @@ void GameScene::loadLevelData( int levelNumber )
 
 void GameScene::pushEnemies( float spawnBarrelFrequency, float spawnMineFrequency, float spawnSubmarineFrequency, float spawnRocketFrequency )
 {
-    // PUSH BARRELS method
+    /* PUSH BARRELS method */
     schedule( schedule_selector( GameScene::spawnBarrel ), spawnBarrelFrequency * visibleSize.height );
-    
+    /* PUSH MINE method */
     schedule( schedule_selector( GameScene::spawnMine ), spawnMineFrequency * visibleSize.height );
-    
-//    log("GS 159 spawn barrel time %f mine time %f", (spawnBarrelFrequency * visibleSize.height),  (spawnMineFrequency * visibleSize.height));
 }
 
 void GameScene::pushFish( float spawnFishFrequency, float spawnHeartFrequency )
@@ -174,6 +168,7 @@ bool GameScene::onContactBegin( PhysicsContact &contact )
     
     counter++;
     
+    /* Contact with FISH */
     if ( ( a->getContactTestBitmask() == CONTACT_MASK_SHARK && b->getContactTestBitmask() == CONTACT_MASK_FISH )
         || ( b->getContactTestBitmask() == CONTACT_MASK_SHARK && a->getContactTestBitmask() == CONTACT_MASK_FISH ) ) {
         playEatFishSound();
@@ -189,20 +184,18 @@ bool GameScene::onContactBegin( PhysicsContact &contact )
         addToGameScore( fish_temp->getPoints() );
             gameData->increaseFishCounter();
             fish_temp->removeFromParentAndCleanup( true );
-    //        this->RemoveSprite( fish_temp );
-    //        fish_temp->removeFish();
         }
     }
+    /* Contact with BARREL */
     else if ( ( a->getContactTestBitmask() == CONTACT_MASK_SHARK && b->getContactTestBitmask() == CONTACT_MASK_BARREL )
              || ( b->getContactTestBitmask() == CONTACT_MASK_SHARK && a->getContactTestBitmask() == CONTACT_MASK_BARREL ) ){
-//        log("GS 215 %d ON CONTACT BEGIN SHARK 1", counter );
         barrel_temp = dynamic_cast<Barrel*>(b->getNode());
         if ( barrel_temp == nullptr ){
             barrel_temp = dynamic_cast<Barrel*>(a->getNode());
         }
         
         if ( barrel_temp == nullptr ){
-//            log("GS 267 ERROR barrel is nullptr after contact with ground");
+
         }
         else {
             if ( false == isTheSharkDead ){
@@ -212,7 +205,7 @@ bool GameScene::onContactBegin( PhysicsContact &contact )
             }
         }
     }
-
+    /* Contact with MINE */
     else if ( ( a->getContactTestBitmask() == CONTACT_MASK_SHARK && b->getContactTestBitmask() == CONTACT_MASK_MINE )
              || ( b->getContactTestBitmask() == CONTACT_MASK_SHARK && a->getContactTestBitmask() == CONTACT_MASK_MINE ) ) {
         
@@ -223,7 +216,7 @@ bool GameScene::onContactBegin( PhysicsContact &contact )
         }
         
         if ( mine_temp == nullptr ){
-//            log("GS 239 ERROR at Class fish is nullptr after contact with shark");
+
         }
         else {
             if ( false == isTheSharkDead ){
@@ -393,7 +386,8 @@ void GameScene::startTimer()
 void GameScene::sharkKilled( PhysicsBody *a )
 {
     stopBackgroundMusic();
-
+    
+    ui->setScoreCounterToZero();
     ui->stopTimer();
     ui->decreaseSharkLives();
     

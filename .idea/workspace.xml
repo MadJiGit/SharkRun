@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="2160b904-61b7-4b4b-9e24-4664fdea2a21" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Classes/GameData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Classes/GameData.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Classes/UserData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Classes/UserData.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Classes/WelcomeScene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Classes/WelcomeScene.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cocos-project.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,14 +32,19 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1q6cZ05VHK7cjVLgCAH9aXK3YwP" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="http.proxy" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -37,6 +59,21 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="522" y="600" key="#Notifications" timestamp="1616403663612">
       <screen x="0" y="23" width="2560" height="1417" />
@@ -46,5 +83,9 @@
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="110" y="392" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.2560.1417@0.23.2560.1417" timestamp="1616403673550" />
+    <state x="223" y="226" key="SettingsEditor" timestamp="1616407475251">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="223" y="226" key="SettingsEditor/0.23.2560.1417@0.23.2560.1417" timestamp="1616407475251" />
   </component>
 </project>

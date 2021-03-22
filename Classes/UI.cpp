@@ -172,9 +172,7 @@ void UI::setFishCounter( int fishes )
 
 void UI::increaseFishCounter()
 {
-    printf("UI 164 fishCounter before %d\n", this->fishCounter);
     this->fishCounter++;
-    printf("UI 166 fishCounter after %d\n", this->fishCounter);
 }
 
 
@@ -190,7 +188,7 @@ int UI::getGameScoreCounter()
 
 void UI::addPointsToGameScore( int points )
 {
-    printf("UI 165 increaseScore with %d", points);
+//    printf("UI 165 increaseScore with %d", points);
     gameData->increaseScore( points );
     
     if ( false == thirdStar ){
@@ -276,6 +274,11 @@ void UI::updateEarnedStars()
         firstStar = true;
     }
 
+}
+
+void UI::clearEarnedStars( )
+{
+    gameData->resetStarsCounter();
 }
 
 void UI::update( float dt )

@@ -6,7 +6,7 @@
 //
 
 #ifndef Levels_hpp
-#define Levels_hpp
+#define Levels_hpp 
 
 #pragma once
 #include <stdio.h>
@@ -44,6 +44,7 @@ struct enemyStat
 
 struct fishStat
 {
+    /* at the moment use only data for spawn fish [1] */
     struct fishStruct  fish[1];
 };
 

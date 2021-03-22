@@ -75,8 +75,9 @@ bool Fish::initFish()
     
     auto timeToMove = RandomHelper::random_int( TIME_FISH_MOVE_MIN, TIME_FISH_MOVE_MAX );
     
+    
     createPhyicsBody();
-    // tag for contact begin method
+    /* tag for contact begin method */
     this->setTag( 88 );
     auto randomSceneTag = RandomHelper::random_int( FISH_SCENE_TAG_MIN, FISH_SCENE_TAG_MAX );
     

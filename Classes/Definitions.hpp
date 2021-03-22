@@ -169,7 +169,7 @@ static int debug_counter;
 
 // FISH
 #define FISH_SCALE_PARAM 1.0
-#define TIME_FISH_MOVE_MIN 5.0 // 15.0 default
+#define TIME_FISH_MOVE_MIN 8.0 // 15.0 default
 #define TIME_FISH_MOVE_MAX 15.0 // 45.0 default
 #define PUSH_FISH_FREQUENCY 0.0080
 #define FISH_PHYSIC_PARAM 0.8

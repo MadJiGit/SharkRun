@@ -19,29 +19,29 @@ struct enemyStat enemyData[] = {
     }},
         // level 1
     {{
-        { 1, 0.045, 20, 20 },
-        { 2, 0.040, 30, 30 },
+        { 1, 0.025, 20, 20 },
+        { 2, 0.020, 30, 30 },
         { 3, 0, 0, 0 },
         { 4, 0, 0, 0 },
     }},
     // level 2
     {{
-        { 1, 0.0350, 20, 20 },
-        { 2, 0.0380, 15, 15 },
+        { 1, 0.023, 20, 20 },
+        { 2, 0.018, 15, 15 },
         { 3, 0, 0, 0 },
         { 4, 0, 0, 0 },
     }},
     // level 3
     {{
-        { 1, 0.0320, 20, 20 },
-        { 2, 0.0320, 15, 15 },
+        { 1, 0.022, 20, 20 },
+        { 2, 0.018, 15, 15 },
         { 3, 0, 0, 0 },
         { 4, 0, 0, 0 },
     }},
     // level 4
     {{
-        { 1, 0.0300, 20, 20 },
-        { 2, 0.0310, 15, 15 },
+        { 1, 0.021, 20, 20 },
+        { 2, 0.017, 15, 15 },
         { 3, 0, 0, 0 },
         { 4, 0, 0, 0 },
     }},
@@ -302,34 +302,38 @@ struct fishStat fishData[] = {
 
 struct levelStat levelData[] = {
     // default
-    // level num, one star, two stars, three stars, pass level points, pass level time(sec)
+    /* level num,
+                one star, two stars, three stars,
+                                                pass level points, pass level time(sec)
+     */
+    
     {
         { 0, 0, 0, 0, 0, 0 },
     },
 // 1 screen
     // level 1
     {{
-        { 1, 10, 20, 30, 30, PASSLEVELTIME }, 
+        { 1, 50, 90, 130, 100, PASSLEVELTIME },
     }},
     // level 2
     {{
-        { 2, 10, 20, 40, 40, PASSLEVELTIME },
+        { 2, 60, 100, 140, 120, PASSLEVELTIME },
     }},
     // level 3
     {{
-        { 3, 20, 30, 80, 80, PASSLEVELTIME },
+        { 3, 70, 120, 180, 140, PASSLEVELTIME },
     }},
     // level 4
    {{
-       { 4, 20, 40, 90, 90, PASSLEVELTIME },
+       { 4, 80, 130, 190, 160, PASSLEVELTIME },
    }},
     // level 5
    {{
-       { 5, 20, 50, 100, 100, PASSLEVELTIME },
+       { 5, 20, 50, 200, 100, PASSLEVELTIME },
    }},
     // level 6
    {{
-       { 6, 70, 120, 170, 170, PASSLEVELTIME },
+       { 6, 70, 120, 270, 170, PASSLEVELTIME },
    }},
     
 // 2 screen
