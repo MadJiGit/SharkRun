@@ -31,6 +31,9 @@ UserData *UserData::getUserData()
     {
         _userData = new UserData();
         
+        DEBUG_INFO
+        printf("result from _userData->loadDataFromFile() %d\n", _userData->loadDataFromFile());
+        
         if ( _userData->loadDataFromFile() < 0 )
         {
             _userData->initStats();
@@ -46,6 +49,9 @@ void UserData::initStats()
 {
     DEBUG_INFO
         //    memset(&_dataStruct, '\0', sizeof(_dataStruct));
+    
+//    fileToSaveName = FileUtils::getInstance()->getWritablePath() + "sgud.db";
+    
     int i;
     
     for (i = 1; i <= ALL_LEVELS; i++ )
@@ -79,7 +85,7 @@ void UserData::initStats()
     /*
      Need for tet only - simulate registered user, who is passed a few levels
      */
-#ifdef USERISACTIVE
+#if USERISACTIVE
     _dataStruct.ds_levelsPlayed = ALL_LEVELS;
     _dataStruct.ds_isUserRegister = true;
     this->setUsername( "alo" );
@@ -125,9 +131,9 @@ int UserData::loadDataFromFile()
     
         //    return -1;
     
-    auto fileToSave = FileUtils::getInstance()->getWritablePath() + "sgud.db";
+    auto fileToSaveName = FileUtils::getInstance()->getWritablePath() + "sgud.db";
     
-    FILE *f = fopen( fileToSave.c_str(), "rb" );
+    FILE *f = fopen( fileToSaveName.c_str(), "rb" );
     if ( f == nullptr ) {
         return -1;
     }
@@ -201,7 +207,8 @@ void UserData::saveUserData()
         }
     }
     
-    
+    DEBUG_INFO;
+    printf("save username %s\n", gameData->getUsername().c_str());
     _userData->setUsername(gameData->getUsername());
     
     _dataStruct.oneLevelData[currentLevel].ld_isUnlocked = true;
@@ -228,11 +235,11 @@ void UserData::saveUserData()
 
 int UserData::saveDataToFile()
 {
-    auto fileToSave = FileUtils::getInstance()->getWritablePath() + "sgud.db";
+    auto fileToSaveName = FileUtils::getInstance()->getWritablePath() + "sgud.db";
     
     FILE *f;
     
-    f = fopen( fileToSave.c_str(), "wb" );
+    f = fopen( fileToSaveName.c_str(), "wb" );
     
     if ( f == nullptr ) {
         return  -1;

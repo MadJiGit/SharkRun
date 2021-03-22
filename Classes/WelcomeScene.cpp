@@ -99,12 +99,16 @@ void WelcomeScene::logoGoUp()
     
 }
 
+/*
+    Welcome screen TEXT if has username show it, else print just Welcome back!
+ */
+
 void WelcomeScene::showText()
 {
     username = gameData->getUsername();
-    std::string welcomeText = "Welcome back";
+    std::string welcomeText = "Welcome";
     if ( 0 < strlen(username.c_str()) ) {
-        welcomeText += ", " + username;
+        welcomeText += " back, " + username;
     }
     
     welcomeText += "!";
@@ -118,6 +122,10 @@ void WelcomeScene::showText()
     
 }
 
+/*
+    If the user exists, this method checks for the existing username,
+    if the username does not exist -> show a field to enter it.
+ */
 void WelcomeScene::checkIfUserExist()
 {
     if ( false == gameData->getUserRegisterStatus() )
@@ -134,6 +142,7 @@ void WelcomeScene::checkIfUserExist()
 
 void WelcomeScene::showEnterUsernameScreen()
 {
+    DEBUG_INFO
     editUsername = EditBox::create( Size ( textBoxSizeX, textBoxSizeY ), Scale9Sprite::create( "bg_default_yellow_1920_1080.png" ) );
     editUsername->setPosition( Vec2 ( visibleSize.width / 2 + origin.x, visibleSize.height / 3 + origin.y ) );
     editUsername->setFontSize( textSize );
@@ -150,6 +159,8 @@ void WelcomeScene::showEnterUsernameScreen()
     
     this->addChild( editUsername, 500 );
     
+    showOkButton();
+    
 }
 
 void WelcomeScene::editBoxEditigDidBegin( EditBox *editBox )
@@ -165,11 +176,13 @@ void WelcomeScene::editBoxTextChanged( EditBox *editBox, const std::string &text
     editUsername->detachWithIME();
     editBox->setTextHorizontalAlignment( TextHAlignment::CENTER );
     
-    username = text;
+    printf("%s\n", text.c_str());
+    this->username = text;
 }
+
 void WelcomeScene::editBoxReturn( EditBox *editBox )
 {
-    showOkButton();
+//    showOkButton();
 }
 
 void WelcomeScene::showOkButton()
@@ -198,7 +211,6 @@ void WelcomeScene::showOkButton()
 
 void WelcomeScene::setUsername()
 {
-    DEBUG_INFO;
     gameData->changeUsername( username );
     gameData->changeUserRegisterStatus( true );
     gameData->writeDataToUserData();
@@ -295,7 +307,6 @@ void WelcomeScene::goToMainMenuScene( )
 
 void WelcomeScene::exitGameScene( )
 {
-    DEBUG_INFO;
     gameData->writeDataToUserData();
     
     Director::getInstance()->end();

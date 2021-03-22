@@ -423,6 +423,8 @@ void GameData::changeUserRegisterStatus( bool newStatus )
 
 void GameData::setUsername( std::string name )
 {
+    DEBUG_INFO;
+    printf("username is %s\n", username.c_str());
     _gameData->username = name;
 }
 
@@ -433,6 +435,8 @@ std::string GameData::getUsername()
 
 void GameData::changeUsername( std::string newName )
 {
+    DEBUG_INFO;
+    printf("username is %s\n", username.c_str());
     setUsername( newName );
 }
 
@@ -489,7 +493,9 @@ long GameData::getFifthLifeLoseTimer()
 void GameData::getDataFromUserData()
 {
     auto dataStruct = userData->getDataStruct();
-    
+    DEBUG_INFO
+    printf("Username %s\n", dataStruct->ds_username );
+    setUsername( dataStruct->ds_username );
     setDefaultSharkLives( dataStruct->ds_defaultSharkLives );
     setCurrentLevel( dataStruct->ds_currentLevel );
     
