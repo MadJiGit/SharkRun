@@ -74,11 +74,15 @@ bool AppDelegate::applicationDidFinishLaunching() {
     Size visibleSize = Director::getInstance()->getVisibleSize();
     float asr_game = designResolutionSize.width/designResolutionSize.height;
     float asr_device = deviceSize.width/deviceSize.height;
-    designResolutionSize.height = designResolutionSize.width/asr_device;
+   
+    DEBUG_INFO;
     
-//    log( "AppDelegate 79 deviceX %f deviceY %f", deviceSize.width, deviceSize.height );
-//    log( "AppDelegate 80 desX %f desY %f", designResolutionSize.width, designResolutionSize.height );
-//    log( "AppDelegate 81 visX %f visY %f", visibleSize.width, visibleSize.height );
+    log( "deviceSizeX %f deviceSizeY %f", deviceSize.width, deviceSize.height );
+    log( "designResolutionSizeX %f designResolutionSizeY %f", designResolutionSize.width, designResolutionSize.height );
+    log( "visibleSizeX %f visibleSizeY %f", visibleSize.width, visibleSize.height );
+    log( "asr_game %f asr_device %f", asr_game, asr_device );
+    
+    designResolutionSize.height = designResolutionSize.width/asr_device;
     
     if(designResolutionSize.height < 1080)
     {

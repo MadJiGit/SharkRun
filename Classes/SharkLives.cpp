@@ -227,6 +227,7 @@ void SharkLives::increaseCurrentSharkLives()
 
 void SharkLives::calculateTimeToRefille()
 {
+    DEBUG_INFO;
     int timeForOneLife = 0;
     long tempTime = getTimeStampInSeconds();
     

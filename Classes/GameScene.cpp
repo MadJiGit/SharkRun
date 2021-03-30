@@ -13,6 +13,8 @@
 #define SUBMARINE   2
 #define ROCKET      3
 
+#define FISH       1
+
 int global_var = 0;
 
 using namespace cocos2d;
@@ -112,16 +114,16 @@ void GameScene::loadLevelData( int levelNumber )
     float submarineSpawnTime = enemyData[levelNumber].enemy[SUBMARINE].spawnTime;
     float rocketSpawnTime = enemyData[levelNumber].enemy[ROCKET].spawnTime;
     
-    barrelSpawnTime = enemyData[levelNumber].enemy[0].spawnTime;
-    barrelSpeedMin = enemyData[levelNumber].enemy[0].speedMin;
-    barrelSpeedMax = enemyData[levelNumber].enemy[0].speedMax;
+    barrelSpawnTime = enemyData[levelNumber].enemy[BARREL].spawnTime;
+    barrelSpeedMin = enemyData[levelNumber].enemy[BARREL].speedMin;
+    barrelSpeedMax = enemyData[levelNumber].enemy[BARREL].speedMax;
     
-    mineSpawnTime = enemyData[levelNumber].enemy[1].spawnTime;
-    mineSpeedMin = enemyData[levelNumber].enemy[1].speedMin;
-    mineSpeedMax = enemyData[levelNumber].enemy[1].speedMax;
+    mineSpawnTime = enemyData[levelNumber].enemy[MINE].spawnTime;
+    mineSpeedMin = enemyData[levelNumber].enemy[MINE].speedMin;
+    mineSpeedMax = enemyData[levelNumber].enemy[MINE].speedMax;
     
     float fishSpawnTime = fishData->fish[levelNumber].fishSpawnTime;
-    float heartSpawnTime = fishData[levelNumber].fish[1].heartSpawnTime;
+    float heartSpawnTime = fishData[levelNumber].fish[FISH].heartSpawnTime;
     pushEnemies( barrelSpawnTime, mineSpawnTime, submarineSpawnTime, rocketSpawnTime );
     
     pushFish( fishSpawnTime, heartSpawnTime );
@@ -278,10 +280,7 @@ void GameScene::addToGameScore( int points )
 
 void GameScene::checkPassLevelConditions()
 {
-    // if there is at least one earned star => pass level
-    // else failed
-    
-//    printf("GS 297 earned stars %d\n", ui->getEarnedStars());
+    /* if there is at least one earned star => pass level else failed */
     
     isGame = false;
     saveUserData();
@@ -302,25 +301,19 @@ void GameScene::goToGameOverScene()
 
 void GameScene::goToYouFailedScene( )
 {
-    DEBUG_INFO;
-
     if ( true == checkCanPlayGS() )
     {
         ui->setPauseButtonCondition( false );
         failedMenu = YouFailedMenu::createMenu( this );
-//        this->addChild( failedMenu, 1000 );
     }
     else
     {
         this->goToGameOverScene();
     }
-    
 }
 
 void GameScene::goToLevelCompleteScene( )
 {
-    DEBUG_INFO;
-    printf("curr level %d\n", currentLevel);
     gameData->unlockLevel( currentLevel + 1 );
     ui->stopTimer();
     shark->unscheduleTouchListener();
@@ -328,13 +321,11 @@ void GameScene::goToLevelCompleteScene( )
     this->removeChild( shark );
     ui->setPauseButtonCondition( false );
     levelCompleteScene = LevelCompleteScene::createMenu( this );
-//    this->addChild( levelCompleteScene, 1000 );
 }
 
 void GameScene::retryGameLevel()
 {
     ui->setPauseButtonCondition( true );
-//    gameData->setCountdownTimerCounter( currentLevel );
     spawnShark();
 }
 
@@ -385,6 +376,7 @@ void GameScene::startTimer()
 
 void GameScene::sharkKilled( PhysicsBody *a )
 {
+    DEBUG_INFO;
     stopBackgroundMusic();
     
     ui->setScoreCounterToZero();

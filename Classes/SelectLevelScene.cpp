@@ -41,8 +41,7 @@ bool SelectLevelScene::init( )
     loadCurrentLevelNumberFromGameData();
     loadMaxLevelNubmer();
     loadMaxPlayedLevel();
-    DEBUG_INFO;
-    printf("numberOfCurrentPlayedLevel %d\n", getCurrentLevel());
+
     showSixLevels( gameData->getNumberOfLeftUpperLevel() );
     checkButtonsStatus( getCurrentLevel() );
     
@@ -114,10 +113,7 @@ void SelectLevelScene::setStars()
 
 void SelectLevelScene::showSixLevels(int firstLevelNumber)
 {
-    DEBUG_INFO;
-    printf("first level number is %d\n", firstLevelNumber);
-
-    
+   
 //    int i;
     
 //    for( i = 0; i < 6; i++ )
@@ -295,8 +291,11 @@ void SelectLevelScene::setLevelImageSecondNumber( int levelNumber )
 void SelectLevelScene::setLevelImageStars( int levelNumber )
 {
 
+    
     int starsNum = gameData->getOneLevelDataByLevelNumber(levelNumber).ld_stars;
-
+    DEBUG_INFO;
+    printf("stars %d level num %d\n",starsNum, levelNumber );
+    
     switch ( starsNum ) {
         case 0:
             t_stars = MenuItemImage::create( "", "" );
@@ -399,7 +398,6 @@ void SelectLevelScene::setBackground()
 
 void SelectLevelScene::goToSelectedLevelScene()
 {
-    DEBUG_INFO;
     auto scene = SelectLevelScene::createScene();
     Director::getInstance( )->replaceScene( TransitionFade::create( TRANSITION_TIME_BETWEEN_SCENE, scene ) );
 }
@@ -411,8 +409,6 @@ void SelectLevelScene::goBackToInvokeScene( Ref *sender )
 
 void SelectLevelScene::goToLevel( int number )
 {
-    DEBUG_INFO;
-    printf("number = %d\n", number);
     gameData->setCurrentLevel( number );
     gameData->writeDataToUserData();
     
@@ -428,16 +424,10 @@ void SelectLevelScene::loadCurrentSix( int number )
 {
     checkButtonsStatus( number );
     int firstNum = abs( number / 6 );
-    
-    DEBUG_INFO;
-    printf("number = %d firstNum %d\n", number, firstNum);
-    printf("Before set _gameData->getNumberOfLeftUpperLevel() = %d\n", gameData->getNumberOfLeftUpperLevel());
-   
 }
 
 void SelectLevelScene::loadPreviousSix( int number )
 {
-    DEBUG_INFO;
     int firstLevelNumber = gameData->getNumberOfLeftUpperLevel() - 6;
     if( firstLevelNumber <= 1 ){
         firstLevelNumber = 1;
@@ -448,7 +438,6 @@ void SelectLevelScene::loadPreviousSix( int number )
 
 void SelectLevelScene::loadNextSix( int number )
 {
-    DEBUG_INFO;
     int firstLevelNumber = gameData->getNumberOfLeftUpperLevel() + 6;
     if( firstLevelNumber >= gameData->getLastLevelNumber() ){
         firstLevelNumber = gameData->getLastLevelNumber();
@@ -493,8 +482,6 @@ void SelectLevelScene::loadMaxPlayedLevel()
 void SelectLevelScene::loadMaxLevelNubmer()
 {
     maxLevelNumber = gameData->getLastLevelNumber();
-    DEBUG_INFO;
-    log("setMaxLevelNumber %d", maxLevelNumber);
 }
 
 void SelectLevelScene::goToMainMenu()
@@ -510,21 +497,16 @@ void SelectLevelScene::setCurrentLevel(int number)
 
 int SelectLevelScene::getCurrentLevel()
 {
-    DEBUG_INFO;
-    log("numberOfCurrentPlayedLevel %d\n", numberOfCurrentPlayedLevel);
     return numberOfCurrentPlayedLevel;
 }
 
 void SelectLevelScene::loadGameData()
 {
-    DEBUG_INFO;
     gameData = GameData::getGameData();
 }
 
 void SelectLevelScene::loadCurrentLevelNumberFromGameData()
 {
-    DEBUG_INFO;
-    log("gameData->getCurrentLevelNumber() %d\n", gameData->getCurrentLevelNumber());
     setCurrentLevel(gameData->getCurrentLevelNumber());
 }
 

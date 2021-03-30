@@ -157,7 +157,7 @@ void MainMenuScene::setSettingsLabel()
 
 void MainMenuScene::setBackground()
 {
-    background = Sprite::create( "bg_main_menu_mm.png" );
+    background = Sprite::create( "bg_main_menu_3x.png" );
     background->setPosition( Vec2 ( visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y ) );
 }
 

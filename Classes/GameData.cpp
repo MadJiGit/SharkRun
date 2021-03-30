@@ -282,6 +282,7 @@ int GameData::getScoreCounter()
 
 void GameData::setScoreCounterToZero()
 {
+    DEBUG_INFO;
     _gameData->scoreCounter = 0;
 }
 

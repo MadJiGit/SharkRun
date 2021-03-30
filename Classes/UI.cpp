@@ -199,6 +199,7 @@ void UI::addPointsToGameScore( int points )
 
 void UI::setScoreCounterToZero()
 {
+    DEBUG_INFO;
     gameData->setScoreCounterToZero();
 }
 
